@@ -400,8 +400,8 @@ type
     gbCreature: TGroupBox;
     lbctEntry: TLabel;
     edctEntry: TJvComboEdit;
-    edctModelId1: TLabeledEdit;
-    edctModelId3: TLabeledEdit;
+    edctDisplayId1: TLabeledEdit;
+    edctDisplayId3: TLabeledEdit;
     edctName: TLabeledEdit;
     edctSubName: TLabeledEdit;
     edctMinLevel: TLabeledEdit;
@@ -1158,8 +1158,8 @@ type
     btBrowseItemPopup: TBitBtn;
     editmaxMoneyLoot: TLabeledEdit;
     editminMoneyLoot: TLabeledEdit;
-    edctModelId4: TLabeledEdit;
-    edctModelId2: TLabeledEdit;
+    edctDisplayId4: TLabeledEdit;
+    edctDisplayId2: TLabeledEdit;
     edglmap: TJvComboEdit;
     lbglmap: TLabel;
     edclmap: TJvComboEdit;
@@ -2121,6 +2121,32 @@ type
     edqtRewFactionFlags: TLabeledEdit;
     edqtRewArenaPoints: TLabeledEdit;
     edqtRewUnk: TLabeledEdit;
+    edctDisplayIdProbability4: TLabeledEdit;
+    edctDisplayIdProbability3: TLabeledEdit;
+    edctDisplayIdProbability2: TLabeledEdit;
+    edctDisplayIdProbability1: TLabeledEdit;
+    edctUnitFlags2: TJvComboEdit;
+    edctStaticFlags1: TJvComboEdit;
+    edctStaticFlags2: TJvComboEdit;
+    Label4: TLabel;
+    edctStaticFlags3: TJvComboEdit;
+    Label5: TLabel;
+    Label6: TLabel;
+    edctStaticFlags4: TJvComboEdit;
+    edctStrengthMultiplier: TLabeledEdit;
+    edctAgilityMultiplier: TLabeledEdit;
+    edctStaminaMultiplier: TLabeledEdit;
+    edctIntellectMultiplier: TLabeledEdit;
+    edctSpiritMultiplier: TLabeledEdit;
+    edctDamageVarianceOLD: TLabeledEdit;
+    edctDamageMultiplierOLD: TLabeledEdit;
+    edctStringId1: TLabeledEdit;
+    edctStringId2: TLabeledEdit;
+    edctSpellList: TLabeledEdit;
+    edctCharmedSpellList: TLabeledEdit;
+    edctCorpseDecay: TLabeledEdit;
+    edctHoverHeight: TLabeledEdit;
+    edctInteractionPauseTimer: TLabeledEdit;
     procedure FormActivate(Sender: TObject);
     procedure btSearchClick(Sender: TObject);
     procedure FormCreate(Sender: TObject);
@@ -2544,6 +2570,11 @@ type
     procedure GetUnitFlags(Sender: TObject);
     procedure GetFlagsExtra(Sender: TObject);
     procedure GetCreatureTypeFlags(Sender: TObject);
+    procedure GetUnitFlags2(Sender: TObject);
+    procedure GetStaticFlags1(Sender: TObject);
+    procedure GetStaticFlags2(Sender: TObject);
+    procedure GetStaticFlags3(Sender: TObject);
+    procedure GetStaticFlags4(Sender: TObject);
     procedure GetCreatureDynamicFlags(Sender: TObject);
     procedure GetGOFlags(Sender: TObject);
     procedure GetMovementType(Sender: TObject);
@@ -5453,15 +5484,15 @@ var
   model: string;
 begin
   model := '';
-    if (edctModelId1.Text <> '') and (edctModelId1.Text <> '0') then
-      model := edctModelId1.Text;
-    if (edctModelId2.Text <> '') and (edctModelId2.Text <> '0') or (edctModelId3.Text <> '0') or
-      (edctModelId4.Text <> '0') then
+    if (edctDisplayId1.Text <> '') and (edctDisplayId1.Text <> '0') then
+      model := edctDisplayId1.Text;
+    if (edctDisplayId2.Text <> '') and (edctDisplayId2.Text <> '0') or (edctDisplayId3.Text <> '0') or
+      (edctDisplayId4.Text <> '0') then
     begin
       if model <> '' then
-        model := Format('%s,%s,%s,%s', [model, edctModelId2.Text, edctModelId3.Text, edctModelId4.Text])
+        model := Format('%s,%s,%s,%s', [model, edctDisplayId2.Text, edctDisplayId3.Text, edctDisplayId4.Text])
       else
-        model := edctModelId2.Text;
+        model := edctDisplayId2.Text;
     end;
 
   if model <> '' then
@@ -6065,6 +6096,31 @@ end;
 procedure TMainForm.GetCreatureTypeFlags(Sender: TObject);
 begin
   GetSomeFlags(Sender, 'CreatureTypeFlags');
+end;
+
+procedure TMainForm.GetUnitFlags2(Sender: TObject);
+begin
+  GetSomeFlags(Sender, 'UnitFlags2');
+end;
+
+procedure TMainForm.GetStaticFlags1(Sender: TObject);
+begin
+  GetSomeFlags(Sender, 'StaticFlags1');
+end;
+
+procedure TMainForm.GetStaticFlags2(Sender: TObject);
+begin
+  GetSomeFlags(Sender, 'StaticFlags2');
+end;
+
+procedure TMainForm.GetStaticFlags3(Sender: TObject);
+begin
+  GetSomeFlags(Sender, 'StaticFlags3');
+end;
+
+procedure TMainForm.GetStaticFlags4(Sender: TObject);
+begin
+  GetSomeFlags(Sender, 'StaticFlags4');
 end;
 
 procedure TMainForm.GetSomeFlags(Sender: TObject; What: string);
