@@ -466,13 +466,6 @@ type
     edclorientation: TLabeledEdit;
     edclspawntimesecsmin: TLabeledEdit;
     edclspawndist: TLabeledEdit;
-    edclcurrentwaypoint: TLabeledEdit;
-    edclspawn_position_x: TLabeledEdit;
-    edclspawn_position_y: TLabeledEdit;
-    edclspawn_position_z: TLabeledEdit;
-    edclcurhealth: TLabeledEdit;
-    edclcurmana: TLabeledEdit;
-    edclDeathState: TLabeledEdit;
     edclMovementType: TLabeledEdit;
     btScriptCreatureLocation: TButton;
     btScriptCreatureLocationCustomToAll: TButton;
@@ -1309,7 +1302,7 @@ type
     Timer1: TTimer;
     edcnevent_chance: TLabeledEdit;
     edctIconName: TLabeledEdit;
-    edgtcastBarCaption: TLabeledEdit;
+    edgtOpeningText: TLabeledEdit;
     edSearchItemFlags: TJvComboEdit;
     lbSearchItemFlags: TLabel;
     edcvExtendedCost: TJvComboEdit;
@@ -1404,7 +1397,7 @@ type
     edctQuestItem4: TLabeledEdit;
     edctMovementTemplateId: TLabeledEdit;
     editHolidayId: TLabeledEdit;
-    edgtunk1: TLabeledEdit;
+    edgtClosingText: TLabeledEdit;
     edctQuestItem5: TLabeledEdit;
     edctQuestItem6: TLabeledEdit;
     gbGOQuestItems: TGroupBox;
@@ -1537,14 +1530,6 @@ type
     edctTrainerTemplateId: TJvComboEdit;
     lbcttrainer_id: TLabel;
     edctVehicleTemplateId: TLabeledEdit;
-    edqtPortraitGiverName: TLabeledEdit;
-    edqtPortraitGiverText: TLabeledEdit;
-    edqtPortraitTurnInName: TLabeledEdit;
-    edqtPortraitTurnInText: TLabeledEdit;
-    edqtPortraitGiver: TJvComboEdit;
-    lbqtPortraitGiver: TLabel;
-    edqtPortraitTurnIn: TJvComboEdit;
-    lbqtPortraitTurnIn: TLabel;
     edqtSoundAccept: TLabeledEdit;
     edqtSoundTurnIn: TLabeledEdit;
     edqtPointMapId: TJvComboEdit;
@@ -1846,10 +1831,6 @@ type
     lbclguid: TLabel;
     edcimodelid: TJvComboEdit;
     lbcimodelid: TLabel;
-    edclmodelid: TJvComboEdit;
-    lbclmodelid: TLabel;
-    edclequipment_id: TJvComboEdit;
-    lbclequipment_id: TLabel;
     lvcdsCreatureOnDeathScript: TJvListView;
     edcdsid: TJvComboEdit;
     lbcdsid: TLabel;
@@ -2132,6 +2113,7 @@ type
     edcnevent_param6: TJvComboEdit;
     lbcnevent_param5: TLabel;
     lbcnevent_param6: TLabel;
+    edgtStringId: TLabeledEdit;
     procedure FormActivate(Sender: TObject);
     procedure btSearchClick(Sender: TObject);
     procedure FormCreate(Sender: TObject);
@@ -3122,16 +3104,6 @@ end;
 
 procedure TMainForm.SetVisibleForMangosOnlyFields(IsVisible: Boolean);
 begin
-  // quest
-  edqtPortraitGiverName.Visible := IsVisible;
-  edqtPortraitGiverText.Visible := IsVisible;
-  edqtPortraitTurnInName.Visible := IsVisible;
-  edqtPortraitTurnInText.Visible := IsVisible;
-  edqtPortraitGiver.Visible := IsVisible;
-  edqtPortraitTurnIn.Visible := IsVisible;
-  lbqtPortraitGiver.Visible := IsVisible;
-  lbqtPortraitTurnIn.Visible := IsVisible;
-
   edqtSoundAccept.Visible := IsVisible;
   edqtSoundTurnIn.Visible := IsVisible;
 
@@ -5460,8 +5432,6 @@ begin
 end;
 
 procedure TMainForm.tsCreatureEquipTemplateShow(Sender: TObject);
-var
-  equipentry: Integer;
 begin
   if (edceequipentry1.Text = '') then
     edceequipentry1.Text := '0';
@@ -5469,15 +5439,6 @@ begin
     edceequipentry2.Text := '0';
   if (edceequipentry3.Text = '') then
     edceequipentry3.Text := '0';
-
-  if Assigned(lvclCreatureLocation.Selected) and (StrToIntDef(edclequipment_id.Text, 0) <> 0) then
-    equipentry := StrToIntDef(edclequipment_id.Text, 0)
-  else
-    equipentry := StrToIntDef(edctEquipmentTemplateId.Text, 0);
-  if equipentry <> 0 then
-  begin
-    edceentry.Text := IntToStr(equipentry);
-  end;
 end;
 
 procedure TMainForm.tsCreatureModelInfoShow(Sender: TObject);
@@ -5485,10 +5446,6 @@ var
   model: string;
 begin
   model := '';
-  if Assigned(lvclCreatureLocation.Selected) and (StrToIntDef(edclmodelid.Text, 0) <> 0) then
-    model := edclmodelid.Text
-  else
-  begin
     if (edctModelId1.Text <> '') and (edctModelId1.Text <> '0') then
       model := edctModelId1.Text;
     if (edctModelId2.Text <> '') and (edctModelId2.Text <> '0') or (edctModelId3.Text <> '0') or
@@ -5499,7 +5456,7 @@ begin
       else
         model := edctModelId2.Text;
     end;
-  end;
+
   if model <> '' then
   begin
     edCreatureModelSearch.Text := model;
@@ -8437,7 +8394,7 @@ begin
   ShowHourGlassCursor;
   id := edSearchGOEntry.Text;
   lvSearchGO.Columns[5].Caption := 'name' + loc;
-  lvSearchGO.Columns[6].Caption := 'castbarcaption' + loc;
+  lvSearchGO.Columns[6].Caption := 'OpeningText' + loc;
   CName := edSearchGOName.Text;
   CName := StringReplace(CName, '''', '\''', [rfReplaceAll]);
   CName := StringReplace(CName, ' ', '%', [rfReplaceAll]);
