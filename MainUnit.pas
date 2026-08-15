@@ -2114,6 +2114,13 @@ type
     lbcnevent_param5: TLabel;
     lbcnevent_param6: TLabel;
     edgtStringId: TLabeledEdit;
+    edqtBreadcrumbForQuestId: TLabeledEdit;
+    edqtMaxLevel: TLabeledEdit;
+    edqtIncompleteEmoteDelay: TLabeledEdit;
+    edqtCompleteEmoteDelay: TLabeledEdit;
+    edqtRewFactionFlags: TLabeledEdit;
+    edqtRewArenaPoints: TLabeledEdit;
+    edqtRewUnk: TLabeledEdit;
     procedure FormActivate(Sender: TObject);
     procedure btSearchClick(Sender: TObject);
     procedure FormCreate(Sender: TObject);
@@ -2647,7 +2654,7 @@ type
     procedure SearchQuest();
     procedure LoadQuest(QuestID: Integer);
     procedure ChangeNamesOfComponents;
-    procedure CompleteScript;
+    procedure CompleteQuestScript;
     procedure CompleteLocalesQuest;
     procedure CompleteMailLootScript;
     procedure CompleteGreetingScript;
@@ -3392,7 +3399,7 @@ end;
 
 procedure TMainForm.tsScriptTabShow(Sender: TObject);
 begin
-  CompleteScript;
+  CompleteQuestScript;
 end;
 
 procedure TMainForm.UpdateCaption;
@@ -3542,7 +3549,7 @@ begin
     Result := Format('DELETE FROM `%s` WHERE `id`=%s;', [tn, id]);
 end;
 
-procedure TMainForm.CompleteScript;
+procedure TMainForm.CompleteQuestScript;
 var
   s1, s2, s3, s4, s5, s6, script, quest, Fields, Values: string;
   who, id: string;
@@ -3602,9 +3609,9 @@ begin
   case SyntaxStyle of
     ssInsertDelete:
       s3 := Format('DELETE FROM `quest_template` WHERE `entry` = %s;'#13#10 +
-        'INSERT INTO `quest_template` (%s) VALUES (%s);'#13#10, [quest, Fields, Values]);
+        'INSERT INTO `quest_template` (%s) VALUES '#13#10'(%s);'#13#10, [quest, Fields, Values]);
     ssReplace:
-      s3 := Format('REPLACE INTO `quest_template` (%s) VALUES (%s);'#13#10, [Fields, Values]);
+      s3 := Format('REPLACE INTO `quest_template` (%s) VALUES '#13#10'(%s);'#13#10, [Fields, Values]);
     ssUpdate:
       s3 := MakeUpdate('quest_template', PFX_QUEST_TEMPLATE, false, 'entry', quest);
   end;
@@ -3613,7 +3620,7 @@ begin
     s4 := Format('DELETE FROM `areatrigger_involvedrelation` WHERE `quest` = %1:s;'#13#10 +
       'INSERT INTO `areatrigger_involvedrelation` (`id`, `quest`) VALUES (%0:s, %1:s);'#13#10,
       [edqtAreatrigger.Text, quest]);
-  script := s1 + s2 + s5 + s6 + s3 + s4;
+  script := s4 + s1 + s2 + s5 + s6 + s3;
   meqtScript.Text := script;
 end;
 
@@ -7766,13 +7773,23 @@ end;
 
 procedure TMainForm.CompleteLocalesQuest;
 var
-  lqentry: string;
+  lqentry, Fields, Values: string;
 begin
   meqtLog.Clear;
   lqentry := edqtEntry.Text;
   if lqentry = '' then
     Exit;
-  meqtScript.Text := MakeUpdate('locales_quest', PFX_LOCALES_QUEST, true, 'entry', lqentry);
+ // SetFieldsAndValues(Fields, Values, 'locales_quest', PFX_LOCALES_QUEST, meqtLog);
+ // case SyntaxStyle of
+ //   ssInsertDelete:
+ //    meqtScript.Text := Format('DELETE FROM `locales_quest` WHERE (`entry`=%s);'#13#10 +
+ //     'INSERT INTO `locales_quest` (%s) VALUES (%s);'#13#10, [lqentry, Fields, Values]);
+ //   ssReplace:
+ //     meqtScript.Text := Format('REPLACE INTO `locales_quest` (%s) VALUES (%s);'#13#10, [Fields, Values]);
+ //   ssUpdate:
+      meqtScript.Text := MakeUpdate('locales_quest', PFX_LOCALES_QUEST, true, 'entry', lqentry);
+ // end;
+
 end;
 
 procedure TMainForm.CompleteCreatureEventAIScript;

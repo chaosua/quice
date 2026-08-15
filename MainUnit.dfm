@@ -24,7 +24,7 @@ object MainForm: TMainForm
     Top = 0
     Width = 1008
     Height = 681
-    ActivePage = tsGameObject
+    ActivePage = tsQuest
     Align = alClient
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clWindowText
@@ -1214,9 +1214,9 @@ object MainForm: TMainForm
               Hint = 
                 'Level of quest. Player recieves full experience amount only if t' +
                 'heir level is less than or equal to QuestLevel+5'
-              EditLabel.Width = 75
+              EditLabel.Width = 54
               EditLabel.Height = 13
-              EditLabel.Caption = 'edqtQuestLevel'
+              EditLabel.Caption = 'QuestLevel'
               TabOrder = 2
               Text = '0'
             end
@@ -1226,9 +1226,9 @@ object MainForm: TMainForm
               Width = 57
               Height = 21
               Hint = 'Minimum level required to get the quest.'
-              EditLabel.Width = 64
+              EditLabel.Width = 43
               EditLabel.Height = 13
-              EditLabel.Caption = 'edqtMinLevel'
+              EditLabel.Caption = 'MinLevel'
               TabOrder = 0
               Text = '0'
             end
@@ -1405,9 +1405,9 @@ object MainForm: TMainForm
               Width = 73
               Height = 21
               Hint = 'If quest is time limited, field contains the limit, in seconds'
-              EditLabel.Width = 65
+              EditLabel.Width = 44
               EditLabel.Height = 13
-              EditLabel.Caption = 'edqtLimitTime'
+              EditLabel.Caption = 'LimitTime'
               TabOrder = 2
               Text = ''
             end
@@ -1743,6 +1743,32 @@ object MainForm: TMainForm
               Text = ''
               OnButtonClick = edconentryButtonClick
             end
+            object edqtBreadcrumbForQuestId: TLabeledEdit
+              Left = 215
+              Top = 70
+              Width = 89
+              Height = 21
+              Hint = 'Minimum reputation value to recieve the quest'
+              EditLabel.Width = 109
+              EditLabel.Height = 13
+              EditLabel.BiDiMode = bdLeftToRight
+              EditLabel.Caption = 'BreadcrumbForQuestId'
+              EditLabel.ParentBiDiMode = False
+              TabOrder = 7
+              Text = ''
+            end
+            object edqtMaxLevel: TLabeledEdit
+              Left = 215
+              Top = 112
+              Width = 57
+              Height = 21
+              Hint = 'Minimum level required to get the quest.'
+              EditLabel.Width = 46
+              EditLabel.Height = 13
+              EditLabel.Caption = 'MaxLevel'
+              TabOrder = 8
+              Text = '0'
+            end
           end
           object gbSource: TGroupBox
             Left = 794
@@ -2024,10 +2050,10 @@ object MainForm: TMainForm
           ParentShowHint = False
           ShowHint = True
           object gbRequirementsEnd: TGroupBox
-            Left = 8
-            Top = 8
+            Left = 7
+            Top = 3
             Width = 442
-            Height = 357
+            Height = 318
             Caption = 'Requirements for finish quest'
             TabOrder = 0
             object lbReqItemId1: TLabel
@@ -2052,8 +2078,8 @@ object MainForm: TMainForm
               Caption = 'ReqCreatureOrGOId1-4'
             end
             object lbReqSpellCast1: TLabel
-              Left = 8
-              Top = 306
+              Left = 211
+              Top = 178
               Width = 70
               Height = 13
               Caption = 'ReqSpellCast1'
@@ -2066,22 +2092,22 @@ object MainForm: TMainForm
               Caption = 'RepObjectiveFaction'
             end
             object lbReqSpellCast2: TLabel
-              Left = 95
-              Top = 306
+              Left = 211
+              Top = 222
               Width = 70
               Height = 13
               Caption = 'ReqSpellCast2'
             end
             object lbReqSpellCast3: TLabel
-              Left = 182
-              Top = 306
+              Left = 316
+              Top = 179
               Width = 70
               Height = 13
               Caption = 'ReqSpellCast3'
             end
             object lbReqSpellCast4: TLabel
-              Left = 269
-              Top = 306
+              Left = 316
+              Top = 219
               Width = 70
               Height = 13
               Caption = 'ReqSpellCast4'
@@ -2762,8 +2788,8 @@ object MainForm: TMainForm
               OnButtonClick = GetCreatureOrGO
             end
             object edqtReqSpellCast1: TJvComboEdit
-              Left = 8
-              Top = 323
+              Left = 211
+              Top = 195
               Width = 81
               Height = 21
               Hint = 
@@ -2805,8 +2831,8 @@ object MainForm: TMainForm
               OnButtonClick = GetSpell
             end
             object edqtReqSpellCast2: TJvComboEdit
-              Left = 95
-              Top = 322
+              Left = 211
+              Top = 238
               Width = 81
               Height = 21
               Hint = 
@@ -2848,8 +2874,8 @@ object MainForm: TMainForm
               OnButtonClick = GetSpell
             end
             object edqtReqSpellCast3: TJvComboEdit
-              Left = 182
-              Top = 322
+              Left = 316
+              Top = 195
               Width = 81
               Height = 21
               Hint = 
@@ -2891,8 +2917,8 @@ object MainForm: TMainForm
               OnButtonClick = GetSpell
             end
             object edqtReqSpellCast4: TJvComboEdit
-              Left = 269
-              Top = 322
+              Left = 316
+              Top = 238
               Width = 81
               Height = 21
               Hint = 
@@ -3130,21 +3156,21 @@ object MainForm: TMainForm
             end
             object lbRewSpell: TLabel
               Left = 417
-              Top = 207
+              Top = 238
               Width = 45
               Height = 13
               Caption = 'RewSpell'
             end
             object lbRewSpellCast: TLabel
               Left = 417
-              Top = 247
+              Top = 282
               Width = 66
               Height = 13
               Caption = 'RewSpellCast'
             end
             object lbqtRewMailTemplateId: TLabel
               Left = 417
-              Top = 127
+              Top = 154
               Width = 94
               Height = 13
               Caption = 'RewMailTemplateId'
@@ -3314,7 +3340,7 @@ object MainForm: TMainForm
             end
             object edqtRewOrReqMoney: TLabeledEdit
               Left = 417
-              Top = 303
+              Top = 335
               Width = 97
               Height = 21
               Hint = 
@@ -3328,7 +3354,7 @@ object MainForm: TMainForm
             end
             object edqtRewMoneyMaxLevel: TLabeledEdit
               Left = 417
-              Top = 343
+              Top = 378
               Width = 97
               Height = 21
               Hint = 'Money given when completing the quest at max level.'
@@ -3508,7 +3534,7 @@ object MainForm: TMainForm
             end
             object edqtRewSpell: TJvComboEdit
               Left = 417
-              Top = 223
+              Top = 254
               Width = 97
               Height = 21
               Hint = 
@@ -4018,7 +4044,7 @@ object MainForm: TMainForm
             end
             object edqtRewSpellCast: TJvComboEdit
               Left = 417
-              Top = 263
+              Top = 298
               Width = 97
               Height = 21
               ButtonWidth = 22
@@ -4056,7 +4082,7 @@ object MainForm: TMainForm
             end
             object edqtRewMailDelaySecs: TLabeledEdit
               Left = 417
-              Top = 183
+              Top = 213
               Width = 98
               Height = 21
               EditLabel.Width = 92
@@ -4067,7 +4093,7 @@ object MainForm: TMainForm
             end
             object edqtRewHonorAddition: TLabeledEdit
               Left = 417
-              Top = 63
+              Top = 43
               Width = 98
               Height = 21
               Hint = 
@@ -4084,7 +4110,7 @@ object MainForm: TMainForm
             end
             object edqtRewHonorMultiplier: TLabeledEdit
               Left = 417
-              Top = 103
+              Top = 83
               Width = 98
               Height = 21
               Hint = 'RewHonorMultiplier'
@@ -4151,7 +4177,7 @@ object MainForm: TMainForm
             end
             object edqtRewMailTemplateId: TJvComboEdit
               Left = 417
-              Top = 143
+              Top = 170
               Width = 98
               Height = 21
               ButtonWidth = 22
@@ -4262,12 +4288,46 @@ object MainForm: TMainForm
               TabOrder = 47
               Text = ''
             end
+            object edqtRewFactionFlags: TLabeledEdit
+              Left = 8
+              Top = 330
+              Width = 98
+              Height = 21
+              EditLabel.Width = 82
+              EditLabel.Height = 13
+              EditLabel.Caption = 'RewFactionFlags'
+              TabOrder = 48
+              Text = ''
+            end
+            object edqtRewArenaPoints: TLabeledEdit
+              Left = 417
+              Top = 127
+              Width = 98
+              Height = 21
+              Hint = 'RewHonorMultiplier'
+              EditLabel.Width = 79
+              EditLabel.Height = 13
+              EditLabel.Caption = 'RewArenaPoints'
+              TabOrder = 49
+              Text = ''
+            end
+            object edqtRewUnk: TLabeledEdit
+              Left = 8
+              Top = 370
+              Width = 98
+              Height = 21
+              EditLabel.Width = 42
+              EditLabel.Height = 13
+              EditLabel.Caption = 'RewUnk'
+              TabOrder = 50
+              Text = ''
+            end
           end
           object gbOther: TGroupBox
-            Left = 8
-            Top = 364
+            Left = 7
+            Top = 327
             Width = 442
-            Height = 186
+            Height = 242
             Caption = 'Emotions'
             TabOrder = 2
             object lbqtDetailsEmote1: TLabel
@@ -4808,6 +4868,28 @@ object MainForm: TMainForm
               EditLabel.Height = 13
               EditLabel.Caption = 'SoundTurnIn'
               TabOrder = 19
+              Text = ''
+            end
+            object edqtIncompleteEmoteDelay: TLabeledEdit
+              Left = 8
+              Top = 197
+              Width = 90
+              Height = 21
+              EditLabel.Width = 109
+              EditLabel.Height = 13
+              EditLabel.Caption = 'IncompleteEmoteDelay'
+              TabOrder = 20
+              Text = ''
+            end
+            object edqtCompleteEmoteDelay: TLabeledEdit
+              Left = 126
+              Top = 197
+              Width = 90
+              Height = 21
+              EditLabel.Width = 101
+              EditLabel.Height = 13
+              EditLabel.Caption = 'CompleteEmoteDelay'
+              TabOrder = 21
               Text = ''
             end
           end
@@ -6468,7 +6550,7 @@ object MainForm: TMainForm
         Top = 25
         Width = 1000
         Height = 628
-        ActivePage = tsCreatureEquipTemplate
+        ActivePage = tsEditCreature
         Align = alClient
         MultiLine = True
         TabOrder = 0
