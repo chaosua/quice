@@ -31,7 +31,7 @@ const
   SCRIPT_TAB_NO_QUEST = 8;
   SCRIPT_TAB_NO_CREATURE = 23;
   SCRIPT_TAB_NO_GAMEOBJECT = 5;
-  SCRIPT_TAB_NO_ITEM = 11;
+  SCRIPT_TAB_NO_ITEM = 9;
   SCRIPT_TAB_NO_OTHER = 5;
   SCRIPT_TAB_NO_CHARACTER = 3;
   SCRIPT_TAB_NO_DBSCRIPTS_ON = 12;
@@ -1330,7 +1330,7 @@ type
     lbctdifficulty_entry_1: TLabel;
     lbcnevent_param4: TLabel;
     edcnevent_param4: TJvComboEdit;
-    edqtRewHonorAddition: TLabeledEdit;
+    edqtRewFactionFlags: TLabeledEdit;
     edqtMethod: TLabeledEdit;
     pmruwowhead: TMenuItem;
     nEditCreatureAI: TMenuItem;
@@ -1356,24 +1356,6 @@ type
     edlqObjectiveText3: TLabeledEdit;
     edlqObjectiveText4: TLabeledEdit;
     btlqShowFullLocalesScript: TButton;
-    editScalingStatDistribution: TLabeledEdit;
-    editItemLimitCategory: TLabeledEdit;
-    edqtPlayersSlain: TLabeledEdit;
-    edqtBonusTalents: TLabeledEdit;
-    tsMillingLoot: TTabSheet;
-    lvitMillingLoot: TJvListView;
-    edimitem: TJvComboEdit;
-    edimentry: TLabeledEdit;
-    lbimitem: TLabel;
-    edimChanceOrQuestChance: TLabeledEdit;
-    edimgroupid: TLabeledEdit;
-    edimmincountOrRef: TLabeledEdit;
-    edimmaxcount: TLabeledEdit;
-    btMillingLootAdd: TSpeedButton;
-    btMillingLootUpd: TSpeedButton;
-    btMillingLootDel: TSpeedButton;
-    btFullScriptMillingLoot: TButton;
-    btScriptMillingLoot: TButton;
     edceequipentry1: TLabeledEdit;
     edceequipentry2: TLabeledEdit;
     edceequipentry3: TLabeledEdit;
@@ -1403,7 +1385,6 @@ type
     edctQuestItem3: TLabeledEdit;
     edctQuestItem4: TLabeledEdit;
     edctMovementTemplateId: TLabeledEdit;
-    editHolidayId: TLabeledEdit;
     edgtunk1: TLabeledEdit;
     edctQuestItem5: TLabeledEdit;
     edctQuestItem6: TLabeledEdit;
@@ -1414,10 +1395,6 @@ type
     edgtquestItem4: TLabeledEdit;
     edgtquestItem5: TLabeledEdit;
     edgtquestItem6: TLabeledEdit;
-    edqtReqItemId5: TJvComboEdit;
-    edqtReqItemCount5: TLabeledEdit;
-    edqtReqItemCount6: TLabeledEdit;
-    edqtReqItemId6: TJvComboEdit;
     edSearchItemItemLevel: TLabeledEdit;
     edSearchGOdata0: TLabeledEdit;
     edSearchGOdata1: TLabeledEdit;
@@ -1452,16 +1429,8 @@ type
     lbglspawnMask: TLabel;
     edctGossipMenuId: TJvComboEdit;
     lbctgossip_menu_id: TLabel;
-    edqtCompletedText: TLabeledEdit;
-    edlqCompletedText: TLabeledEdit;
-    edqtRewXPId: TLabeledEdit;
-    edqtRewHonorMultiplier: TLabeledEdit;
-    edqtRewRepValueId1: TLabeledEdit;
-    edqtRewRepValueId2: TLabeledEdit;
-    edqtRewRepValueId3: TLabeledEdit;
-    edqtRewRepValueId4: TLabeledEdit;
-    edqtRewRepValueId5: TLabeledEdit;
-    editExtraFlags: TLabeledEdit;
+    edqtBreadcrumbForQuestId: TLabeledEdit;
+    edqtRewHonorableKills: TLabeledEdit;
     edctSpeedRun: TLabeledEdit;
     gbGOgolds: TGroupBox;
     edgtmaxgold: TLabeledEdit;
@@ -1537,16 +1506,8 @@ type
     edctTrainerTemplateId: TJvComboEdit;
     lbcttrainer_id: TLabel;
     edctVehicleTemplateId: TLabeledEdit;
-    edqtPortraitGiverName: TLabeledEdit;
-    edqtPortraitGiverText: TLabeledEdit;
-    edqtPortraitTurnInName: TLabeledEdit;
-    edqtPortraitTurnInText: TLabeledEdit;
-    edqtPortraitGiver: TJvComboEdit;
-    lbqtPortraitGiver: TLabel;
-    edqtPortraitTurnIn: TJvComboEdit;
-    lbqtPortraitTurnIn: TLabel;
-    edqtSoundAccept: TLabeledEdit;
-    edqtSoundTurnIn: TLabeledEdit;
+    edqtIncompleteEmoteDelay: TLabeledEdit;
+    edqtCompleteEmoteDelay: TLabeledEdit;
     edqtPointMapId: TJvComboEdit;
     edqtPointX: TLabeledEdit;
     edqtPointY: TLabeledEdit;
@@ -1572,14 +1533,8 @@ type
     editstat_unk2_8: TLabeledEdit;
     editstat_unk2_9: TLabeledEdit;
     editstat_unk2_10: TLabeledEdit;
-    editStatScalingFactor: TLabeledEdit;
     editDamageType: TJvComboEdit;
     lbitDamageType: TLabel;
-    editUnknown: TLabeledEdit;
-    editUnknown1: TLabeledEdit;
-    editUnknown2: TLabeledEdit;
-    editUnknown400_1: TLabeledEdit;
-    editUnknown400_2: TLabeledEdit;
     edctPetSpellDataId: TLabeledEdit;
     edctExtraFlags: TJvComboEdit;
     lbctflags_extra: TLabel;
@@ -1620,14 +1575,6 @@ type
     lbcgmooption_icon: TLabel;
     edcgmoaction_menu_id: TJvComboEdit;
     lbcgmoaction_menu_id: TLabel;
-    gbitDamage: TGroupBox;
-    lbitdmg_type: TLabel;
-    editdmg_min1: TLabeledEdit;
-    editdmg_max1: TLabeledEdit;
-    editdmg_min2: TLabeledEdit;
-    editdmg_max2: TLabeledEdit;
-    editdmg_type1: TJvComboEdit;
-    editdmg_type2: TJvComboEdit;
     gbitResistance: TGroupBox;
     editholy_res: TLabeledEdit;
     editfire_res: TLabeledEdit;
@@ -1638,8 +1585,6 @@ type
     editammo_type: TLabeledEdit;
     editarmor: TLabeledEdit;
     editblock: TLabeledEdit;
-    editScalingStatValue: TLabeledEdit;
-    editStatsCount: TLabeledEdit;
     lbGossipMenuInfo: TLabel;
     edctDamageMultiplier: TLabeledEdit;
     edctExperienceMultiplier: TLabeledEdit;
@@ -1681,20 +1626,6 @@ type
     btgtbDel: TSpeedButton;
     btgtbUpd: TSpeedButton;
     btgtbAdd: TSpeedButton;
-    tsSpellLoot: TTabSheet;
-    lvslSpellLoot: TJvListView;
-    edslChanceOrQuestChance: TLabeledEdit;
-    btScriptSpellLoot: TButton;
-    edslitem: TJvComboEdit;
-    edslgroupid: TLabeledEdit;
-    btSpellLootAdd: TSpeedButton;
-    btSpellLootUpd: TSpeedButton;
-    btSpellLootDel: TSpeedButton;
-    edslmincountOrRef: TLabeledEdit;
-    edslmaxcount: TLabeledEdit;
-    btFullScriptSpellLoot: TButton;
-    edslentry: TLabeledEdit;
-    lbslitem: TLabel;
     Conditions: TTabSheet;
     edconvalue2: TLabeledEdit;
     edconvalue1: TLabeledEdit;
@@ -1716,12 +1647,8 @@ type
     lbidcondition_id: TLabel;
     edipcondition_id: TJvComboEdit;
     lbipcondition_id: TLabel;
-    edimcondition_id: TJvComboEdit;
-    lbcondition_id: TLabel;
     edircondition_id: TJvComboEdit;
     lbircondition_id: TLabel;
-    edslcondition_id: TJvComboEdit;
-    lbslcondition_id: TLabel;
     edmlcondition_id: TJvComboEdit;
     lbmlcondition_id: TLabel;
     edqtRewMailTemplateId: TJvComboEdit;
@@ -2064,8 +1991,6 @@ type
     edtgText: TLabeledEdit;
     edltgText: TLabeledEdit;
     btGreetingScript: TButton;
-    editFlags2: TJvComboEdit;
-    lbitFlags2: TLabel;
     edssdata_flags: TJvComboEdit;
     lbssdata_flags: TLabel;
     edesdata_flags: TJvComboEdit;
@@ -2132,6 +2057,25 @@ type
     edcnevent_param6: TJvComboEdit;
     lbcnevent_param5: TLabel;
     lbcnevent_param6: TLabel;
+    edqtMaxLevel: TLabeledEdit;
+    gbitDamage: TGroupBox;
+    lbitdmg_type: TLabel;
+    editdmg_min1: TLabeledEdit;
+    editdmg_max1: TLabeledEdit;
+    editdmg_min2: TLabeledEdit;
+    editdmg_max2: TLabeledEdit;
+    editdmg_type1: TJvComboEdit;
+    editdmg_type2: TJvComboEdit;
+    editExtraFlags: TLabeledEdit;
+    editdmg_max3: TLabeledEdit;
+    editdmg_min3: TLabeledEdit;
+    editdmg_type3: TJvComboEdit;
+    editdmg_max4: TLabeledEdit;
+    editdmg_min4: TLabeledEdit;
+    editdmg_type4: TJvComboEdit;
+    editdmg_max5: TLabeledEdit;
+    editdmg_min5: TLabeledEdit;
+    editdmg_type5: TJvComboEdit;
     procedure FormActivate(Sender: TObject);
     procedure btSearchClick(Sender: TObject);
     procedure FormCreate(Sender: TObject);
@@ -2583,14 +2527,6 @@ type
     procedure lvcnEventAIChange(Sender: TObject; Item: TListItem; Change: TItemChange);
     procedure btEventAIDelClick(Sender: TObject);
     procedure btlqShowFullLocalesScriptClick(Sender: TObject);
-    procedure lvitMillingLootSelectItem(Sender: TObject; Item: TListItem; Selected: Boolean);
-    procedure lvitMillingLootChange(Sender: TObject; Item: TListItem; Change: TItemChange);
-    procedure btMillingLootAddClick(Sender: TObject);
-    procedure btMillingLootUpdClick(Sender: TObject);
-    procedure btMillingLootDelClick(Sender: TObject);
-    procedure tsMillingLootShow(Sender: TObject);
-    procedure tsSpellLootShow(Sender: TObject);
-    procedure btFullScriptMillingLootClick(Sender: TObject);
     procedure edctEquipmentTemplateIdDblClick(Sender: TObject);
     procedure edflagsChange(Sender: TObject);
     procedure btReferenceLootAddClick(Sender: TObject);
@@ -2599,12 +2535,6 @@ type
     procedure lvitReferenceLootChange(Sender: TObject; Item: TListItem; Change: TItemChange);
     procedure lvitReferenceLootSelectItem(Sender: TObject; Item: TListItem; Selected: Boolean);
     procedure btFullScriptReferenceLootClick(Sender: TObject);
-    procedure btSpellLootAddClick(Sender: TObject);
-    procedure btSpellLootUpdClick(Sender: TObject);
-    procedure btSpellLootDelClick(Sender: TObject);
-    procedure lvslSpellLootChange(Sender: TObject; Item: TListItem; Change: TItemChange);
-    procedure lvslSpellLootSelectItem(Sender: TObject; Item: TListItem; Selected: Boolean);
-    procedure btFullScriptSpellLootClick(Sender: TObject);
     procedure edirentryButtonClick(Sender: TObject);
     procedure GetSpawnMask(Sender: TObject);
     procedure btcmsAddClick(Sender: TObject);
@@ -2743,9 +2673,7 @@ type
     procedure CompleteItemLootScript;
     procedure CompleteDisLootScript;
     procedure CompleteProsLootScript;
-    procedure CompleteMillingLootScript;
     procedure CompleteReferenceLootScript;
-    procedure CompleteSpellLootScript;
     procedure CompleteItemScript;
     procedure CompleteItemEnchScript;
 
@@ -3122,19 +3050,6 @@ end;
 
 procedure TMainForm.SetVisibleForMangosOnlyFields(IsVisible: Boolean);
 begin
-  // quest
-  edqtPortraitGiverName.Visible := IsVisible;
-  edqtPortraitGiverText.Visible := IsVisible;
-  edqtPortraitTurnInName.Visible := IsVisible;
-  edqtPortraitTurnInText.Visible := IsVisible;
-  edqtPortraitGiver.Visible := IsVisible;
-  edqtPortraitTurnIn.Visible := IsVisible;
-  lbqtPortraitGiver.Visible := IsVisible;
-  lbqtPortraitTurnIn.Visible := IsVisible;
-
-  edqtSoundAccept.Visible := IsVisible;
-  edqtSoundTurnIn.Visible := IsVisible;
-
   // go
   edgtdata24.Visible := IsVisible;
   edgtdata25.Visible := IsVisible;
@@ -3167,15 +3082,10 @@ begin
   editstat_unk2_8.Visible := IsVisible;
   editstat_unk2_9.Visible := IsVisible;
   editstat_unk2_10.Visible := IsVisible;
-  editStatScalingFactor.Visible := IsVisible;
 
   editDamageType.Visible := IsVisible;
   lbitDamageType.Visible := IsVisible;
-  editUnknown.Visible := IsVisible;
-  editUnknown1.Visible := IsVisible;
-  editUnknown2.Visible := IsVisible;
-  editUnknown400_1.Visible := IsVisible;
-  editUnknown400_2.Visible := IsVisible;
+
 end;
 
 procedure  TMainForm.SetVisibleForCMangosOnlyFields(IsVisible: Boolean);
@@ -3185,8 +3095,6 @@ begin
   editammo_type.Visible := IsVisible;
   editarmor.Visible := IsVisible;
   editblock.Visible := IsVisible;
-  editScalingStatValue.Visible := IsVisible;
-  editStatsCount.Visible := IsVisible;
 end;
 
 procedure TMainForm.FormCreate(Sender: TObject);
@@ -3322,6 +3230,7 @@ procedure TMainForm.LoadQuest(QuestID: Integer);
 begin
   ShowHourGlassCursor;
   ClearFields(ttQuest);
+  ClearFields(ttQuestLoc);
   // show tsQuest
   if QuestID < 1 then
     Exit;
@@ -3630,9 +3539,9 @@ begin
   case SyntaxStyle of
     ssInsertDelete:
       s3 := Format('DELETE FROM `quest_template` WHERE `entry` = %s;'#13#10 +
-        'INSERT INTO `quest_template` (%s) VALUES (%s);'#13#10, [quest, Fields, Values]);
+        'INSERT INTO `quest_template` (%s) VALUES '#13#10'(%s);'#13#10, [quest, Fields, Values]);
     ssReplace:
-      s3 := Format('REPLACE INTO `quest_template` (%s) VALUES (%s);'#13#10, [Fields, Values]);
+      s3 := Format('REPLACE INTO `quest_template` (%s) VALUES '#13#10'(%s);'#13#10, [Fields, Values]);
     ssUpdate:
       s3 := MakeUpdate('quest_template', PFX_QUEST_TEMPLATE, false, 'entry', quest);
   end;
@@ -3640,8 +3549,12 @@ begin
   if edqtAreatrigger.Text <> '' then
     s4 := Format('DELETE FROM `areatrigger_involvedrelation` WHERE `quest` = %1:s;'#13#10 +
       'INSERT INTO `areatrigger_involvedrelation` (`id`, `quest`) VALUES (%0:s, %1:s);'#13#10,
+      [edqtAreatrigger.Text, quest])
+  else
+    s4 := Format('DELETE FROM `areatrigger_involvedrelation` WHERE `quest` = %1:s;'#13#10,
       [edqtAreatrigger.Text, quest]);
-  script := s1 + s2 + s5 + s6 + s3 + s4;
+
+  script := s4 + s1 + s2 + s5 + s6 + s3;
   meqtScript.Text := script;
 end;
 
@@ -3711,21 +3624,6 @@ begin
   PageControl2.ActivePageIndex := SCRIPT_TAB_NO_QUEST;
   meqtScript.Clear;
   CompleteGreetingScript;
-end;
-
-procedure TMainForm.btMillingLootAddClick(Sender: TObject);
-begin
-  LootAdd('edim', lvitMillingLoot);
-end;
-
-procedure TMainForm.btMillingLootDelClick(Sender: TObject);
-begin
-  LootDel(lvitMillingLoot);
-end;
-
-procedure TMainForm.btMillingLootUpdClick(Sender: TObject);
-begin
-  LootUpd('edim', lvitMillingLoot);
 end;
 
 procedure TMainForm.GetItem(Sender: TObject);
@@ -3929,7 +3827,7 @@ var
 begin
   loc := LoadLocales();
   MyQuery.SQL.Text := Format('SELECT Title%0:s, Details%0:s, Objectives%0:s, OfferRewardText%0:s,' +
-    'RequestItemsText%0:s, EndText%0:s, CompletedText%0:s,' +
+    'RequestItemsText%0:s, EndText%0:s, ' +
     'ObjectiveText1%0:s, ObjectiveText2%0:s, ObjectiveText3%0:s, ObjectiveText4%0:s ' +
    'FROM locales_quest WHERE entry=%1:d LIMIT 1', [loc, QuestID]);
   MyQuery.Open;
@@ -3937,7 +3835,6 @@ begin
   l2Details.Caption := 'Details' + loc;
   l2Objectives.Caption := 'Objectives' + loc;
   l2EndText.Caption := 'EndText' + loc;
-  edlqCompletedText.EditLabel.Caption := 'CompletedText' + loc;
   l2OfferRewardText.Caption := 'OfferRewardText' + loc;
   l2RequestItemsText.Caption := 'RequestItemsText' + loc;
   edlqObjectiveText1.EditLabel.Caption := 'ObjectiveText1' + loc;
@@ -3953,11 +3850,10 @@ begin
     edlqOfferRewardText.Text := MyQuery.Fields[3].AsString;
     edlqRequestItemsText.Text := MyQuery.Fields[4].AsString;
     edlqEndText.Text := MyQuery.Fields[5].AsString;
-    edlqCompletedText.Text := MyQuery.Fields[6].AsString;
-    edlqObjectiveText1.Text := MyQuery.Fields[7].AsString;
-    edlqObjectiveText2.Text := MyQuery.Fields[8].AsString;
-    edlqObjectiveText3.Text := MyQuery.Fields[9].AsString;
-    edlqObjectiveText4.Text := MyQuery.Fields[10].AsString;
+    edlqObjectiveText1.Text := MyQuery.Fields[6].AsString;
+    edlqObjectiveText2.Text := MyQuery.Fields[7].AsString;
+    edlqObjectiveText3.Text := MyQuery.Fields[8].AsString;
+    edlqObjectiveText4.Text := MyQuery.Fields[9].AsString;
     MyQuery.Next;
   end;
   MyQuery.Close;
@@ -4149,6 +4045,7 @@ procedure TMainForm.btNewQuestClick(Sender: TObject);
 begin
   lvQuest.Selected := nil;
   ClearFields(ttQuest);
+  ClearFields(ttQuestLoc);
   SetDefaultFields(ttQuest);
   PageControl2.ActivePageIndex := 1;
 end;
@@ -4213,6 +4110,8 @@ begin
   case Where of
     ttQuest:
       S := 'q';
+    ttQuestLoc:
+      S := 'l';
     ttNPC:
       S := 'c';
     ttObject:
@@ -4229,7 +4128,8 @@ begin
       if ((Components[i] is TLabeledEdit) or (Components[i] is TJvComboEdit) or (Components[i] is TMemo)) and
         ((pos('ed' + S + 't', Components[i].Name) = 1) or (pos('ed' + S + 'l', Components[i].Name) = 1) or
         (pos('ed' + S + 'o', Components[i].Name) = 1) or (pos('me' + S + 't', Components[i].Name) = 1) or
-        (pos('me' + S + 'l', Components[i].Name) = 1) or (pos('me' + S + 'o', Components[i].Name) = 1)) then
+        (pos('me' + S + 'l', Components[i].Name) = 1) or (pos('me' + S + 'o', Components[i].Name) = 1) or
+        (pos('ed' + S + 'q', Components[i].Name) = 1)) then
         TCustomEdit(Components[i]).Clear;
       if (Components[i] is TJvListView) and ((pos('lv' + S + 'o', Components[i].Name) = 1) or
         (pos('lv' + S + 'l', Components[i].Name) = 1) or (pos('lv' + S + 't', Components[i].Name) = 1)) then
@@ -4378,21 +4278,6 @@ end;
 procedure TMainForm.btReferenceLootUpdClick(Sender: TObject);
 begin
   LootUpd('edir', lvitReferenceLoot);
-end;
-
-procedure TMainForm.btSpellLootAddClick(Sender: TObject);
-begin
-  LootAdd('edsl', lvslSpellLoot);
-end;
-
-procedure TMainForm.btSpellLootDelClick(Sender: TObject);
-begin
-  LootDel(lvslSpellLoot);
-end;
-
-procedure TMainForm.btSpellLootUpdClick(Sender: TObject);
-begin
-  LootUpd('edsl', lvslSpellLoot);
 end;
 
 procedure TMainForm.nSettingsClick(Sender: TObject);
@@ -4636,7 +4521,7 @@ begin
         if MessageDlg(Format(dmMain.Text[137], [CreateVer(LastVer)]), mtConfirmation, mbYesNoCancel, 0, mbYes)
           = mrYes then
         begin
-          BrowseURL1.Url := 'http://quice.indomit.ru/?act=1';
+          BrowseURL1.Url := 'https://github.com/chaosua/quice/releases';
           BrowseURL1.Execute;
         end;
       end
@@ -9495,11 +9380,6 @@ begin
       '''prospecting_loot_template'' as `table` ' + 'FROM `prospecting_loot_template` WHERE (`item`=%s)', [Key]);
     QueryResult_AddToList;
 
-    // load milling loot
-    MyQuery.SQL.Text := Format('SELECT *,  ' +
-      '''milling_loot_template'' as `table` ' + 'FROM `milling_loot_template` WHERE (`item`=%s)', [Key]);
-    QueryResult_AddToList;
-
     // load reference loot
     MyQuery.SQL.Text := Format('SELECT *,  ' +
       '''reference_loot_template'' as `table` ' + 'FROM `reference_loot_template` WHERE (`item`=%s)', [Key]);
@@ -9508,11 +9388,6 @@ begin
     // load mail loot
     MyQuery.SQL.Text := Format('SELECT *,  ' +
       '''mail_loot_template'' as `table` ' + 'FROM `mail_loot_template` WHERE (`item`=%s)', [Key]);
-    QueryResult_AddToList;
-
-    // load spell loot
-    MyQuery.SQL.Text := Format('SELECT *,  ' +
-      '''spell_loot_template'' as `table` ' + 'FROM `spell_loot_template` WHERE (`item`=%s)', [Key]);
     QueryResult_AddToList;
 
     // load npc_vendor
@@ -9543,8 +9418,8 @@ begin
       MyQuery.SQL.Text := Format('SELECT `name` FROM `item_template` WHERE `entry` = %s LIMIT 1', [id]);
     if table = 'prospecting_loot_template' then
       MyQuery.SQL.Text := Format('SELECT `name` FROM `item_template` WHERE `entry` = %s LIMIT 1', [id]);
-    if table = 'milling_loot_template' then
-      MyQuery.SQL.Text := Format('SELECT `name` FROM `item_template` WHERE `entry` = %s LIMIT 1', [id]);
+  //  if table = 'milling_loot_template' then
+  //    MyQuery.SQL.Text := Format('SELECT `name` FROM `item_template` WHERE `entry` = %s LIMIT 1', [id]);
     if table = 'disenchant_loot_template' then
       MyQuery.SQL.Text := Format('SELECT `name` FROM `item_template` WHERE `DisenchantID` = %s', [id]);
     if table = 'spell_loot_template' then
@@ -10486,12 +10361,6 @@ begin
   ShowFullLootScript('reference_loot_template', lvitReferenceLoot, meitScript, edirentry.Text);
 end;
 
-procedure TMainForm.btFullScriptSpellLootClick(Sender: TObject);
-begin
-  PageControl5.ActivePageIndex := SCRIPT_TAB_NO_ITEM;
-  ShowFullLootScript('spell_loot_template', lvslSpellLoot, meitScript, edslentry.Text);
-end;
-
 procedure TMainForm.btShowCharacterScriptClick(Sender: TObject);
 begin
   PageControl8.ActivePageIndex := SCRIPT_TAB_NO_CHARACTER;
@@ -11109,27 +10978,6 @@ begin
   end;
 end;
 
-procedure TMainForm.CompleteMillingLootScript;
-var
-  entry, Item, Fields, Values: string;
-begin
-  meitLog.Clear;
-  entry := edimentry.Text;
-  Item := edimitem.Text;
-  if (entry = '') or (Item = '') then
-    Exit;
-  SetFieldsAndValues(Fields, Values, 'milling_loot_template', PFX_MILLING_LOOT_TEMPLATE, meitLog);
-  case SyntaxStyle of
-    ssInsertDelete:
-      meitScript.Text := Format('DELETE FROM `milling_loot_template` WHERE (`entry`=%s) AND (`item`=%s);'#13#10 +
-      'INSERT INTO `milling_loot_template` (%s) VALUES (%s);'#13#10, [entry, Item, Fields, Values]);
-    ssReplace:
-      meitScript.Text := Format('REPLACE INTO `milling_loot_template` (%s) VALUES (%s);'#13#10, [Fields, Values]);
-    ssUpdate:
-      meitScript.Text := MakeUpdate2('milling_loot_template', PFX_MILLING_LOOT_TEMPLATE, false, 'entry', entry, 'item', Item);
-  end;
-end;
-
 procedure TMainForm.CompleteReferenceLootScript;
 var
   entry, Item, Fields, Values: string;
@@ -11148,27 +10996,6 @@ begin
       meitScript.Text := Format('REPLACE INTO `reference_loot_template` (%s) VALUES (%s);'#13#10, [Fields, Values]);
     ssUpdate:
       meitScript.Text := MakeUpdate2('reference_loot_template', PFX_REFERENCE_LOOT_TEMPLATE, false, 'entry', entry, 'item', Item);
-  end;
-end;
-
-procedure TMainForm.CompleteSpellLootScript;
-var
-  entry, Item, Fields, Values: string;
-begin
-  meitLog.Clear;
-  entry := edslentry.Text;
-  Item := edslitem.Text;
-  if (entry = '') or (Item = '') then
-    Exit;
-  SetFieldsAndValues(Fields, Values, 'spell_loot_template', PFX_SPELL_LOOT_TEMPLATE, meitLog);
-  case SyntaxStyle of
-    ssInsertDelete:
-      meitScript.Text := Format('DELETE FROM `spell_loot_template` WHERE (`entry`=%s) AND (`item`=%s);'#13#10 +
-      'INSERT INTO `spell_loot_template` (%s) VALUES (%s);'#13#10, [entry, Item, Fields, Values]);
-    ssReplace:
-      meitScript.Text := Format('REPLACE INTO `spell_loot_template` (%s) VALUES (%s);'#13#10, [Fields, Values]);
-    ssUpdate:
-      meitScript.Text := MakeUpdate2('spell_loot_template', PFX_SPELL_LOOT_TEMPLATE, false, 'entry', entry, 'item', Item);
   end;
 end;
 
@@ -11219,14 +11046,6 @@ begin
     LoadQueryToListView(Format('SELECT plt.*, i.`name` FROM `prospecting_loot_template`' +
       ' plt LEFT OUTER JOIN `item_template` i ON i.`entry` = plt.`item`' + ' WHERE (plt.`entry`=%d)',
       [StrToIntDef(editentry.Text, 0)]), lvitProsLoot);
-
-    LoadQueryToListView(Format('SELECT mlt.*, i.`name` FROM `milling_loot_template`' +
-      ' mlt LEFT OUTER JOIN `item_template` i ON i.`entry` = mlt.`item`' + ' WHERE (mlt.`entry`=%d)',
-      [StrToIntDef(editentry.Text, 0)]), lvitMillingLoot);
-
-    LoadQueryToListView(Format('SELECT slt.*, i.`name` FROM `spell_loot_template`' +
-      ' slt LEFT OUTER JOIN `item_template` i ON i.`entry` = slt.`item`' + ' WHERE (slt.`item`=%d)',
-      [StrToIntDef(editentry.Text, 0)]), lvslSpellLoot);
 
     LoadQueryToListView(Format('SELECT mlt.*, i.`name` FROM `mail_loot_template`' +
       ' mlt LEFT OUTER JOIN `item_template` i ON i.`entry` = mlt.`item`' + ' WHERE (mlt.`entry`=%d)',
@@ -11531,18 +11350,6 @@ begin
     SetLootEditFields('edil', lvitItemLoot);
 end;
 
-procedure TMainForm.lvitMillingLootChange(Sender: TObject; Item: TListItem; Change: TItemChange);
-begin
-  btMillingLootUpd.Enabled := Assigned(TJvListView(Sender).Selected);
-  btMillingLootDel.Enabled := Assigned(TJvListView(Sender).Selected);
-end;
-
-procedure TMainForm.lvitMillingLootSelectItem(Sender: TObject; Item: TListItem; Selected: Boolean);
-begin
-  if Selected then
-    SetLootEditFields('edim', lvitMillingLoot);
-end;
-
 procedure TMainForm.btScriptItemLootClick(Sender: TObject);
 begin
   PageControl5.ActivePageIndex := SCRIPT_TAB_NO_ITEM;
@@ -11567,12 +11374,6 @@ procedure TMainForm.btFullScriptItemLootClick(Sender: TObject);
 begin
   PageControl5.ActivePageIndex := SCRIPT_TAB_NO_ITEM;
   ShowFullLootScript('item_loot_template', lvitItemLoot, meitScript, editentry.Text);
-end;
-
-procedure TMainForm.btFullScriptMillingLootClick(Sender: TObject);
-begin
-  PageControl5.ActivePageIndex := SCRIPT_TAB_NO_ITEM;
-  ShowFullLootScript('milling_loot_template', lvitMillingLoot, meitScript, editentry.Text);
 end;
 
 procedure TMainForm.editentryButtonClick(Sender: TObject);
@@ -11657,26 +11458,10 @@ begin
     4:
       CompleteProsLootScript;
     5:
-      CompleteMillingLootScript;
-    6:
       CompleteReferenceLootScript;
-    7:
-      CompleteSpellLootScript;
-    10:
+    8:
       CompleteItemEnchScript;
   end;
-end;
-
-procedure TMainForm.tsMillingLootShow(Sender: TObject);
-begin
-  if (edipentry.Text = '') then
-    edipentry.Text := editentry.Text;
-end;
-
-procedure TMainForm.tsSpellLootShow(Sender: TObject);
-begin
-  if (edslitem.Text = '') then
-    edslitem.Text := editentry.Text;
 end;
 
 procedure TMainForm.tsNPCgossipShow(Sender: TObject);
@@ -13521,18 +13306,6 @@ procedure TMainForm.lvitReferenceLootSelectItem(Sender: TObject; Item: TListItem
 begin
   if Selected then
     SetLootEditFields('edir', lvitReferenceLoot);
-end;
-
-procedure TMainForm.lvslSpellLootChange(Sender: TObject; Item: TListItem; Change: TItemChange);
-begin
-  btSpellLootUpd.Enabled := Assigned(TJvListView(Sender).Selected);
-  btSpellLootDel.Enabled := Assigned(TJvListView(Sender).Selected);
-end;
-
-procedure TMainForm.lvslSpellLootSelectItem(Sender: TObject; Item: TListItem; Selected: Boolean);
-begin
-  if Selected then
-    SetLootEditFields('edsl', lvslSpellLoot);
 end;
 
 procedure TMainForm.lvQuickListClick(Sender: TObject);

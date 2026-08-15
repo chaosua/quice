@@ -4,7 +4,8 @@ interface
 
 uses
   Forms, SysUtils, Classes, ActnList, ExtActns, Translate, WideStrings,
-  DB, ZAbstractRODataset, ZAbstractDataset, ZDataset, JvExComCtrls, JvListView;
+  DB, ZAbstractRODataset, ZAbstractDataset, ZDataset, JvExComCtrls, JvListView,
+  System.Actions;
 
 const
   DefaultLanguage = 'English';
@@ -12,7 +13,7 @@ const
   ProgramName = 'Quice';
 
 type
-  TType = (ttNPC, ttItem, ttObject, ttQuest, ttChar);
+  TType = (ttNPC, ttItem, ttObject, ttQuest, ttQuestLoc, ttChar);
   TSite = (sW, sRW, sA, sT, sD);
 
   TdmMain = class(TDataModule)

@@ -12,10 +12,8 @@ object AboutBox: TAboutBox
   Font.Height = -11
   Font.Name = 'MS Sans Serif'
   Font.Style = []
-  OldCreateOrder = True
   Position = poScreenCenter
   OnShow = FormShow
-  PixelsPerInch = 96
   TextHeight = 13
   object Panel2: TPanel
     Left = 0
@@ -1985,8 +1983,8 @@ object AboutBox: TAboutBox
         IsControl = True
       end
       object lblAutorName: TLabel
-        Left = 292
-        Top = 176
+        Left = 19
+        Top = 143
         Width = 106
         Height = 15
         AutoSize = False
@@ -2003,10 +2001,10 @@ object AboutBox: TAboutBox
       object LinkSite: TLabel
         Left = 108
         Top = 124
-        Width = 196
+        Width = 209
         Height = 13
         Cursor = crHandPoint
-        Caption = 'https://github.com/Ravie/quice/releases'
+        Caption = 'https://github.com/chaosua/quice/releases'
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clNavy
         Font.Height = -11
@@ -2015,53 +2013,12 @@ object AboutBox: TAboutBox
         ParentFont = False
         OnClick = LinkSiteClick
       end
-      object lbDesc: TLabel
-        Left = 19
-        Top = 51
-        Width = 333
-        Height = 13
-        Caption = 'If you want to help Quice, click 1 banner on my website. ;)'
-        Font.Charset = DEFAULT_CHARSET
-        Font.Color = clWindowText
-        Font.Height = -11
-        Font.Name = 'MS Sans Serif'
-        Font.Style = [fsBold]
-        ParentFont = False
-      end
-      object PayPal: TLabel
-        Left = 19
-        Top = 102
-        Width = 85
-        Height = 13
-        Cursor = crHandPoint
-        Hint = 'http://sourceforge.net/donate/index.php?group_id=196709'
-        Caption = 'Donate by PayPal'
-        Font.Charset = DEFAULT_CHARSET
-        Font.Color = clNavy
-        Font.Height = -11
-        Font.Name = 'MS Sans Serif'
-        Font.Style = [fsUnderline]
-        ParentFont = False
-        OnClick = PayPalClick
-      end
       object lbdbversion: TLabel
         Left = 19
         Top = 32
         Width = 54
         Height = 13
         Caption = 'lbdbversion'
-      end
-      object Label1: TLabel
-        Left = 19
-        Top = 66
-        Width = 185
-        Height = 13
-        Caption = 'or send some money to my Webmoney:'
-      end
-      object JvPoweredByJVCL1: TJvPoweredByJVCL
-        Left = 19
-        Top = 157
-        URL = 'http://homepages.borland.com/jedi/jvcl/PoweredByJVCL.htm'
       end
       object lbprojectwebsite: TLabel
         Left = 19
@@ -2070,61 +2027,50 @@ object AboutBox: TAboutBox
         Height = 13
         Caption = 'Project WEB site:'
       end
-      object edWebMoneyU: TEdit
-        Left = 292
-        Top = 83
-        Width = 85
-        Height = 12
-        BevelInner = bvNone
-        BorderStyle = bsNone
-        Color = clBtnFace
-        Ctl3D = False
-        ParentCtl3D = False
-        ReadOnly = True
-        TabOrder = 3
-        Text = 'U362537334387'
-      end
-      object edWebMoneyE: TEdit
-        Left = 110
-        Top = 83
-        Width = 85
-        Height = 12
-        BevelInner = bvNone
-        BorderStyle = bsNone
-        Color = clBtnFace
-        Ctl3D = False
-        ParentCtl3D = False
-        ReadOnly = True
-        TabOrder = 1
-        Text = 'E351094636108'
-      end
-      object edWebMoneyR: TEdit
-        Left = 201
-        Top = 83
-        Width = 85
-        Height = 12
-        BevelInner = bvNone
-        BorderStyle = bsNone
-        Color = clBtnFace
-        Ctl3D = False
-        ParentCtl3D = False
-        ReadOnly = True
-        TabOrder = 2
-        Text = 'R311167626620'
-      end
-      object edWebMoneyZ: TEdit
+      object Label2: TLabel
         Left = 19
-        Top = 83
-        Width = 85
-        Height = 12
-        BevelInner = bvNone
-        BorderStyle = bsNone
-        Color = clBtnFace
-        Ctl3D = False
-        ParentCtl3D = False
-        ReadOnly = True
-        TabOrder = 0
-        Text = 'Z574841514963'
+        Top = 164
+        Width = 106
+        Height = 15
+        AutoSize = False
+        Caption = #169' Ravie 2018'
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clGray
+        Font.Height = -11
+        Font.Name = 'MS Sans Serif'
+        Font.Style = []
+        ParentFont = False
+        Transparent = True
+        WordWrap = True
+      end
+      object Label3: TLabel
+        Left = 147
+        Top = 143
+        Width = 106
+        Height = 15
+        AutoSize = False
+        Caption = #169' chaosua 2026'
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clGray
+        Font.Height = -11
+        Font.Name = 'MS Sans Serif'
+        Font.Style = []
+        ParentFont = False
+        Transparent = True
+        WordWrap = True
+      end
+      object Label1: TLabel
+        Left = 19
+        Top = 105
+        Width = 187
+        Height = 13
+        Caption = 'Quice for CMANGOS TBC (2.4.3)'
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -11
+        Font.Name = 'MS Sans Serif'
+        Font.Style = [fsBold]
+        ParentFont = False
       end
     end
     object OKButton: TButton

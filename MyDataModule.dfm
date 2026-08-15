@@ -1,5 +1,4 @@
 object dmMain: TdmMain
-  OldCreateOrder = False
   OnDestroy = DataModuleDestroy
   Height = 352
   Width = 426
