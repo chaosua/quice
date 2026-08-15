@@ -4778,10 +4778,10 @@ begin
   if id <> '' then
   begin
     if pos('-', id) = 0 then
-      WhereStr := Format('WHERE ((ct.`Entry` in (%s)) OR (ct.`DifficultyEntry1` in (%0:s)))', [id])
+      WhereStr := Format('WHERE ((ct.`Entry` in (%s)) OR (ct.`HeroicEntry` in (%0:s)))', [id])
     else
       WhereStr :=
-        Format('WHERE (((ct.`Entry` >= %s) AND (ct.`Entry` <= %0:s)) OR ct.`DifficultyEntry1` >= %0:s)',
+        Format('WHERE (((ct.`Entry` >= %s) AND (ct.`Entry` <= %0:s)) OR ct.`HeroicEntry` >= %0:s)',
         [id]);
   end;
 
