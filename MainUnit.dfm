@@ -31,7 +31,7 @@ object MainForm: TMainForm
     Top = 0
     Width = 1008
     Height = 681
-    ActivePage = tsCreature
+    ActivePage = tsItem
     Align = alClient
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clWindowText
@@ -20926,7 +20926,7 @@ object MainForm: TMainForm
         Top = 25
         Width = 1000
         Height = 628
-        ActivePage = tsSearchItem
+        ActivePage = tsItemLoot
         Align = alClient
         TabOrder = 1
         object tsSearchItem: TTabSheet
