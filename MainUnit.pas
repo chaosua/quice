@@ -400,8 +400,8 @@ type
     gbCreature: TGroupBox;
     lbctEntry: TLabel;
     edctEntry: TJvComboEdit;
-    edctModelId1: TLabeledEdit;
-    edctModelId3: TLabeledEdit;
+    edctDisplayId1: TLabeledEdit;
+    edctDisplayId3: TLabeledEdit;
     edctName: TLabeledEdit;
     edctSubName: TLabeledEdit;
     edctMinLevel: TLabeledEdit;
@@ -1165,8 +1165,8 @@ type
     btBrowseItemPopup: TBitBtn;
     editmaxMoneyLoot: TLabeledEdit;
     editminMoneyLoot: TLabeledEdit;
-    edctModelId4: TLabeledEdit;
-    edctModelId2: TLabeledEdit;
+    edctDisplayId4: TLabeledEdit;
+    edctDisplayId2: TLabeledEdit;
     edglmap: TJvComboEdit;
     lbglmap: TLabel;
     edclmap: TJvComboEdit;
@@ -1325,7 +1325,7 @@ type
     rbqtQuestSort: TRadioButton;
     rbqtZoneID: TRadioButton;
     edqtRewMailDelaySecs: TLabeledEdit;
-    edctDifficultyEntry1: TJvComboEdit;
+    edctHeroicEntry: TJvComboEdit;
     lbctdifficulty_entry_1: TLabel;
     lbcnevent_param4: TLabel;
     edcnevent_param4: TJvComboEdit;
@@ -1378,14 +1378,7 @@ type
     edqtOfferRewardEmoteDelay4: TLabeledEdit;
     edctKillCredit1: TLabeledEdit;
     edctKillCredit2: TLabeledEdit;
-    gbQuestItems: TGroupBox;
-    edctQuestItem1: TLabeledEdit;
-    edctQuestItem2: TLabeledEdit;
-    edctQuestItem3: TLabeledEdit;
-    edctQuestItem4: TLabeledEdit;
-    edctMovementTemplateId: TLabeledEdit;
-    edctQuestItem5: TLabeledEdit;
-    edctQuestItem6: TLabeledEdit;
+    edctInteractionPauseTimer: TLabeledEdit;
     gbGOQuestItems: TGroupBox;
     edgtOpeningText: TLabeledEdit;
     edgtClosingText: TLabeledEdit;
@@ -1414,10 +1407,6 @@ type
     edSearchKillCredit1: TLabeledEdit;
     edSearchKillCredit2: TLabeledEdit;
     edSearchGOdata2: TLabeledEdit;
-    edctDifficultyEntry2: TJvComboEdit;
-    edctDifficultyEntry3: TJvComboEdit;
-    lbctdifficulty_entry_2: TLabel;
-    lbctdifficulty_entry_3: TLabel;
     edclspawnMask: TJvComboEdit;
     lbclspawnMask: TLabel;
     edglspawnMask: TJvComboEdit;
@@ -1500,7 +1489,6 @@ type
     lbcrtspell: TLabel;
     edctTrainerTemplateId: TJvComboEdit;
     lbcttrainer_id: TLabel;
-    edctVehicleTemplateId: TLabeledEdit;
     edqtIncompleteEmoteDelay: TLabeledEdit;
     edqtCompleteEmoteDelay: TLabeledEdit;
     edqtPointMapId: TJvComboEdit;
@@ -2071,6 +2059,30 @@ type
     editdmg_max5: TLabeledEdit;
     editdmg_min5: TLabeledEdit;
     editdmg_type5: TJvComboEdit;
+    edctAgilityMultiplier: TLabeledEdit;
+    edctIntellectMultiplier: TLabeledEdit;
+    edctStaminaMultiplier: TLabeledEdit;
+    edctStrengthMultiplier: TLabeledEdit;
+    edctSpiritMultiplier: TLabeledEdit;
+    edctDisplayIdProbability1: TLabeledEdit;
+    edctDisplayIdProbability2: TLabeledEdit;
+    edctDisplayIdProbability3: TLabeledEdit;
+    edctDisplayIdProbability4: TLabeledEdit;
+    edctDamageMultiplierOLD: TLabeledEdit;
+    edctDamageVarianceOLD: TLabeledEdit;
+    edctCorpseDecay: TLabeledEdit;
+    edctSpellList: TLabeledEdit;
+    edctCharmedSpellList: TLabeledEdit;
+    edctStringId1: TLabeledEdit;
+    edctStringId2: TLabeledEdit;
+    edctStaticFlags1: TJvComboEdit;
+    Label1: TLabel;
+    edctStaticFlags2: TJvComboEdit;
+    Label2: TLabel;
+    edctStaticFlags3: TJvComboEdit;
+    Label3: TLabel;
+    edctStaticFlags4: TJvComboEdit;
+    Label4: TLabel;
     procedure FormActivate(Sender: TObject);
     procedure btSearchClick(Sender: TObject);
     procedure FormCreate(Sender: TObject);
@@ -2493,6 +2505,10 @@ type
     procedure GetSpellTrigger(Sender: TObject);
     procedure GetUnitFlags(Sender: TObject);
     procedure GetFlagsExtra(Sender: TObject);
+    procedure GetStaticFlags1(Sender: TObject);
+    procedure GetStaticFlags2(Sender: TObject);
+    procedure GetStaticFlags3(Sender: TObject);
+    procedure GetStaticFlags4(Sender: TObject);
     procedure GetCreatureTypeFlags(Sender: TObject);
     procedure GetCreatureDynamicFlags(Sender: TObject);
     procedure GetGOFlags(Sender: TObject);
@@ -5369,15 +5385,15 @@ begin
     model := edclmodelid.Text
   else
   begin
-    if (edctModelId1.Text <> '') and (edctModelId1.Text <> '0') then
-      model := edctModelId1.Text;
-    if (edctModelId2.Text <> '') and (edctModelId2.Text <> '0') or (edctModelId3.Text <> '0') or
-      (edctModelId4.Text <> '0') then
+    if (edctDisplayId1.Text <> '') and (edctDisplayId1.Text <> '0') then
+      model := edctDisplayId1.Text;
+    if (edctDisplayId2.Text <> '') and (edctDisplayId2.Text <> '0') or (edctDisplayId3.Text <> '0') or
+      (edctDisplayId4.Text <> '0') then
     begin
       if model <> '' then
-        model := Format('%s,%s,%s,%s', [model, edctModelId2.Text, edctModelId3.Text, edctModelId4.Text])
+        model := Format('%s,%s,%s,%s', [model, edctDisplayId2.Text, edctDisplayId3.Text, edctDisplayId4.Text])
       else
-        model := edctModelId2.Text;
+        model := edctDisplayId2.Text;
     end;
   end;
   if model <> '' then
@@ -6012,6 +6028,23 @@ end;
 procedure TMainForm.GetFlagsExtra(Sender: TObject);
 begin
   GetSomeFlags(Sender, 'FlagsExtra');
+end;
+
+procedure TMainForm.GetStaticFlags1(Sender: TObject);
+begin
+  GetSomeFlags(Sender, 'StaticFlags1');
+end;
+procedure TMainForm.GetStaticFlags2(Sender: TObject);
+begin
+  GetSomeFlags(Sender, 'StaticFlags2');
+end;
+procedure TMainForm.GetStaticFlags3(Sender: TObject);
+begin
+  GetSomeFlags(Sender, 'StaticFlags31');
+end;
+procedure TMainForm.GetStaticFlags4(Sender: TObject);
+begin
+  GetSomeFlags(Sender, 'StaticFlags4');
 end;
 
 function TMainForm.GetValueFromDBC(Name: string; id: Cardinal; idx_str: Integer = 1): string;

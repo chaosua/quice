@@ -3,7 +3,7 @@
         <ProjectGuid>{D8F89B63-750A-4A17-802F-FFC975ED873D}</ProjectGuid>
         <MainSource>Quice.dpr</MainSource>
         <Base>True</Base>
-        <Config Condition="'$(Config)'==''">Debug</Config>
+        <Config Condition="'$(Config)'==''">Release</Config>
         <AppType>Application</AppType>
         <FrameworkType>VCL</FrameworkType>
         <DCC_DCCCompiler>DCC32</DCC_DCCCompiler>
