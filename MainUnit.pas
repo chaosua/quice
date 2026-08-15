@@ -10156,14 +10156,16 @@ begin
   begin
     for i := 0 to lvList.Items.Count - 2 do
     begin
-      Values := Values + Format('(%s, %s, %s, %s, %s, %s, %s),'#13#10,
+      Values := Values + Format('(%s, %s, %s, %s, %s, %s, %s,'+ ''''+'%s'+'''),'#13#10,
         [lvList.Items[i].Caption, lvList.Items[i].SubItems[0], lvList.Items[i].SubItems[1], lvList.Items[i].SubItems[2],
-        lvList.Items[i].SubItems[3], lvList.Items[i].SubItems[4], lvList.Items[i].SubItems[5]]);
+        lvList.Items[i].SubItems[3], lvList.Items[i].SubItems[4], lvList.Items[i].SubItems[5],
+        StringReplace(lvList.Items[i].SubItems[6], '''', '\''', [rfReplaceAll])]);
     end;
     i := lvList.Items.Count - 1;
-    Values := Values + Format('(%s, %s, %s, %s, %s, %s, %s);',
+    Values := Values + Format('(%s, %s, %s, %s, %s, %s, %s,'+ ''''+'%s'+''');',
       [lvList.Items[i].Caption, lvList.Items[i].SubItems[0], lvList.Items[i].SubItems[1], lvList.Items[i].SubItems[2],
-      lvList.Items[i].SubItems[3], lvList.Items[i].SubItems[4], lvList.Items[i].SubItems[5]]);
+      lvList.Items[i].SubItems[3], lvList.Items[i].SubItems[4], lvList.Items[i].SubItems[5],
+      StringReplace(lvList.Items[i].SubItems[6], '''', '\''', [rfReplaceAll])]);
   end;
   if Values <> '' then
   begin
