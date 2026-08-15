@@ -48,20 +48,14 @@ type
     lblAutorName: TLabel;
     LinkSite: TLabel;
     Image1: TImage;
-    edWebMoneyU: TEdit;
-    edWebMoneyE: TEdit;
-    edWebMoneyR: TEdit;
-    edWebMoneyZ: TEdit;
     lbDesc: TLabel;
-    PayPal: TLabel;
     BrowseURL2: TBrowseURL;
     lbdbversion: TLabel;
-    Label1: TLabel;
-    JvPoweredByJVCL1: TJvPoweredByJVCL;
     lbprojectwebsite: TLabel;
+    Label1: TLabel;
+    Label2: TLabel;
     procedure FormShow(Sender: TObject);
     procedure LinkSiteClick(Sender: TObject);
-    procedure PayPalClick(Sender: TObject);
   private
     procedure InitializeCaptions;
     { Private declarations }
@@ -96,7 +90,7 @@ end;
 
 procedure TAboutBox.LinkSiteClick(Sender: TObject);
 begin
-  BrowseURL1.URL:='https://github.com/Ravie/quice/releases';
+  BrowseURL1.URL:='https://github.com/chaosua/quice/releases';
   BrowseURL1.Execute;
 end;
 
@@ -105,10 +99,6 @@ begin
   inherited Create(AOwner);
 end;
          
-procedure TAboutBox.PayPalClick(Sender: TObject);
-begin
-  BrowseURL2.URL:='http://sourceforge.net/donate/index.php?group_id=196709';
-  BrowseURL2.Execute;
-end;
+
 
 end.
