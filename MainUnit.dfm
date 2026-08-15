@@ -24,7 +24,7 @@ object MainForm: TMainForm
     Top = 0
     Width = 1008
     Height = 681
-    ActivePage = tsItem
+    ActivePage = tsGameObject
     Align = alClient
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clWindowText
@@ -18769,17 +18769,6 @@ object MainForm: TMainForm
               OnButtonClick = GetGOFlags
               OnChange = edflagsChange
             end
-            object edgtcastBarCaption: TLabeledEdit
-              Left = 87
-              Top = 111
-              Width = 122
-              Height = 21
-              EditLabel.Width = 72
-              EditLabel.Height = 13
-              EditLabel.Caption = 'castBarCaption'
-              TabOrder = 8
-              Text = ''
-            end
             object edgtIconName: TLabeledEdit
               Left = 8
               Top = 111
@@ -18788,18 +18777,7 @@ object MainForm: TMainForm
               EditLabel.Width = 49
               EditLabel.Height = 13
               EditLabel.Caption = 'IconName'
-              TabOrder = 9
-              Text = ''
-            end
-            object edgtunk1: TLabeledEdit
-              Left = 215
-              Top = 111
-              Width = 111
-              Height = 21
-              EditLabel.Width = 24
-              EditLabel.Height = 13
-              EditLabel.Caption = 'unk1'
-              TabOrder = 10
+              TabOrder = 8
               Text = ''
             end
             object edgtExtraFlags: TLabeledEdit
@@ -18810,7 +18788,7 @@ object MainForm: TMainForm
               EditLabel.Width = 49
               EditLabel.Height = 13
               EditLabel.Caption = 'ExtraFlags'
-              TabOrder = 11
+              TabOrder = 9
               Text = ''
             end
           end
@@ -19191,72 +19169,39 @@ object MainForm: TMainForm
             Top = 3
             Width = 246
             Height = 140
-            Caption = 'Quest Items'
+            Caption = 'Additional'
             TabOrder = 3
-            object edgtquestItem1: TLabeledEdit
-              Left = 7
+            object edgtOpeningText: TLabeledEdit
+              Left = 11
               Top = 32
-              Width = 107
+              Width = 166
               Height = 21
-              EditLabel.Width = 52
+              EditLabel.Width = 61
               EditLabel.Height = 13
-              EditLabel.Caption = 'questItem1'
+              EditLabel.Caption = 'OpeningText'
               TabOrder = 0
               Text = ''
             end
-            object edgtquestItem2: TLabeledEdit
-              Left = 128
-              Top = 32
-              Width = 107
+            object edgtClosingText: TLabeledEdit
+              Left = 11
+              Top = 75
+              Width = 166
               Height = 21
-              EditLabel.Width = 52
+              EditLabel.Width = 55
               EditLabel.Height = 13
-              EditLabel.Caption = 'questItem2'
+              EditLabel.Caption = 'ClosingText'
               TabOrder = 1
               Text = ''
             end
-            object edgtquestItem3: TLabeledEdit
-              Left = 7
-              Top = 72
-              Width = 107
+            object edgtStringId: TLabeledEdit
+              Left = 11
+              Top = 114
+              Width = 111
               Height = 21
-              EditLabel.Width = 52
+              EditLabel.Width = 36
               EditLabel.Height = 13
-              EditLabel.Caption = 'questItem3'
+              EditLabel.Caption = 'StringId'
               TabOrder = 2
-              Text = ''
-            end
-            object edgtquestItem4: TLabeledEdit
-              Left = 128
-              Top = 72
-              Width = 107
-              Height = 21
-              EditLabel.Width = 52
-              EditLabel.Height = 13
-              EditLabel.Caption = 'questItem4'
-              TabOrder = 3
-              Text = ''
-            end
-            object edgtquestItem5: TLabeledEdit
-              Left = 7
-              Top = 111
-              Width = 107
-              Height = 21
-              EditLabel.Width = 52
-              EditLabel.Height = 13
-              EditLabel.Caption = 'questItem5'
-              TabOrder = 4
-              Text = ''
-            end
-            object edgtquestItem6: TLabeledEdit
-              Left = 128
-              Top = 111
-              Width = 107
-              Height = 21
-              EditLabel.Width = 52
-              EditLabel.Height = 13
-              EditLabel.Caption = 'questItem6'
-              TabOrder = 5
               Text = ''
             end
           end

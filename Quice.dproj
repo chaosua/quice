@@ -3,7 +3,7 @@
         <ProjectGuid>{D8F89B63-750A-4A17-802F-FFC975ED873D}</ProjectGuid>
         <MainSource>Quice.dpr</MainSource>
         <Base>True</Base>
-        <Config Condition="'$(Config)'==''">Release</Config>
+        <Config Condition="'$(Config)'==''">Debug</Config>
         <AppType>Application</AppType>
         <FrameworkType>VCL</FrameworkType>
         <DCC_DCCCompiler>DCC32</DCC_DCCCompiler>
@@ -126,11 +126,11 @@
         <DCC_AssertionsAtRuntime>false</DCC_AssertionsAtRuntime>
         <VerInfo_MinorVer>243</VerInfo_MinorVer>
         <Manifest_File>None</Manifest_File>
-        <VerInfo_Keys>CompanyName=;FileVersion=1.243.1.11;InternalName=;LegalCopyright=;LegalTrademarks=;OriginalFilename=;ProductVersion=1.243.1.0;Comments=;ProgramID=com.embarcadero.$(MSBuildProjectName);FileDescription=$(MSBuildProjectName);ProductName=$(MSBuildProjectName)</VerInfo_Keys>
+        <VerInfo_Keys>CompanyName=;FileVersion=1.243.1.12;InternalName=;LegalCopyright=;LegalTrademarks=;OriginalFilename=;ProductVersion=1.243.1.0;Comments=;ProgramID=com.embarcadero.$(MSBuildProjectName);FileDescription=$(MSBuildProjectName);ProductName=$(MSBuildProjectName)</VerInfo_Keys>
         <VerInfo_Locale>1033</VerInfo_Locale>
         <BT_BuildType>Debug</BT_BuildType>
         <Debugger_DebugSourcePath>D:\wowservers\zeosdbo\src\dbc\;$(Debugger_DebugSourcePath)</Debugger_DebugSourcePath>
-        <VerInfo_Build>11</VerInfo_Build>
+        <VerInfo_Build>12</VerInfo_Build>
         <AppEnableRuntimeThemes>true</AppEnableRuntimeThemes>
         <VerInfo_AutoIncVersion>true</VerInfo_AutoIncVersion>
     </PropertyGroup>
@@ -153,14 +153,14 @@
         <DCC_Optimize>true</DCC_Optimize>
         <DCC_IntegerOverflowCheck>true</DCC_IntegerOverflowCheck>
         <DCC_RangeChecking>true</DCC_RangeChecking>
-        <VerInfo_Keys>CompanyName=;FileVersion=1.243.1.10;InternalName=;LegalCopyright=;LegalTrademarks=;OriginalFilename=;ProductVersion=1.243.1.0;Comments=;ProgramID=com.embarcadero.$(MSBuildProjectName);FileDescription=$(MSBuildProjectName);ProductName=$(MSBuildProjectName)</VerInfo_Keys>
+        <VerInfo_Keys>CompanyName=;FileVersion=1.243.1.11;InternalName=;LegalCopyright=;LegalTrademarks=;OriginalFilename=;ProductVersion=1.243.1.0;Comments=;ProgramID=com.embarcadero.$(MSBuildProjectName);FileDescription=$(MSBuildProjectName);ProductName=$(MSBuildProjectName)</VerInfo_Keys>
         <VerInfo_Locale>1033</VerInfo_Locale>
         <Manifest_File>None</Manifest_File>
         <BT_BuildType>Debug</BT_BuildType>
         <VerInfo_MinorVer>243</VerInfo_MinorVer>
         <VerInfo_Release>1</VerInfo_Release>
         <AppEnableRuntimeThemes>true</AppEnableRuntimeThemes>
-        <VerInfo_Build>10</VerInfo_Build>
+        <VerInfo_Build>11</VerInfo_Build>
         <VerInfo_AutoGenVersion>false</VerInfo_AutoGenVersion>
         <VerInfo_AutoIncVersion>true</VerInfo_AutoIncVersion>
     </PropertyGroup>

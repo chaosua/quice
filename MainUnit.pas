@@ -1309,7 +1309,6 @@ type
     Timer1: TTimer;
     edcnevent_chance: TLabeledEdit;
     edctIconName: TLabeledEdit;
-    edgtcastBarCaption: TLabeledEdit;
     edSearchItemFlags: TJvComboEdit;
     lbSearchItemFlags: TLabel;
     edcvExtendedCost: TJvComboEdit;
@@ -1385,16 +1384,12 @@ type
     edctQuestItem3: TLabeledEdit;
     edctQuestItem4: TLabeledEdit;
     edctMovementTemplateId: TLabeledEdit;
-    edgtunk1: TLabeledEdit;
     edctQuestItem5: TLabeledEdit;
     edctQuestItem6: TLabeledEdit;
     gbGOQuestItems: TGroupBox;
-    edgtquestItem1: TLabeledEdit;
-    edgtquestItem2: TLabeledEdit;
-    edgtquestItem3: TLabeledEdit;
-    edgtquestItem4: TLabeledEdit;
-    edgtquestItem5: TLabeledEdit;
-    edgtquestItem6: TLabeledEdit;
+    edgtOpeningText: TLabeledEdit;
+    edgtClosingText: TLabeledEdit;
+    edgtStringId: TLabeledEdit;
     edSearchItemItemLevel: TLabeledEdit;
     edSearchGOdata0: TLabeledEdit;
     edSearchGOdata1: TLabeledEdit;
