@@ -12,7 +12,6 @@ object MeConnectForm: TMeConnectForm
   Font.Height = -11
   Font.Name = 'MS Sans Serif'
   Font.Style = []
-  OldCreateOrder = True
   Position = poScreenCenter
   Scaled = False
   OnCreate = FormCreate
@@ -20,7 +19,6 @@ object MeConnectForm: TMeConnectForm
   DesignSize = (
     408
     407)
-  PixelsPerInch = 96
   TextHeight = 13
   object Image1: TImage
     Left = 0
@@ -2149,6 +2147,7 @@ object MeConnectForm: TMeConnectForm
       Top = 93
       Width = 100
       Height = 21
+      AutoDropDownWidth = True
       DropDownCount = 10
       TabOrder = 6
       OnDropDown = GetDataBases
@@ -2167,6 +2166,7 @@ object MeConnectForm: TMeConnectForm
       Top = 62
       Width = 100
       Height = 21
+      AutoDropDownWidth = True
       DropDownCount = 10
       TabOrder = 5
       OnDropDown = GetDataBases
@@ -2177,6 +2177,7 @@ object MeConnectForm: TMeConnectForm
       Top = 154
       Width = 100
       Height = 21
+      AutoDropDownWidth = True
       DropDownCount = 10
       TabOrder = 8
       OnDropDown = GetDataBases
@@ -2187,6 +2188,7 @@ object MeConnectForm: TMeConnectForm
       Top = 123
       Width = 100
       Height = 21
+      AutoDropDownWidth = True
       DropDownCount = 10
       TabOrder = 7
       OnDropDown = GetDataBases
