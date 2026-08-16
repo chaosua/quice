@@ -126,11 +126,11 @@
         <DCC_AssertionsAtRuntime>false</DCC_AssertionsAtRuntime>
         <VerInfo_MinorVer>243</VerInfo_MinorVer>
         <Manifest_File>None</Manifest_File>
-        <VerInfo_Keys>CompanyName=;FileVersion=1.243.3.12;InternalName=;LegalCopyright=;LegalTrademarks=;OriginalFilename=;ProductVersion=1.243.2;Comments=;ProgramID=com.embarcadero.$(MSBuildProjectName);FileDescription=$(MSBuildProjectName);ProductName=$(MSBuildProjectName)</VerInfo_Keys>
+        <VerInfo_Keys>CompanyName=;FileVersion=1.243.3.15;InternalName=;LegalCopyright=;LegalTrademarks=;OriginalFilename=;ProductVersion=1.243.3;Comments=;ProgramID=com.embarcadero.$(MSBuildProjectName);FileDescription=$(MSBuildProjectName);ProductName=$(MSBuildProjectName)</VerInfo_Keys>
         <VerInfo_Locale>1033</VerInfo_Locale>
         <BT_BuildType>Debug</BT_BuildType>
         <Debugger_DebugSourcePath>D:\wowservers\zeosdbo\src\dbc\;$(Debugger_DebugSourcePath)</Debugger_DebugSourcePath>
-        <VerInfo_Build>12</VerInfo_Build>
+        <VerInfo_Build>15</VerInfo_Build>
         <AppEnableRuntimeThemes>true</AppEnableRuntimeThemes>
         <VerInfo_AutoIncVersion>true</VerInfo_AutoIncVersion>
     </PropertyGroup>

@@ -6274,7 +6274,7 @@ object MainForm: TMainForm
         Top = 25
         Width = 1000
         Height = 628
-        ActivePage = tsNPCTrainer
+        ActivePage = tsNPCTrainerTemplate
         Align = alClient
         MultiLine = True
         TabOrder = 0
@@ -13301,34 +13301,37 @@ object MainForm: TMainForm
             Anchors = [akLeft, akTop, akRight]
             Columns = <
               item
-                Width = 80
+                Width = 60
               end
               item
-                Width = 80
+                Width = 60
               end
               item
-                Width = 80
+                Width = 60
               end
               item
-                Width = 80
+                Width = 60
               end
               item
-                Width = 80
+                Width = 60
               end
               item
-                Width = 80
+                Width = 60
               end
               item
-                Width = 80
+                Width = 60
               end
               item
-                Width = 80
+                Width = 60
               end
               item
-                Width = 80
+                Width = 60
               end
               item
-                Width = 80
+                Width = 60
+              end
+              item
+                Width = 100
               end>
             HideSelection = False
             ReadOnly = True
@@ -13337,8 +13340,10 @@ object MainForm: TMainForm
             ViewStyle = vsReport
             OnChange = lvcrNPCTrainerChange
             OnSelectItem = lvcrNPCTrainerSelectItem
-            ColumnsOrder = '0=80,1=80,2=80,3=80,4=80,5=80,6=80,7=80,8=80,9=80'
+            ColumnsOrder = '0=60,1=60,2=60,3=60,4=60,5=60,6=60,7=60,8=60,9=60,10=100'
             ExtendedColumns = <
+              item
+              end
               item
               end
               item
@@ -16500,34 +16505,37 @@ object MainForm: TMainForm
             Anchors = [akLeft, akTop, akRight]
             Columns = <
               item
-                Width = 80
+                Width = 60
               end
               item
-                Width = 80
+                Width = 60
               end
               item
-                Width = 80
+                Width = 60
               end
               item
-                Width = 80
+                Width = 60
               end
               item
-                Width = 80
+                Width = 60
               end
               item
-                Width = 80
+                Width = 60
               end
               item
-                Width = 80
+                Width = 60
               end
               item
-                Width = 80
+                Width = 60
               end
               item
-                Width = 80
+                Width = 60
               end
               item
-                Width = 80
+                Width = 60
+              end
+              item
+                Width = 100
               end>
             HideSelection = False
             ReadOnly = True
@@ -16536,8 +16544,10 @@ object MainForm: TMainForm
             ViewStyle = vsReport
             OnChange = lvcrtNPCTrainerChange
             OnSelectItem = lvcrtNPCTrainerSelectItem
-            ColumnsOrder = '0=80,1=80,2=80,3=80,4=80,5=80,6=80,7=80,8=80,9=80'
+            ColumnsOrder = '0=60,1=60,2=60,3=60,4=60,5=60,6=60,7=60,8=60,9=60,10=100'
             ExtendedColumns = <
+              item
+              end
               item
               end
               item
