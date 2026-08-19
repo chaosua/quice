@@ -179,8 +179,8 @@ object ItemForm: TItemForm
       end
     end
   end
-  object MyQuery: TZQuery
-    Connection = MainForm.MyMangosConnection
+  object MyQuery: TFDQuery
+    Connection = MainForm.MyTrinityConnection
     Params = <>
     Left = 276
     Top = 64

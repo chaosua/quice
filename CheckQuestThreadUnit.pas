@@ -4,7 +4,7 @@ interface
 
 uses
   Classes, SysUtils, Dialogs, Messages, MyDataModule, WideStrings,
-  ZConnection, ZAbstractRODataset, ZAbstractDataset, ZDataset;
+  FireDAC.Comp.Client;
 
 type
   TCheckQuestThread = class(TThread)
@@ -12,9 +12,9 @@ type
     cq: integer;
     FQuestList: TList;
     Report:  TStringList;
-    MyQuery: TZQuery;
-    MyTempQuery: TZQuery;
-    MyLootQuery: TZQuery;
+    MyQuery: TFDQuery;
+    MyTempQuery: TFDQuery;
+    MyLootQuery: TFDQuery;
     ErrorStr: string;
 
     function CheckQuestLog(qId: integer): string;
@@ -24,9 +24,9 @@ type
   protected
     procedure Execute; override;
   public
-    procedure Prepare(Connection : TZConnection);
+    procedure Prepare(Connection : TFDConnection);
     property QuestList: TList read FQuestList write SetQuestList;
-    constructor Create(Connection: TZConnection; List: TList; CreateSuspended: boolean);
+    constructor Create(Connection: TFDConnection; List: TList; CreateSuspended: boolean);
     procedure MyTerminate(Sender: TObject);
     procedure HandleThreadException;
   end;
@@ -88,11 +88,11 @@ end;
 
 function TCheckQuestThread.CheckQuestLog(qId: integer): string;
 var
-  fname: string;
+  Log, fname: string;
   cid, i, j: integer;
   ErrCount: integer;
   WarnCount: integer;
-  List: TStringList;
+  List: TWideStringList;
   ItemQuestGiver: integer;
   QuestGiverOtherCount: integer;
   QuestTakerOtherCount: integer;
@@ -130,7 +130,7 @@ begin
   MyQuery.Close;
   MyTempQuery.Close;
   MyLootQuery.Close;
-  MyQuery.SQL.Text:=Format('SELECT * FROM `quest_template` WHERE `entry`=%d',[qid]);
+  MyQuery.SQL.Text:=Format('SELECT * FROM `quest_template` WHERE `Id`=%d',[qid]);
   MyQuery.Open;
   if MyQuery.Eof then
   begin
@@ -143,7 +143,7 @@ begin
 
   // quest giver creature check
   MyQuery.Close;
-  MyQuery.SQL.Text:=Format('SELECT * FROM `creature_questrelation` WHERE `quest` = %d',[qid]);
+  MyQuery.SQL.Text:=Format('SELECT * FROM `creature_queststarter` WHERE `quest` = %d',[qid]);
   MyQuery.Open;
   if not MyQuery.Eof then
   begin
@@ -166,10 +166,10 @@ begin
       MyQuery.Open;
       if not MyQuery.Eof then
       begin
-        if (MyQuery.FieldByName('NpcFlags').AsInteger and 2) <> 2 then
-          Add(1, dmMain.Text[28], [cid]); //'Error: quest giver is creature with entry = %d, but (`NpcFlags` & 2) <> 2 '
+        if (MyQuery.FieldByName('npcflag').AsInteger and 2) <> 2 then
+          Add(1, dmMain.Text[28], [cid]); //'Error: quest giver is creature with entry = %d, but (`npcflag` & 2) <> 2 '
         MyQuery.Close;
-        MyQuery.SQL.Text:=Format('SELECT * FROM `creature` WHERE `id`=%d',[cid]);
+        MyQuery.SQL.Text:=Format('SELECT * FROM `creature` WHERE `id1`=%d',[cid]);
         MyQuery.Open;
         if not MyQuery.Eof then
         begin
@@ -189,7 +189,7 @@ begin
 
   // quest giver gameobject check
   MyQuery.Close;
-  MyQuery.SQL.Text:=Format('SELECT * FROM `gameobject_questrelation` WHERE `quest` = %d',[qid]);
+  MyQuery.SQL.Text:=Format('SELECT * FROM `gameobject_queststarter` WHERE `quest` = %d',[qid]);
   MyQuery.Open;
   if not MyQuery.Eof then
   begin
@@ -330,7 +330,7 @@ begin
 
   // creature quest taker check
   MyQuery.Close;
-  MyQuery.SQL.Text:=Format('SELECT * FROM `creature_involvedrelation` WHERE `quest` = %d',[qid]);
+  MyQuery.SQL.Text:=Format('SELECT * FROM `creature_questender` WHERE `quest` = %d',[qid]);
   MyQuery.Open;
   if not MyQuery.Eof then
   begin
@@ -353,12 +353,12 @@ begin
       MyQuery.Open;
       if not MyQuery.Eof then
       begin
-        if (MyQuery.FieldByName('NpcFlags').AsInteger and 2) <> 2 then
+        if (MyQuery.FieldByName('npcflag').AsInteger and 2) <> 2 then
         begin
-          Add(1, dmMain.Text[36], [cid]); //'Error: quest taker is creature with entry = %d, but (`NpcFlags` & 2) <> 2 '
+          Add(1, dmMain.Text[36], [cid]); //'Error: quest taker is creature with entry = %d, but (`npcflag` & 2) <> 2 '
         end;
         MyQuery.Close;
-        MyQuery.SQL.Text:=Format('SELECT * FROM `creature` WHERE `id`=%d',[cid]);
+        MyQuery.SQL.Text:=Format('SELECT * FROM `creature` WHERE `id1`=%d',[cid]);
         MyQuery.Open;
         if not MyQuery.Eof then
         begin
@@ -378,7 +378,7 @@ begin
 
   // quest taker gameobject check
   MyQuery.Close;
-  MyQuery.SQL.Text:=Format('SELECT * FROM `gameobject_involvedrelation` WHERE `quest` = %d',[qid]);
+  MyQuery.SQL.Text:=Format('SELECT * FROM `gameobject_questender` WHERE `quest` = %d',[qid]);
   MyQuery.Open;
   if not MyQuery.Eof then
   begin
@@ -431,13 +431,13 @@ begin
 
   // quest check begin
   MyQuery.Close;
-  MyQuery.SQL.Text:=Format('SELECT * FROM `quest_template` WHERE `entry` = %d',[qid]);
+  MyQuery.SQL.Text:=Format('SELECT * FROM `quest_template` WHERE `Id` = %d',[qid]);
   MyQuery.Open;
   // prev quest id check
   cid:=MyQuery.FieldByName('PrevQuestId').AsInteger;
   if cid>0 then
   begin
-    MyTempQuery.SQL.Text:=Format('SELECT * FROM `quest_template` WHERE `entry` = %d', [cid]);
+    MyTempQuery.SQL.Text:=Format('SELECT * FROM `quest_template` WHERE `Id` = %d', [cid]);
     MyTempQuery.Open;
 
     if MyTempQuery.Eof then
@@ -453,7 +453,7 @@ begin
   cid:=MyQuery.FieldByName('NextQuestId').AsInteger;
   if cid>0 then
   begin
-    MyTempQuery.SQL.Text:=Format('SELECT * FROM `quest_template` WHERE `entry` = %d',[cid]);
+    MyTempQuery.SQL.Text:=Format('SELECT * FROM `quest_template` WHERE `Id` = %d',[cid]);
     MyTempQuery.Open;
     if MyTempQuery.Eof then
       Add(1, dmMain.Text[48], [cid]); //'Error: NextQuestId=%d, but quest with this id is not exists'
@@ -463,7 +463,7 @@ begin
   Synchronize(UpdateCaption2);  if Terminated then Exit;
   //
 
-  List:=TStringList.Create;
+  List:=TWideStringList.Create;
   try
     // Type check
     cid:=MyQuery.FieldByName('Type').AsInteger;
@@ -626,7 +626,7 @@ begin
                 begin
                   while not MyTempQuery.Eof do
                   begin
-                    MyLootQuery.SQL.Text:=Format('SELECT `guid` FROM `creature` WHERE `id` = %d',[
+                    MyLootQuery.SQL.Text:=Format('SELECT `guid` FROM `creature` WHERE `id1` = %d',[
                       MyTempQuery.FieldByName('entry').AsInteger]);
                     MyLootQuery.Open;
                     if MyLootQuery.Eof then
@@ -683,7 +683,8 @@ begin
       begin
         // location check
         MyTempQuery.Close;
-        MyTempQuery.SQL.Text:=Format('SELECT `guid` FROM `creature` WHERE `id`=%d',[cid]);
+        MyTempQuery.SQL.Text:=Format('SELECT `guid` FROM `creature` WHERE `id1`=%d ',[cid]);
+       // MyTempQuery.SQL.Text:=Format('SELECT `guid` FROM `creature` WHERE `id1`=%d OR `id2`=%d OR `id3`=%d',[cid]);
         MyTempQuery.Open;
         if MyTempQuery.Eof then
           Add(1, dmMain.Text[70], [i, cid]); //'Error: ReqCreatureOrGOId%d = %d, Location for creature not exists'
@@ -726,11 +727,11 @@ begin
   FQuestList := Value;
 end;
 
-procedure TCheckQuestThread.Prepare(Connection : TZConnection);
+procedure TCheckQuestThread.Prepare(Connection : TFDConnection);
 begin
-  MyQuery := TZQuery.Create(nil);
-  MyTempQuery := TZQuery.Create(nil);
-  MyLootQuery := TZQuery.Create(nil);
+  MyQuery := TFDQuery.Create(nil);
+  MyTempQuery := TFDQuery.Create(nil);
+  MyLootQuery := TFDQuery.Create(nil);
   Report := TStringList.Create;
   MyQuery.Connection := Connection;
   MyTempQuery.Connection := Connection;
@@ -745,7 +746,7 @@ begin
   CheckForm.Memo.Perform(EM_SCROLLCARET, 0, 0);
 end;
 
-constructor TCheckQuestThread.Create(Connection: TZConnection;
+constructor TCheckQuestThread.Create(Connection: TFDConnection;
   List: TList; CreateSuspended: boolean);
 begin
   inherited Create(CreateSuspended);

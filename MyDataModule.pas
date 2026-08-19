@@ -4,12 +4,14 @@ interface
 
 uses
   Forms, SysUtils, Classes, ActnList, ExtActns, Translate, WideStrings,
-  DB, ZAbstractRODataset, ZAbstractDataset, ZDataset, JvExComCtrls, JvListView;
+  DB, FireDAC.Comp.Client, JvExComCtrls, JvListView,
+  System.Actions, FireDAC.Stan.Intf, FireDAC.Stan.Option, FireDAC.Stan.Param,
+  FireDAC.Stan.Error, FireDAC.DatS, FireDAC.Phys.Intf, FireDAC.DApt.Intf,
+  FireDAC.Stan.Async, FireDAC.DApt, FireDAC.Comp.DataSet;
 
 const
-  DefaultLanguage = 'English';
-  SoftwareCompany = 'Indomit Software';
-  ProgramName = 'Quice';
+  DefaultLanguage = 'Default';
+  ProgramName = 'Truice';
 
 type
   TType = (ttNPC, ttItem, ttObject, ttQuest, ttChar);
@@ -18,7 +20,7 @@ type
   TdmMain = class(TDataModule)
     ActionList: TActionList;
     BrowseURL: TBrowseURL;
-    MyQuery: TZQuery;
+    MyQuery: TFDQuery;
     procedure DataModuleDestroy(Sender: TObject);
   private
     { Private declarations }
@@ -75,36 +77,17 @@ begin
 
   FSite := sW;
   Init;
-  ProgramDir:=IncludeTrailingPathDelimiter(ExtractFilePath(Application.ExeName));
-  try
-    DBCDir := ReadFromRegistry(CurrentUser, '', 'DBCDir', tpString);
-  except
-    DBCDir := IncludeTrailingPathDelimiter(ExtractFilePath(Application.ExeName)) + 'DBFilesClient';
-  end;
-  try
-    DBCLocale := ReadFromRegistry(CurrentUser, '', 'DBCLocale', tpInteger);
-  except
-    DBCLocale := 16;
-  end;
-  try
-    Language := ReadFromRegistry(CurrentUser, '', 'Language', tpString);
-  except
-    Language := DefaultLanguage;
-  end;
+  ProgramDir := IncludeTrailingPathDelimiter(ExtractFilePath(Application.ExeName));
 
-  try
-    IsAutoUpdates := ReadFromRegistry(CurrentUser, '', 'IsAutoUpdates', tpBool);
-  except
-    IsAutoUpdates := True;
-  end;
+  DBCDir := ReadFromRegistry(CurrentUser, '', 'DBCDir', tpString, ProgramDir + 'DBC');
+  DBCLocale := ReadFromRegistry(CurrentUser, '', 'DBCLocale', tpInteger, 16);
+  Language := ReadFromRegistry(CurrentUser, '', 'Language', tpString, DefaultLanguage);
+  IsAutoUpdates := ReadFromRegistry(CurrentUser, '', 'IsAutoUpdates', tpBool, True);
 
-  try
-    ProxyServer := ReadFromRegistry(CurrentUser, '', 'ProxyServer', tpString);
-    ProxyPort   := ReadFromRegistry(CurrentUser, '', 'ProxyPort', tpString);
-    ProxyUser   := ReadFromRegistry(CurrentUser, '', 'ProxyUser', tpString);
-    ProxyPass   := ReadFromRegistry(CurrentUser, '', 'ProxyPass', tpString);
-  except
-  end;                           
+  ProxyServer := ReadFromRegistry(CurrentUser, '', 'ProxyServer', tpString, '');
+  ProxyPort   := ReadFromRegistry(CurrentUser, '', 'ProxyPort', tpString, '');
+  ProxyUser   := ReadFromRegistry(CurrentUser, '', 'ProxyUser', tpString, '');
+  ProxyPass   := ReadFromRegistry(CurrentUser, '', 'ProxyPass', tpString, '');
 
   Translate:=TTranslate.Create;
   Translate.CreateCustomTranslation;
@@ -223,7 +206,7 @@ begin
   Text[0]:='NONE';
   Text[1]:='Item cannot be a quest taker';
   Text[2]:='Error: Quest (%d) not found';
-  Text[3]:='The error has occurred while loading the Quest:';
+  Text[3]:='The error has accured while loading the Quest:';
   Text[4]:='Error: QuestGiver is not set';
   Text[5]:='Error: QuestGiver is not set correctly';
   Text[6]:='Error: QuestTaker is not set';
@@ -248,15 +231,15 @@ begin
   Text[25]:='Fatal Error: Wrong quest id (%d)';
   Text[26]:='Fatal Error: Quest with entry = %d not found';
   Text[27]:='Warning: There more than one quest giver:';
-  Text[28]:='Error: quest giver is creature with entry = %d, but (`NpcFlags` & 2) <> 2';
+  Text[28]:='Error: quest giver is creature with entry = %d, but (`npcflag` & 2) <> 2';
   Text[29]:='Warning: There more than one location for quest giver (id=%d) in table `creature`';
   Text[30]:='Error: Location for quest giver (id=%d) not found in table `creature`';
   Text[31]:='Error: quest giver is creature with entry = %d, but there is no one record in `creature_template` with entry = %0:d';
   Text[32]:='Warning: There more than one location for quest giver (id=%d) in table `gameobject`';
   Text[33]:='Error: Location for quest giver (id=%d) not found in table `gameobject`';
-  Text[34]:='Warning: quest giver is item (id=%d), but there is no one loot in tables *_loot_template and npc_vendor. May be it is not error, just item need to be rewarded or given from other quest.';
+  Text[34]:='Warning: quest giver is item (id=%d), but there is no one loot in tables *_loot_template and npc_vendor. May be it is not error, just item need to be rewarded or gived from other quest.';
   Text[35]:='Warning: There more than one quest taker:';
-  Text[36]:='Error: quest taker is creature with entry = %d, but (`NpcFlags` & 2) <> 2';
+  Text[36]:='Error: quest taker is creature with entry = %d, but (`npcflag` & 2) <> 2';
   Text[37]:='Warning: There more than one location for quest taker (id=%d) in table `creature`';
   Text[38]:='Error: Location for quest taker (id=%d) not found in table `creature`';
   Text[39]:='Error: quest taker is creature with entry = %d, but there is no one record in `creature_template` with entry = %0:d';
@@ -295,24 +278,24 @@ begin
   Text[72]:='Error: ReqCreatureOrGOId%d = %d, Location for gameobject not exists';
   Text[73]:='Check complete: %d errors, %d warnings';
   Text[74]:='Check quest (%d) : %d%%';
-  Text[75]:='Check quest complete';
+  Text[75]:='Check quest colmpete';
   Text[76]:='Error: quest giver is gameobject with entry = %d, but there is no one record in `gameobject_template` with entry = %0:d';
   Text[77]:='<< Details';
   Text[78]:='Details >>';
   Text[79]:='Quests found: %d';
   Text[80]:='Creatures found: %d';
   Text[81]:='Error: Creature (entry = %d) not found';
-  Text[82]:='The error has occurred while loading the Creature_Template:';
+  Text[82]:='The error has accured while loading the Creature_Template:';
   Text[83]:='Rank';
   Text[84]:='Family';
   Text[85]:='Creature Type';
-  Text[86]:='The error has occurred while loading Creature:';
+  Text[86]:='The error has accured while loading Creature:';
   Text[87]:='GameObjects found: %d';
   Text[88]:='Error: Gameobject (entry = %d) not found';
-  Text[89]:='The error has occurred while loading the Gameobject_Template:';
-  Text[90]:='The error has occurred while loading GameObject:';
-  Text[91]:='The error has occurred while loading creature_loot_template:';
-  Text[92]:='The error has occurred while loading gameobject_loot_template:';
+  Text[89]:='The error has accured while loading the Gameobject_Template:';
+  Text[90]:='The error has accured while loading GameObject:';
+  Text[91]:='The error has accured while loading creature_loot_template:';
+  Text[92]:='The error has accured while loading gameobject_loot_template:';
   Text[93]:='GameObject Type';
   Text[94]:='Always = 0 or Unknown';
   Text[95]:='State';
@@ -338,7 +321,7 @@ begin
   Text[115]:='ID from PageTextMaterial.dbc';
   Text[116]:='Items found: %d';
   Text[117]:='Error: Item (entry = %d) not found';
-  Text[118]:='The error has occurred while loading the Item_Template:';
+  Text[118]:='The error has accured while loading the Item_Template:';
   Text[119]:='Quality';
   Text[120]:='InventoryType';
   Text[121]:='RequiredReputationRank';
@@ -357,41 +340,30 @@ begin
   Text[134]:='Search filter is empty. This task returns all entries from table.$B$BAre you sure to continue?';
   Text[135]:='Script Command';
   Text[136]:='Characters found: %d';
-  Text[137]:='New version of Quice (%s) is available. You want to download it?';
+  Text[137]:='New version of Truice (%s) is available. You want to download it?';
   Text[138]:='You have got the latest version.';  
-  Text[139]:='The error has occurred while loading Creature Addon:';
-  Text[140]:='Are you sure to uninstall Quice?';
+  Text[139]:='The error has accured while loading Creature Addon:';
+  Text[140]:='Are you sure to uninstall Truice?';
   Text[141]:='Trainer Type';
   Text[142]:='Race';
   Text[143]:='Class';
-  Text[144]:='The error has occurred while loading NPC gossip:';
-  Text[145]:='The error has occurred while loading NPC Text:';
+  Text[144]:='The error has accured while loading NPC gossip:';
+  Text[145]:='The error has accured while loading NPC Text:';
   Text[146]:='~OBSOLETE';
   Text[147]:='Emote';
   Text[148]:='ItemPetFood';
-  Text[149]:='The error has occurred while loading Creature Template Addon:';
+  Text[149]:='The error has accured while loading Creature Template Addon:';
   Text[150]:='GemProperties';
   Text[151]:='SpellItemEnchantment';
   Text[152]:='ItemExtendedCost';
   Text[153]:='Error: Character (guid = %d) not found';
-  Text[154]:='The error has occurred while loading the Character:';
+  Text[154]:='The error has accured while loading the Character:';
   Text[155]:='AreaTrigger';
-  Text[156]:='Conditions';
-  Text[157]:='The error has occurred while loading Creature EventAI:';
-  Text[158]:='Option Icon';
-  Text[159]:='The error has occurred while loading Creature Template Spells:';
-  Text[160]:='The error has occurred while loading DBScripts On Creature Death:';
-  Text[161]:='Error: Conditions (condition_entry = %d) not found';
-  Text[162]:='The error has occurred while loading Conditions:';
-  Text[163]:='Method of text output';
-  Text[164]:='Error: Db_script_string (entry = %d) not found';
-  Text[165]:='The error has occurred while loading Db_script_string:';
-  Text[166]:='Error: %s (entry = %d) not found';
-  Text[167]:='The error has occurred while loading %s:';
-  Text[168]:='Error: creature_model_info (id = %d) not found';
-  Text[169]:='The error has occurred while loading creature_model_info:';
-  Text[170]:='Error: gossip_menu_option (id = %d) not found';
-  Text[171]:='The error has occurred while loading gossip_menu_option:';
+  Text[156]:='LootMode';
+  Text[157]:='The error has accured while loading Creature EventAI:';
+  Text[158]:='Please specify a source type!';
+  Text[159]:='The error has accured while loading Creature Template Movement:';
+  Text[160]:='Detected enUS locale. Nothing to search. Please select locale in Settings language section or use another tab instead!';
 end;
 
 procedure TdmMain.SetLanguage(const Value: string);

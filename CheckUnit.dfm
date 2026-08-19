@@ -63,8 +63,7 @@ object CheckForm: TCheckForm
       Width = 105
       Height = 40
       Caption = 'STOP'
-      TabOrder = 1
-      OnClick = btStopClick
+      DoubleBuffered = True
       Glyph.Data = {
         76060000424D7606000000000000360400002800000018000000180000000100
         080000000000400200000000000000000000000100000000000000000000FFFF
@@ -119,6 +118,9 @@ object CheckForm: TCheckForm
         09D66E6E2A6E2A0D078D8D8DFD78040404040404040404040404040404047895
         8D8D8D8D8D8D8D8D8D8D8D8D8D8D8D8D8D8D8D8D8D8D8D8D8D8D}
       Margin = 5
+      ParentDoubleBuffered = False
+      TabOrder = 1
+      OnClick = btStopClick
     end
     object btSave: TButton
       Left = 528

@@ -10,8 +10,9 @@ tsSite=Site
 Label2=At this page you can change the site. It will be used for browse items, NPC, objects and quests.
 rgSite=Site
 tsLanguage=Language
-lbLanguage=Language
-lbLocales=Locales
+lbLanguage=Language ( Truice interface)
+lbLocales=Locales (Quest locales tab will load propper translation if exists)
+LbLocales2=Affects Search Tabs (search names in *_locale tables)
 Label3=At this page you can choose the Language File
 tsInternet=Internet
 cbAutomaticCheckForUpdates=Automatic Check For Updates
@@ -27,3 +28,4 @@ lbDBCDir=Path to DBC directory:
 lbDBCLocale=DBC Locale:
 btOK=OK
 btCancel=Cancel
+

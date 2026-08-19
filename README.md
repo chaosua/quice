@@ -1,4 +1,4 @@
-Quice Win32 CMaNGOS WoTLK (3.3.5) DataBase Editor
+Quice Win32 MaNGOS WoTLK (3.3.5) aka Mangos Two DataBase Editor
 =====
 
 Quice is a database editor made for editing MaNGOS (CMaNGOS) DB.
@@ -11,8 +11,8 @@ https://github.com/chaosua/quice
 fork from https://github.com/Ravie/quice
 Original https://github.com/indomit/quice
 
-Tested on Development Build(2026-08-09) WoTLKDB v1.9+ 'Icecrown' for CMaNGOS-WOTLK 14092
-https://github.com/cmangos/wotlk-db/releases
+Tested on 8203c818722eecca91dcb774aae5389bc98f68e4 commit
+https://github.com/mangostwo/database
 
 To compile use additional components:
 

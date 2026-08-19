@@ -1,4 +1,4 @@
-0;REGULAR | DUNGEON_NORMAL | RAID_10MAN_NORMAL
-1;DUNGEON_HEROIC | RAID_25MAN_NORMAL
-2;RAID_10MAN_HEROIC
-3;RAID_25MAN_HEROIC
+1;10-man-normal (maps without heroic mode)
+2;25-man-normal (or heroics pre 3.2)
+3;10-man heroic
+4;25-man-heroic

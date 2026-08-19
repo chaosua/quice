@@ -23,7 +23,7 @@ type
     procedure lvListDblClick(Sender: TObject);
     procedure lvListColumnClick(Sender: TObject; Column: TListColumn);
   private
-    prmID: integer;  
+    prmName, prmID: integer;  
     procedure Search();
   public
     procedure Prepare(Text: string);
@@ -86,7 +86,10 @@ begin
     prmID := -prmID;
   end
   else
-    lvList.CustomSort(@CustomNameSortProc, column.Index);
+  begin
+    lvList.CustomSort(@CustomNameSortProc, prmName);
+    prmName := -prmName;    
+  end;
 end;
 
 procedure TAreaTableForm.lvListDblClick(Sender: TObject);
@@ -101,7 +104,7 @@ end;
 
 procedure TAreaTableForm.FormCreate(Sender: TObject);
 begin
-  if not MainForm.MyMangosConnection.Connected then Exit;
+  if not MainForm.MyTrinityConnection.Connected then Exit;
   dmMain.Translate.CreateDefaultTranslation(TForm(Self));
   dmMain.Translate.TranslateForm(TForm(Self));
 end;

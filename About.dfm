@@ -1,44 +1,45 @@
 object AboutBox: TAboutBox
-  Left = 367
-  Top = 190
+  Left = 572
+  Top = 228
   BorderIcons = [biSystemMenu]
   BorderStyle = bsDialog
   Caption = 'About'
   ClientHeight = 296
-  ClientWidth = 410
+  ClientWidth = 409
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
   Font.Height = -11
   Font.Name = 'MS Sans Serif'
   Font.Style = []
-  Position = poScreenCenter
+  Position = poDesigned
   OnShow = FormShow
   TextHeight = 13
   object Panel2: TPanel
     Left = 0
     Top = 0
-    Width = 410
+    Width = 409
     Height = 296
     Align = alClient
     TabOrder = 0
     DesignSize = (
-      410
+      409
       296)
     object Bevel1: TBevel
       Left = 1
       Top = 248
-      Width = 408
+      Width = 407
       Height = 47
       Align = alBottom
       Shape = bsTopLine
-      ExplicitTop = 219
-      ExplicitWidth = 406
+      ExplicitLeft = 2
+      ExplicitTop = 245
+      ExplicitWidth = 408
     end
     object Image1: TImage
       Left = 1
       Top = 1
-      Width = 408
+      Width = 407
       Height = 50
       Align = alTop
       Picture.Data = {
@@ -1957,22 +1958,45 @@ object AboutBox: TAboutBox
         FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
         FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
         FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF}
-      ExplicitWidth = 406
+      ExplicitLeft = 3
+      ExplicitTop = 7
+    end
+    object lbprojectwebsite: TLabel
+      Left = 0
+      Top = 255
+      Width = 75
+      Height = 13
+      Caption = 'Project website:'
+    end
+    object LinkSiteNew: TLabel
+      Left = 81
+      Top = 255
+      Width = 168
+      Height = 13
+      Cursor = crHandPoint
+      Caption = 'https://github.com/chaosua/qruice'
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clNavy
+      Font.Height = -11
+      Font.Name = 'MS Sans Serif'
+      Font.Style = [fsUnderline]
+      ParentFont = False
+      OnClick = LinkSiteNewClick
     end
     object Panel1: TPanel
-      Left = 0
+      Left = 1
       Top = 51
       Width = 409
-      Height = 196
+      Height = 198
       BevelOuter = bvNone
       Color = clWhite
       TabOrder = 1
       object lblVersion: TLabel
-        Left = 19
+        Left = 10
         Top = 10
-        Width = 69
+        Width = 94
         Height = 13
-        Caption = 'Version: 1.0'
+        Caption = 'Version: 2.335.1'
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clGray
         Font.Height = -11
@@ -1983,12 +2007,12 @@ object AboutBox: TAboutBox
         IsControl = True
       end
       object lblAutorName: TLabel
-        Left = 19
-        Top = 152
+        Left = 10
+        Top = 137
         Width = 106
         Height = 15
         AutoSize = False
-        Caption = #169' indomit, 2007-2012'
+        Caption = #169' indomit, 2007-2009'
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clGray
         Font.Height = -11
@@ -1997,56 +2021,28 @@ object AboutBox: TAboutBox
         ParentFont = False
         Transparent = True
         WordWrap = True
-      end
-      object LinkSite: TLabel
-        Left = 108
-        Top = 124
-        Width = 209
-        Height = 13
-        Cursor = crHandPoint
-        Caption = 'https://github.com/chaosua/quice/releases'
-        Font.Charset = DEFAULT_CHARSET
-        Font.Color = clNavy
-        Font.Height = -11
-        Font.Name = 'MS Sans Serif'
-        Font.Style = [fsUnderline]
-        ParentFont = False
-        OnClick = LinkSiteClick
-      end
-      object lbDesc: TLabel
-        Left = 19
-        Top = 105
-        Width = 207
-        Height = 13
-        Caption = 'Quice for CMANGOS WOTLK (3.3.5)'
-        Font.Charset = DEFAULT_CHARSET
-        Font.Color = clWindowText
-        Font.Height = -11
-        Font.Name = 'MS Sans Serif'
-        Font.Style = [fsBold]
-        ParentFont = False
       end
       object lbdbversion: TLabel
-        Left = 19
-        Top = 32
-        Width = 54
-        Height = 13
+        Left = 10
+        Top = 43
+        Width = 390
+        Height = 30
+        AutoSize = False
         Caption = 'lbdbversion'
+        WordWrap = True
       end
-      object lbprojectwebsite: TLabel
-        Left = 19
-        Top = 124
-        Width = 83
-        Height = 13
-        Caption = 'Project WEB site:'
+      object JvPoweredByJVCL1: TJvPoweredByJVCL
+        Left = 191
+        Top = 6
+        URL = 'http://jvcl.delphi-jedi.org/'
       end
-      object Label1: TLabel
-        Left = 19
-        Top = 173
+      object Label2: TLabel
+        Left = 10
+        Top = 158
         Width = 106
         Height = 15
         AutoSize = False
-        Caption = #169' Ravie 2018'
+        Caption = #169' Ishigure, 2010'
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clGray
         Font.Height = -11
@@ -2056,13 +2052,75 @@ object AboutBox: TAboutBox
         Transparent = True
         WordWrap = True
       end
-      object Label2: TLabel
-        Left = 147
-        Top = 152
-        Width = 106
+      object Label1: TLabel
+        Left = 10
+        Top = 179
+        Width = 92
         Height = 15
         AutoSize = False
-        Caption = #169' chaosua 2026'
+        Caption = #169' Faq, 2012-2013'
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clGray
+        Font.Height = -11
+        Font.Name = 'MS Sans Serif'
+        Font.Style = []
+        ParentFont = False
+        Transparent = True
+        WordWrap = True
+      end
+      object Label3: TLabel
+        Left = 142
+        Top = 137
+        Width = 117
+        Height = 15
+        AutoSize = False
+        Caption = #169' chaosua, 2013-2014'
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clGray
+        Font.Height = -11
+        Font.Name = 'MS Sans Serif'
+        Font.Style = []
+        ParentFont = False
+        Transparent = True
+        WordWrap = True
+      end
+      object Label6: TLabel
+        Left = 142
+        Top = 158
+        Width = 117
+        Height = 15
+        AutoSize = False
+        Caption = #169' Faq, 2017-2022'
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clGray
+        Font.Height = -11
+        Font.Name = 'MS Sans Serif'
+        Font.Style = []
+        ParentFont = False
+        Transparent = True
+        WordWrap = True
+      end
+      object Label4: TLabel
+        Left = 10
+        Top = 79
+        Width = 273
+        Height = 13
+        Caption = 'Support WoTLK 3.3.5a DB forMangos (aka Mangos Two)'
+      end
+      object Label5: TLabel
+        Left = 10
+        Top = 110
+        Width = 213
+        Height = 13
+        Caption = 'Support the project with fixes and bugreports!'
+      end
+      object Label7: TLabel
+        Left = 142
+        Top = 179
+        Width = 117
+        Height = 15
+        AutoSize = False
+        Caption = #169' chaosua, 2023-2026'
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clGray
         Font.Height = -11
@@ -2074,7 +2132,7 @@ object AboutBox: TAboutBox
       end
     end
     object OKButton: TButton
-      Left = 325
+      Left = 300
       Top = 261
       Width = 75
       Height = 25
@@ -2087,8 +2145,8 @@ object AboutBox: TAboutBox
     end
   end
   object ActionList1: TActionList
-    Left = 366
-    Top = 118
+    Left = 310
+    Top = 14
     object BrowseURL1: TBrowseURL
       Category = 'Internet'
       Caption = '&Browse URL'

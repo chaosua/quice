@@ -1,5 +1,4 @@
 object dmMain: TdmMain
-  OldCreateOrder = False
   OnDestroy = DataModuleDestroy
   Height = 352
   Width = 426
@@ -12,9 +11,8 @@ object dmMain: TdmMain
       Hint = 'Browse URL'
     end
   end
-  object MyQuery: TZQuery
-    Connection = MainForm.MyMangosConnection
-    Params = <>
+  object MyQuery: TFDQuery
+    Connection = MainForm.MyTrinityConnection
     Left = 128
     Top = 144
   end

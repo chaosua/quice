@@ -23,7 +23,7 @@ type
     procedure lvListDblClick(Sender: TObject);
     procedure lvListColumnClick(Sender: TObject; Column: TListColumn);
   private
-    prmID: integer;  
+    prmName, prmID: integer;  
     procedure Search();
   public
     procedure Prepare(Text: string);
@@ -86,7 +86,10 @@ begin
     prmID := -prmID;
   end
   else
-    lvList.CustomSort(@CustomNameSortProc, column.Index);
+  begin
+    lvList.CustomSort(@CustomNameSortProc, prmName);
+    prmName := -prmName;    
+  end;
 end;
 
 procedure TSpellsForm.lvListDblClick(Sender: TObject);
@@ -101,7 +104,7 @@ end;
 
 procedure TSpellsForm.FormCreate(Sender: TObject);
 begin
-  if not MainForm.MyMangosConnection.Connected then Exit;
+  if not MainForm.MyTrinityConnection.Connected then Exit;
   dmMain.Translate.CreateDefaultTranslation(TForm(Self));
   dmMain.Translate.TranslateForm(TForm(Self));
 end;
@@ -112,7 +115,6 @@ var
 begin
   Result:='';
   if spell<1 then Exit;
-  if lvList.Items.Count=0 then SetList(lvList, 'Spell');
   for i:=0 to lvList.Items.Count - 1 do
   begin
     if spell = StrToIntDef(lvList.Items[i].Caption,0) then

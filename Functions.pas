@@ -2,7 +2,7 @@ unit Functions;
 
 interface
 
-uses Windows, Classes, StrUtils, SysUtils, ComCtrls, DBCFile, Registry, Messages, Controls, JvExComCtrls, JvListView;
+uses Windows, Classes, StrUtils, SysUtils, ComCtrls, DBCFile, Registry, Messages, Controls, JvExComCtrls, JvListView, WideStrings;
 
 type
    TParameter = (tpInteger, tpFloat, tpString, tpDate, tpTime, tpDateTime,
@@ -17,17 +17,17 @@ procedure LoadListFromFile(List: TListView; Fname: string); forward; overload;
 procedure LoadListFromFile(List: TListView; Fname: string; id1: string); forward; overload;
 
 function LoadListFromDBCFile(List: TListView; Name: string ): boolean; forward; overload;
-function LoadListFromDBCFile(List: TListView; Fname: string ; idx_str: Cardinal ): boolean; forward; overload;
+function LoadListFromDBCFile(List: TListView; FName: string ; idx_str: Cardinal ): boolean; forward; overload;
 
 procedure SetList(List: TListView; Name: string; Sorted: boolean = false ); forward; overload;
 procedure SetList(List: TListView; Name: string; id1: string ; Sorted: boolean = false); forward; overload;
 
-procedure LoadSimpleIDListFromDBCFile(List: TStringList; Name: string); forward; export;
+procedure LoadSimpleIDListFromDBCFile(List: TWideStringList; Name: string); forward; export;
 procedure LoadStringListFromFile(List: TStrings; csvname: string); forward; export;
 procedure Sort(List: TListView; Column: integer); forward; export;
 
 procedure WriteToRegistry(Root: TRootKey; Part, Param: string; TypeOfParam: TParameter; Value: OleVariant); forward; overload;
-function ReadFromRegistry(Root: TRootKey; Part, Param: string; TypeOfParam: TParameter): OleVariant; forward; overload;
+function ReadFromRegistry(Root: TRootKey; Part, Param: string; TypeOfParam: TParameter; const DefaultValue: OleVariant): OleVariant; forward; overload;
 procedure WriteToRegistry(Root: TRootKey; Part, Param: string; var Buffer; BufSize: Integer); forward; overload;
 procedure ReadFromRegistry(Root: TRootKey; Part, Param: string; var Buffer; BufSize: Integer); forward; overload;
 
@@ -35,10 +35,9 @@ function GetRaceAcronym(value: integer): string; forward;
 function GetClassAcronym(value: integer): string; forward;
 
 function CustomIDSortProc(Item1, Item2: TListItem; ParamSort: integer): integer; stdcall; forward;
-function CustomNameSortProc(Item1, Item2: TListItem; Column: integer = 0): integer; stdcall; forward;
+function CustomNameSortProc(Item1, Item2: TListItem; ParamSort: integer): integer; stdcall; forward;
 
 function LoadLocales(): string;
-function GetFileVersion(FileName: string; var Major, Minor, Release, Build: Word): Boolean;
 procedure ShowHourGlassCursor;
 
 implementation
@@ -49,22 +48,19 @@ const
   I_CreatureFamily       =  10;
   I_ChrClasses           =  4;
   I_QuestInfo            =  1;
-  I_Faction              = 23;
+  I_Faction              =  20;
   I_SkillLine            =  3;
-  I_ChrRaces             = 14;
+  I_ChrRaces             =  14;
   I_CreatureType         =  1;
   I_Languages            =  1;
-  I_SpellItemEnchantment = 14;
+  I_SpellItemEnchantment =  14;
   I_ItemClass            =  3;
   I_ItemSet              =  1;
-  I_Map                  =  5;
+  I_Map                  =  4;
   I_ItemPetFood          =  1;
-  I_AreaTable            = 11;
-  I_CurrencyTypes        = 2;
-  I_SpellName            = 136;
-  I_SpellRank            = 153;
-  I_SoundType            = 1;
-  I_SoundName            = 2;
+  I_AreaTable            =  11;
+  I_SpellName            =  136;
+  I_SpellRank            =  153;
 
   MAX_ITEM_LENGTH        = 1000;
 
@@ -77,7 +73,6 @@ const
   I_SPELL                = 1007;
   I_PAGE_TEXT_MATERIAL   = 1008;
   I_CLASS                = 1009;
-  I_SOUND_ENTRIES        = 1010;
 
 function CustomIDSortProc(Item1, Item2: TListItem; ParamSort: integer): integer; stdcall;
 begin
@@ -87,47 +82,45 @@ begin
   if ParamSort < 0 then Result := -Result;
 end;
 
-function CustomNameSortProc(Item1, Item2: TListItem; Column: integer = 0): integer; stdcall;
+function CustomNameSortProc(Item1, Item2: TListItem; ParamSort: integer): integer; stdcall;
 begin
-  Result := AnsiCompareStr(Item1.SubItems[Column - 1], Item2.SubItems[Column - 1]);
+  Result := CompareStr(Item1.SubItems[0], Item2.SubItems[0]);
+  if ParamSort < 0 then Result := -Result;  
 end;
 
 function LoadListFromDBCFile(List: TListView; Name: string ): boolean;
 var
   FileName : TFileName;
   str : integer;
-  SL : TStringList;
+  SL : TWideStringList;
 begin
-    SL := TStringList.Create;
+    SL := TWideStringList.Create;
   try
     // these values mean column number of string value in DBC file
-    SL.Add(Format('CreatureFamily=%d',[I_CreatureFamily]));
-    SL.Add(Format('ChrClasses=%d',[I_ChrClasses]));
-    SL.Add(Format('QuestInfo=%d',[I_QuestInfo]));
-    SL.Add(Format('Faction=%d',[I_Faction]));
-    SL.Add(Format('SkillLine=%d',[I_SkillLine]));
-    SL.Add(Format('ChrRaces=%d',[I_ChrRaces]));
-    SL.Add(Format('CreatureType=%d',[I_CreatureType]));
-    SL.Add(Format('Languages=%d',[I_Languages]));
-    SL.Add(Format('SpellItemEnchantment=%d',[I_SpellItemEnchantment]));
-    SL.Add(Format('ItemClass=%d',[I_ItemClass]));
-    SL.Add(Format('ItemSet=%d',[I_ItemSet]));
-    SL.Add(Format('Map=%d',[I_Map]));
-    SL.Add(Format('ItemPetFood=%d',[I_ItemPetFood]));
-    SL.Add(Format('CurrencyTypes=%d',[I_CurrencyTypes]));
-
+    SL.Add(WideFormat('CreatureFamily=%d',[I_CreatureFamily]));
+    SL.Add(WideFormat('ChrClasses=%d',[I_ChrClasses]));
+    SL.Add(WideFormat('QuestInfo=%d',[I_QuestInfo]));
+    SL.Add(WideFormat('Faction=%d',[I_Faction]));
+    SL.Add(WideFormat('SkillLine=%d',[I_SkillLine]));
+    SL.Add(WideFormat('ChrRaces=%d',[I_ChrRaces]));
+    SL.Add(WideFormat('CreatureType=%d',[I_CreatureType]));
+    SL.Add(WideFormat('Languages=%d',[I_Languages]));
+    SL.Add(WideFormat('SpellItemEnchantment=%d',[I_SpellItemEnchantment]));
+    SL.Add(WideFormat('ItemClass=%d',[I_ItemClass]));
+    SL.Add(WideFormat('ItemSet=%d',[I_ItemSet]));
+    SL.Add(WideFormat('Map=%d',[I_Map]));
+    SL.Add(WideFormat('ItemPetFood=%d',[I_ItemPetFood]));
 
     // this values mean indexes of case
-    SL.Add(Format('AreaTrigger=%d',[I_AREA_TRIGGER]));
-    SL.Add(Format('AreaTable=%d',[I_AREA_TABLE]));
-    SL.Add(Format('FactionTemplate=%d',[I_FACTION_TEMPLATE]));
-    SL.Add(Format('GemProperties=%d',[I_GEM_PROPERTIES]));
-    SL.Add(Format('QuestSort=%d',[I_QUEST_SORT]));
-    SL.Add(Format('Emotes=%d',[I_EMOTES]));
-    SL.Add(Format('Spell=%d',[I_SPELL]));
-    SL.Add(Format('PageTextMaterial=%d',[I_PAGE_TEXT_MATERIAL]));
-    SL.Add(Format('Class=%d',[I_CLASS]));
-    SL.Add(Format('SoundEntries=%d',[I_SOUND_ENTRIES]));
+    SL.Add(WideFormat('AreaTrigger=%d',[I_AREA_TRIGGER]));
+    SL.Add(WideFormat('AreaTable=%d',[I_AREA_TABLE]));
+    SL.Add(WideFormat('FactionTemplate=%d',[I_FACTION_TEMPLATE]));
+    SL.Add(WideFormat('GemProperties=%d',[I_GEM_PROPERTIES]));
+    SL.Add(WideFormat('QuestSort=%d',[I_QUEST_SORT]));
+    SL.Add(WideFormat('Emotes=%d',[I_EMOTES]));
+    SL.Add(WideFormat('Spell=%d',[I_SPELL]));
+    SL.Add(WideFormat('PageTextMaterial=%d',[I_PAGE_TEXT_MATERIAL]));
+    SL.Add(WideFormat('Class=%d',[I_CLASS]));
 
     str := StrToIntDef(SL.Values[Name],0);
   finally
@@ -135,49 +128,22 @@ begin
   end;
 
   if Name = 'Class' then Name := 'ChrClasses';
-  FileName := Format('%s\%s.dbc',[dmMain.DBCDir, Name]);
+  FileName := WideFormat('%s\%s.dbc',[dmMain.DBCDir, Name]);
   if (str > 0) and FileExists(FileName) then
     Result := LoadListFromDBCFile(List, FileName, str)
   else
     Result := False;
 end;
 
-function LoadSListFromCSVFile(List: TStringList; csvname: string): boolean;
-var
-  i, id, n: integer;
-  value, s: string;
-  Fname : TFileName;
-begin
-  Result := false;
-  Fname := dmMain.ProgramDir+'CSV\'+csvname+'.csv';
-  if FileExists(Fname) then
-  begin
-    List.LoadFromFile(Fname);
-    List.BeginUpdate;
-    try
-      for i:=0 to List.Count - 1 do
-      begin
-        s := List[i];
-        n := Pos(';', s);
-        id := StrToInt(MidStr(s, 1, n-1));
-        value := midStr(s, n+1, MAX_ITEM_LENGTH);
-        List.Add(Format('%d=%s',[id,value]));
-      end;
-    finally
-      List.EndUpdate;
-    end;
-    Result := true;
-  end;
-end;
 
-function LoadSListFromDBCFile(List: TStringList; Name: string; idx_str: Cardinal): boolean;
+function LoadSListFromDBCFile(List: TWideStringList; Name: string; idx_str: Cardinal): boolean;
 var
   i: integer;
   Dbc : TDBCFile;
   Fname : TFileName;
 begin
   Result := false;
-  Fname := Format('%s\%s.dbc',[dmMain.DBCDir, Name]);
+  Fname := WideFormat('%s\%s.dbc',[dmMain.DBCDir, Name]);
   if FileExists(Fname) then
   try
     dbc := TDBCFile.Create;
@@ -187,7 +153,7 @@ begin
       for i := 0 to Dbc.recordCount - 1 do
       begin
         Dbc.setRecord(i);
-        List.Add(Format('%d=%s',[Dbc.getUInt(0),Dbc.getString(idx_str, true)]));
+        List.Add(WideFormat('%d=%s',[Dbc.getUInt(0),Dbc.getString(idx_str)]));
       end;
     finally
       List.EndUpdate;
@@ -199,13 +165,13 @@ begin
   end;
 end;
 
-procedure LoadSimpleIDListFromDBCFile(List: TStringList; Name: string);
+procedure LoadSimpleIDListFromDBCFile(List: TWideStringList; Name: string);
 var
   i: integer;
   Dbc : TDBCFile;
   Fname : TFileName;
 begin
-  Fname := Format('%s\%s.dbc',[dmMain.DBCDir, Name]);
+  Fname := WideFormat('%s\%s.dbc',[dmMain.DBCDir, Name]);
   if FileExists(Fname) then
   begin
     dbc := TDBCFile.Create;
@@ -215,7 +181,7 @@ begin
       for i := 0 to Dbc.recordCount - 1 do
       begin
         Dbc.setRecord(i);
-        List.Add(Format('%d',[Dbc.getUInt(0)]));
+        List.Add(WideFormat('%d',[Dbc.getUInt(0)]));
       end;
     finally
       List.EndUpdate;
@@ -228,11 +194,11 @@ function LoadListFromDBCFile(List: TListView; Fname: string; idx_str: Cardinal )
 var
   i: integer;
   Dbc : TDBCFile;
-  s, s1, s2, s3: string;
-  SL, SL2: TStringList;
+  s, s1, s2: WideString;
+  SL, SL2: TWideStringList;
 begin
-  Sl := TStringList.Create;
-  Sl2 := TStringList.Create;
+  Sl := TWideStringList.Create;
+  Sl2 := TWideStringList.Create;
   try
     case idx_str of
       I_AREA_TRIGGER: LoadSListFromDBCFile(SL, 'Map', I_Map);
@@ -245,8 +211,6 @@ begin
         LoadSListFromDBCFile(SL, 'Faction', I_Faction);
       I_GEM_PROPERTIES:
         LoadSListFromDBCFile(SL, 'SpellItemEnchantment', I_SpellItemEnchantment);
-      I_SOUND_ENTRIES:
-        LoadSListFromCSVFile(SL, 'SoundType');
     end;
 
     try
@@ -261,68 +225,45 @@ begin
             I_AREA_TRIGGER:
             begin
               s := SL.Values[IntToStr(Dbc.getUInt(1))];
-              if s = '' then s := Format('< unknown map %d>',[Dbc.getUInt(1)]);
-              s := Format('%s (%.3f, %.3f, %.3f)',[s, Dbc.getFloat(2), Dbc.getFloat(3), Dbc.getFloat(4)]);
+              if s = '' then s := WideFormat('< unknown map %d>',[Dbc.getUInt(1)]);
+              s := WideFormat('%s (%.3f, %.3f, %.3f)',[s, Dbc.getFloat(2), Dbc.getFloat(3), Dbc.getFloat(4)]);
             end;
             I_AREA_TABLE:
             begin
-              s1 := Format('%s',[SL.Values[IntToStr(Dbc.getUInt(1))]]);
-              s2 := Format('%s',[SL2.Values[IntToStr(Dbc.getUInt(2))]]);
-              s3 := Format('%s',[Dbc.getString(I_AreaTable, true)]);
+              s1 := SL.Values[IntToStr(Dbc.getUInt(1))];
+              if s1 <> '' then s1 := s1 + ' - ';
+              s2 := SL2.Values[IntToStr(Dbc.getUInt(2))];
+              if s2 <> '' then s2 := s2 + ' - ';
+              s := WideFormat('%s%s%s',[s1, s2, Dbc.getString(11)]);
             end;
             I_FACTION_TEMPLATE:
             begin
               s := SL.Values[IntToStr(Dbc.getUInt(1))];
-              if s = '' then s := Format('< unknown faction %d>',[Dbc.getUInt(1)]);
+              if s = '' then s := WideFormat('< unknown faction %d>',[Dbc.getUInt(1)]);
             end;
             I_GEM_PROPERTIES:
             begin
               s := SL.Values[IntToStr(Dbc.getUInt(1))];
-              if s = '' then s := Format('< unknown SpellItemEnchantment %d>',[Dbc.getUInt(1)]);
+              if s = '' then s := WideFormat('< unknown SpellItemEnchantment %d>',[Dbc.getUInt(1)]);
             end;
-            I_SOUND_ENTRIES:
-            begin
-              s1 := Format('%s', [SL.Values[IntToStr(Dbc.getUInt(I_SoundType))]]);
-              s2 := Format('%s', [Dbc.getString(I_SoundName)]);
-            end;
-            I_QUEST_SORT: s := Dbc.getString(1, true);
-            I_CLASS: s := Dbc.getString(I_ChrClasses, true);
+            I_QUEST_SORT: s := Dbc.getString(1);
+            I_CLASS: s := Dbc.getString(I_ChrClasses);
             I_SPELL:
             begin
               if MainForm.IsSpellInBase(dbc.getUInt(0)) then
-              begin
-                if Dbc.getString(I_SpellRank, true) <> '' then
-                  s := Format('%s <%s>', [dbc.getString(I_SpellName, true), Dbc.getString(I_SpellRank, true)])
-                else
-                  s := Format('%s', [dbc.getString(I_SpellName, true)]);
-              end
+                s := WideFormat('%s %s', [dbc.getString(I_SpellName), Dbc.getString(I_SpellRank)])
               else
                 s := '';
             end;
-            I_EMOTES, I_PAGE_TEXT_MATERIAL: s := dbc.getString(1)
-            else
-              s := Dbc.getString(idx_str, true);
-          end;
-          if (s1 <> '') or (s2 <> '') or (s3 <> '') then
-          begin
-            with List.Items.Add do
+            I_EMOTES, I_PAGE_TEXT_MATERIAL:
             begin
-              if (idx_str = I_SOUND_ENTRIES) then
-              begin
-                Caption := IntToStr(Dbc.getUInt(0));
-                SubItems.Add(s1);
-                SubItems.Add(s2);
-              end;
-              if (idx_str = I_AREA_TABLE) then
-              begin
-                Caption := IntToStr(Dbc.getUInt(0));
-                SubItems.Add(s1);
-                SubItems.Add(s2);
-                SubItems.Add(s3);
-              end;
-            end;
-          end
-          else if s <> '' then
+              dbc.IsLocalized := false;
+              s := dbc.getString(1);
+            end
+            else
+              s := Dbc.getString(idx_str);
+          end;
+          if s <> '' then
           begin
             with List.Items.Add do
             begin
@@ -364,19 +305,28 @@ procedure SetList(List: TListView; Name: string; Sorted: boolean );
 var
   FileName: TFileName;
 begin
-  if not LoadListFromDBCFile(List, Name) then
-  begin
-    List.Items.Clear;
-    FileName := Format('%sCSV\%s.csv',[dmMain.ProgramDir, Name]);
+    if Name = 'FactionTemplate' then
+        Name := 'Faction';
+
+    FileName := WideFormat('%sCSV\%s.csv',[dmMain.ProgramDir, Name]);
     if FileExists(FileName) then
-      LoadListFromFile(List, FileName);
-  end;
-  if Sorted then Sort(List, 1);
+    begin
+        List.Items.Clear;
+        LoadListFromFile(List, FileName);
+    end
+    else
+    begin
+        if Name = 'Faction' then
+            Name := 'FactionTemplate';
+        LoadListFromDBCFile(List, Name);
+    end;
+
+    if Sorted then Sort(List, 1);
 end;
 
 procedure SetList(List: TListView; Name: string; id1: string; Sorted: boolean = false);
 begin
-  LoadListFromFile(List, Format('%s\%s.dbc',[dmMain.DBCDir, Name]), id1);
+  LoadListFromFile(List, WideFormat('%s\%s.dbc',[dmMain.DBCDir, Name]), id1);
   if Sorted then Sort(List, 1);
 end;
 
@@ -389,8 +339,8 @@ var
 begin
   L := TStringList.Create;
   try
-    if FileExists(Fname) then
-      L.LoadFromFile(Fname);
+    if FileExists(FName) then
+      L.LoadFromFile(FName);
     List.Items.BeginUpdate;
     for i:=0 to L.Count - 1 do
     begin
@@ -427,7 +377,7 @@ begin
           with List.Items.Add do
           begin
             Caption := IntToStr(Dbc.getUInt(1));
-            SubItems.Add(Dbc.getString(10, true));
+            SubItems.Add(Dbc.getString(10));
           end;
         end;
       end;
@@ -483,9 +433,9 @@ var
 begin
   try
     if Part='' then
-      Section:='Software\'+SoftwareCompany+'\' + Trim(ProgramName)
+      Section:='Software\'+ Trim(ProgramName)
     else
-      Section:='Software\'+SoftwareCompany+'\' + Trim(ProgramName) + '\' + Trim(Part);
+      Section:='Software\'+ Trim(ProgramName) + '\' + Trim(Part);
     with TRegistry.Create do
     try
       case Root of
@@ -520,9 +470,9 @@ begin
   {  if (Trim(ProgramName)='') then
       raise Exception.Create('ProgramName can not be empty');}
     if Part='' then
-      Section:='Software\'+SoftwareCompany+'\' + Trim(ProgramName)
+      Section:='Software\'+ Trim(ProgramName)
     else
-      Section:='Software\'+SoftwareCompany+'\' + Trim(ProgramName) + '\' + Trim(Part);
+      Section:='Software\'+ Trim(ProgramName) + '\' + Trim(Part);
     with TRegistry.Create do
     try
       case Root of
@@ -540,34 +490,37 @@ end;
 
 
 function ReadFromRegistry(Root: TRootKey; Part, Param: string;
-                         TypeOfParam: TParameter): OleVariant;
+                         TypeOfParam: TParameter; const DefaultValue: OleVariant): OleVariant;
 var
   Section: string;
   Value: OleVariant;
 begin
-{  if (Trim(ProgramName)='') then
-    raise Exception.Create('ProgramName can not be empty');}
-  if Part='' then
-    Section:='Software\'+SoftwareCompany+'\' + Trim(ProgramName)
-  else
-    Section:='Software\'+SoftwareCompany+'\' + Trim(ProgramName) + '\' + Trim(Part);
+  Value := DefaultValue;
+  Section:='Software\' + Trim(ProgramName) + '\' + Trim(Part);
   with TRegistry.Create do
   try
     case Root of
-      CurrentUser: RootKey:=HKEY_CURRENT_USER;
-      LocalMachine: RootKey:=HKEY_LOCAL_MACHINE;
+      CurrentUser:    RootKey:=HKEY_CURRENT_USER;
+      LocalMachine:   RootKey:=HKEY_LOCAL_MACHINE;
     end;
-    OpenKey(Section, false);
-    case TypeOfParam of
-      tpInteger     :   Value:=ReadInteger(Param);
-      tpFloat       :   Value:=ReadFloat(Param);
-      tpString      :   Value:=ReadString(Param);
-      tpDate        :   Value:=ReadDate(Param);
-      tpTime        :   Value:=ReadTime(Param);
-      tpDateTime    :   Value:=ReadDateTime(Param);
-      tpBool        :   Value:=ReadBool(Param);
-      tpCurrency    :   Value:=ReadCurrency(Param);
-      tpBinaryData  :   raise Exception.Create('use overloaded procedure');
+
+    if KeyExists(Section) then
+    begin
+      OpenKeyReadOnly(Section);
+      if ValueExists(Param) then
+      begin
+        case TypeOfParam of
+          tpInteger     :   Value:=ReadInteger(Param);
+          tpFloat       :   Value:=ReadFloat(Param);
+          tpString      :   Value:=ReadString(Param);
+          tpDate        :   Value:=ReadDate(Param);
+          tpTime        :   Value:=ReadTime(Param);
+          tpDateTime    :   Value:=ReadDateTime(Param);
+          tpBool        :   Value:=ReadBool(Param);
+          tpCurrency    :   Value:=ReadCurrency(Param);
+          tpBinaryData  :   raise Exception.Create('use overloaded procedure');
+        end;
+      end;
     end;
   finally
     Free;
@@ -583,17 +536,19 @@ begin
 {  if (Trim(ProgramName)='') then
     raise Exception.Create('ProgramName can not be empty');}
   if Part='' then
-    Section:='Software\'+SoftwareCompany+'\' + Trim(ProgramName)
+    Section:='Software\'+ Trim(ProgramName)
   else
-    Section:='Software\'+SoftwareCompany+'\' + Trim(ProgramName) + '\' + Trim(Part);
+    Section:='Software\'+ Trim(ProgramName) + '\' + Trim(Part);
   with TRegistry.Create do
   try
     case Root of
       CurrentUser: RootKey:=HKEY_CURRENT_USER;
       LocalMachine: RootKey:=HKEY_LOCAL_MACHINE;
     end;
-    OpenKey(Section, false);
-    ReadBinaryData(Param, Buffer, BufSize);
+    if OpenKey(Section, false) then
+    begin
+      ReadBinaryData(Param, Buffer, BufSize);
+    end;
   finally
     Free;
   end;
@@ -623,14 +578,14 @@ end;
 function GetClassAcronym(value: integer): string;
 begin
   case value of
-    1	: Result := 'Warrior';
-    2	: Result := 'Paladin';
-    3	: Result := 'Hunter';
-    4	: Result := 'Rogue';
-    5	: Result := 'Priest';
-    7	: Result := 'Shaman';
-    8	: Result := 'Mage';
-    9	: Result := 'Warlock';
+    1: Result := 'Warrior';
+    2: Result := 'Paladin';
+    3: Result := 'Hunter';
+    4: Result := 'Rogue';
+    5: Result := 'Priest';
+    7: Result := 'Shaman';
+    8: Result := 'Mage';
+    9: Result := 'Warlock';
     11: Result := 'Druid';
   else
     Result:= '';
@@ -647,50 +602,24 @@ begin
  with TRegistry.Create do
   try
     RootKey := HKEY_CURRENT_USER;
-    if not OpenKey('SOFTWARE\Indomit Software\Quice', false) then exit;
+    if not OpenKey('SOFTWARE\Truice', false) then exit;
     try
      case ReadInteger('Locales') of
-      0: result:= '_loc1';
-      1: result:= '_loc2';
-      2: result:= '_loc3';
-      3: result:= '_loc4';
-      4: result:= '_loc5';
-      5: result:= '_loc6';
-      6: result:= '_loc7';
-      7: result:= '_loc8';
+      0: result:= 'enUS';
+      1: result:= 'koKR';
+      2: result:= 'frFR';
+      3: result:= 'deDE';
+      4: result:= 'zhCN';
+      5: result:= 'zhTW';
+      6: result:= 'esES';
+      7: result:= 'esMX';
+      8: result:= 'ruRU';
      end;
    except
-      Result:= '_loc1';
+      Result:= 'enUS';
     end;
   finally
     free;
   end;
 end;
-
-function GetFileVersion(FileName: string; var Major, Minor, Release, Build: Word): Boolean;
-var
-  Size, Size2: DWORD;
-  Pt, Pt2: Pointer;
-begin
-  Result:= False;
-  (*** Get version information size in exe ***)
-  Size:= GetFileVersionInfoSize(PChar(FileName),Size2);
-  (*** Make sure that version information are included in exe file ***)
-  if Size > 0 then
-  begin
-    GetMem(Pt, Size);
-    GetFileVersionInfo(PChar(FileName), 0, Size, Pt);
-    VerQueryValue(Pt, '\', Pt2, Size2);
-    with TVSFixedFileInfo(Pt2^) do
-    begin
-      Major:= HiWord(dwFileVersionMS);
-      Minor:= LoWord(dwFileVersionMS);
-      Release:= HiWord(dwFileVersionLS);
-      Build:= LoWord(dwFileVersionLS);
-    end;
-    FreeMem(Pt, Size);
-    Result:= True;
-  end;
-end;
-
 end.

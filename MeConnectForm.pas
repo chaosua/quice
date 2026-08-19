@@ -4,7 +4,7 @@ interface
 
 uses
   Windows, Messages, SysUtils, Classes, Graphics, Controls, Forms, Dialogs,
-  StdCtrls, ExtCtrls, TypInfo, ZConnection;
+  StdCtrls, ExtCtrls, TypInfo, FireDAC.Comp.Client;
 
 type
   TMeConnectForm = class(TForm)
@@ -30,10 +30,12 @@ type
     edCharSet: TEdit;
     edcDatabase: TComboBox;
     lbcDatabase: TLabel;
-    edsDatabase: TComboBox;
     edrDatabase: TComboBox;
     lbrDatabase: TLabel;
-    lbsDatabase: TLabel;
+    Label1: TLabel;
+    Label2: TLabel;
+    edsDatabase: TComboBox;
+    Label3: TLabel;
     procedure btConnectClick(Sender: TObject);
     procedure edServerDropDown(Sender: TObject);
     procedure GetDataBases(Sender: TObject);
@@ -43,7 +45,9 @@ type
     procedure FormCreate(Sender: TObject);
     procedure FormShow(Sender: TObject);
     procedure edServerChange(Sender: TObject);
-
+    procedure btCancelClick(Sender: TObject);
+    procedure WMSysCommand(var MSG: TWMSysCommand); message WM_SYSCOMMAND;
+    procedure CloseProgram;
   private
     FListGot : boolean;
     procedure SaveSettings;
@@ -78,13 +82,19 @@ begin
   edExit(nil);
   MainForm.CharDBName := edcDatabase.Text;
   MainForm.RealmDBName := edrDatabase.Text;
-  MainForm.ScriptDBName := edsDatabase.Text;
+
+    // Встановлюємо кодування до Open
   if Trim(edCharSet.Text) <> '' then
-      MainForm.MyMangosConnection.ClientCodepage := edCharSet.Text;
+    MainForm.MyTrinityConnection.Params.Values['CharacterSet'] := edCharSet.Text
+  else
+    MainForm.MyTrinityConnection.Params.Values['CharacterSet'] := 'utf8';
+
   try
-    if MainForm.MyMangosConnection.Connected then
-      MainForm.MyMangosConnection.Disconnect;
-    MainForm.MyMangosConnection.Connect;
+    if (MainForm.MyTrinityConnection.Connected=true) then
+      MainForm.MyTrinityConnection.Close;
+
+    MainForm.MyTrinityConnection.Open;
+
     ModalResult := mrOk;
   except
     ModalResult := mrNone;
@@ -94,8 +104,6 @@ end;
 
 procedure TMeConnectForm.btConnectClick(Sender: TObject);
 begin
-  if dmMain.DBCDir = '' then
-    dmMain.DBCDir := IncludeTrailingPathDelimiter(ExtractFilePath(Application.ExeName)) + 'DBFilesClient';
   SaveSettings;
   DoConnect;
   if cbSavePassword.Checked then begin
@@ -124,7 +132,7 @@ begin
   with TRegistry.Create do
   try
     RootKey:= HKEY_CURRENT_USER;
-    if OpenKey('Software\'+SoftwareCompany+'\' + Trim(ProgramName) + '\servers', false) then
+    if OpenKey('Software\' + Trim(ProgramName) + '\servers', false) then
       GetKeyNames(Items);
   finally
     Free;
@@ -143,15 +151,15 @@ begin
   OldCursor := Screen.Cursor;
   Screen.Cursor := crSQLWait;
   try
-    WasConnected := MainForm.MyMangosConnection.Connected;
-    if not WasConnected then    
-      MainForm.MyMangosConnection.Connect;
-    MainForm.MyMangosConnection.GetCatalogNames(edmDatabase.Items);
+    WasConnected := (MainForm.MyTrinityConnection.Connected=True);
+    if (WasConnected=False) then    
+      MainForm.MyTrinityConnection.Open;
+    MainForm.MyTrinityConnection.GetCatalogNames('', edmDatabase.Items);
     edcDatabase.Items.AddStrings(edmDatabase.Items);
     edrDatabase.Items.AddStrings(edmDatabase.Items);
     edsDatabase.Items.AddStrings(edmDatabase.Items);
-    if not WasConnected then
-      MainForm.MyMangosConnection.Disconnect;
+    if (WasConnected=False) then
+      MainForm.MyTrinityConnection.Close;
   finally
     Screen.Cursor := OldCursor;
   end;
@@ -160,24 +168,46 @@ end;
 procedure TMeConnectForm.edExit(Sender: TObject);
 begin
   try
-    MainForm.MyMangosConnection.Password := edPassword.Text;
-    MainForm.MyMangosConnection.HostName := edServer.Text;
-    MainForm.MyMangosConnection.User := edUsername.Text;
-    MainForm.MyMangosConnection.Database := edmDatabase.Text;
-    MainForm.MyMangosConnection.Port := StrToIntDef(edPort.Text, 3306);
+    if (MainForm.MyTrinityConnection.Connected=true) then
+      MainForm.MyTrinityConnection.Close;
+  MainForm.MyTrinityConnection.Params.Clear;
+	MainForm.MyTrinityConnection.DriverName:='MySQL';
+	MainForm.MyTrinityConnection.Params.AddPair('Server', edServer.Text);
+	MainForm.MyTrinityConnection.Params.AddPair('Port', edPort.Text);
+	MainForm.MyTrinityConnection.Params.AddPair('Database', edmDatabase.Text);
+	MainForm.MyTrinityConnection.Params.AddPair('User_Name', edUsername.Text);
+	MainForm.MyTrinityConnection.Params.AddPair('Password', edPassword.Text);
   except
     ActiveControl := Sender as TWinControl;
     raise;
   end;
 end;
 
+procedure TMeConnectForm.btCancelClick(Sender: TObject);
+begin
+    CloseProgram;
+end;
+
+procedure TMeConnectForm.WMSYSCommand(var MSG:  TWMSysCommand);
+begin
+  if MSG.CmdType = SC_CLOSE then
+  begin
+     //Closing from border icon
+     CloseProgram;
+  end;
+  inherited;
+end;
+
+procedure TMeConnectForm.CloseProgram;
+begin
+ if (MainForm.MyTrinityConnection.Connected=true) then
+      MainForm.MyTrinityConnection.Close;
+  MainForm.Close;
+end;
+
 procedure TMeConnectForm.LoadPassword;
 begin
-  try
-    edPassword.Text:=ReadFromRegistry(CurrentUser, '', 'Password', tpString);
-  except
-    edPassword.Text:='';
-  end;
+  edPassword.Text:=ReadFromRegistry(CurrentUser, '', 'Password', tpString, '');
 end;
 
 procedure TMeConnectForm.SavePassword;
@@ -188,31 +218,11 @@ end;
 
 procedure TMeConnectForm.LoadSettings;
 begin
-  try
-    cbSavePassword.Checked:=ReadFromRegistry(CurrentUser, '', 'SavePass', tpBool);
-  except
-    cbSavePassword.Checked:=false;
-  end;
-  try
-    edServer.Text:=ReadFromRegistry(CurrentUser, '', 'Server',    tpString);
-  except
-    edServer.Clear;
-  end;
-  try
-    edUsername.Text:=ReadFromRegistry(CurrentUser, '', 'Username',  tpString);
-  except
-    edUsername.Clear;
-  end;
-  try
-    edPort.Text:=ReadFromRegistry(CurrentUser, '', 'Port',      tpString);
-  except
-    edPort.Clear;
-  end;
-  try
-    edCharSet.Text:=ReadFromRegistry(CurrentUser, '', 'Charset', tpString);
-  except
-    edCharSet.Clear;
-  end;
+  cbSavePassword.Checked:=ReadFromRegistry(CurrentUser, '', 'SavePass', tpBool, false);
+  edServer.Text:=ReadFromRegistry(CurrentUser, '', 'Server', tpString, '');
+  edUsername.Text:=ReadFromRegistry(CurrentUser, '', 'Username', tpString, '');
+  edPort.Text:=ReadFromRegistry(CurrentUser, '', 'Port', tpString, '');
+  edCharSet.Text:=ReadFromRegistry(CurrentUser, '', 'Charset', tpString, '');
 end;
 
 procedure TMeConnectForm.SaveSettings;
@@ -269,33 +279,24 @@ begin
 end;
 
 procedure TMeConnectForm.FormCreate(Sender: TObject);
-var
-  Major, Minor, Release, Build: Word;
 begin
   ClientHeight:=292;
-  DoInit;
-  if GetFileVersion(Application.ExeName, Major, Minor, Release, Build) then
-    Caption := Format('Quice %d.%d.%d.%d',[Major, Minor, Release, Build])
-  else
-    Caption := 'Quice';
+  DoInit;  
+  Caption := Format('Quice %s',[VERSION_EXE]);
   dmMain.Translate.CreateDefaultTranslation(TForm(Self));
 end;
 
 procedure TMeConnectForm.FormShow(Sender: TObject);
 var
-  Major, Minor, Release, Build: Word;
   mDBname, cDBname, rDBname, sDBname: string;
   AC: TWinControl;
 begin
   dmMain.Translate.TranslateForm(TForm(Self));
-  if GetFileVersion(Application.ExeName, Major, Minor, Release, Build) then
-    Caption := Format('Quice %d.%d.%d.%d',[Major, Minor, Release, Build])
-  else
-    Caption := 'Quice';
-  mDBname:=ReadFromRegistry(CurrentUser, '', 'mDatabase',  tpString);
-  cDBname:=ReadFromRegistry(CurrentUser, '', 'cDatabase',  tpString);
-  rDBname:=ReadFromRegistry(CurrentUser, '', 'rDatabase',  tpString);
-  sDBname:=ReadFromRegistry(CurrentUser, '', 'sDatabase',  tpString);
+  Caption := Format('Quice %s',[VERSION_EXE]);
+  mDBname:=ReadFromRegistry(CurrentUser, '', 'mDatabase',  tpString, '');
+  cDBname:=ReadFromRegistry(CurrentUser, '', 'cDatabase',  tpString, '');
+  rDBname:=ReadFromRegistry(CurrentUser, '', 'rDatabase',  tpString, '');
+  sDBname:=ReadFromRegistry(CurrentUser, '', 'sDatabase',  tpString, '');
 
   edExit(Sender);
 
@@ -330,48 +331,21 @@ end;
 
 procedure TMeConnectForm.edServerChange(Sender: TObject);
 begin
-  try
-    cbSavePassword.Checked:=ReadFromRegistry(CurrentUser, 'servers\' + edServer.Text, 'SavePass', tpBool);
-  except
-    cbSavePassword.Checked:=false;
-  end;
+  cbSavePassword.Checked:=ReadFromRegistry(CurrentUser, 'servers\' + edServer.Text, 'SavePass', tpBool, false);
+
   if cbSavePassword.Checked then
-  try
-    edPassword.Text:=ReadFromRegistry(CurrentUser, 'servers\' + edServer.Text, 'Password', tpString);
-  except
-    edPassword.Text:='';
-  end;
-  try
-    edUsername.Text:=ReadFromRegistry(CurrentUser, 'servers\' + edServer.Text, 'Username',  tpString);
-  except
-    edUsername.Clear;
-  end;
-  try
-    edmDatabase.Text:=ReadFromRegistry(CurrentUser, 'servers\' + edServer.Text, 'mDatabase',  tpString);
-  except
-  end;
-  try
-    edcDatabase.Text:=ReadFromRegistry(CurrentUser, 'servers\' + edServer.Text, 'cDatabase',  tpString);
-  except
-  end;
-  try
-    edrDatabase.Text:=ReadFromRegistry(CurrentUser, 'servers\' + edServer.Text, 'rDatabase',  tpString);
-  except
-  end;
-  try
-    edsDatabase.Text:=ReadFromRegistry(CurrentUser, 'servers\' + edServer.Text, 'sDatabase',  tpString);
-  except
-  end;
-  try
-    edPort.Text:=ReadFromRegistry(CurrentUser, 'servers\' + edServer.Text, 'Port',      tpString);
-  except
-    edPort.Clear;
-  end;
-  try
-    edCharSet.Text:=ReadFromRegistry(CurrentUser,'servers\' + edServer.Text, 'Charset', tpString);
-  except
-    edCharSet.Clear;
-  end;
+    edPassword.Text:=ReadFromRegistry(CurrentUser, 'servers\' + edServer.Text, 'Password', tpString, '');
+
+  edUsername.Text:=ReadFromRegistry(CurrentUser, 'servers\' + edServer.Text, 'Username',  tpString, '');
+  edmDatabase.Text:=ReadFromRegistry(CurrentUser, 'servers\' + edServer.Text, 'mDatabase',  tpString, '');
+  edcDatabase.Text:=ReadFromRegistry(CurrentUser, 'servers\' + edServer.Text, 'cDatabase',  tpString, '');
+  edrDatabase.Text:=ReadFromRegistry(CurrentUser, 'servers\' + edServer.Text, 'rDatabase',  tpString, '');
+  edsDatabase.Text:=ReadFromRegistry(CurrentUser, 'servers\' + edServer.Text, 'sDatabase',  tpString, '');
+  edPort.Text:=ReadFromRegistry(CurrentUser, 'servers\' + edServer.Text, 'Port',      tpString, '');
+  edCharSet.Text:=ReadFromRegistry(CurrentUser,'servers\' + edServer.Text, 'Charset', tpString, '');
 end;
 
+
 end.
+
+

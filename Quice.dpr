@@ -24,20 +24,19 @@ uses
   MeConnectForm in 'MeConnectForm.pas' {MeConnectForm},
   DBCfile in 'DBCfile.pas',
   AreaTableUnit in 'AreaTableUnit.pas' {AreaTableForm},
-  SoundEntriesUnit in 'SoundEntriesUnit.pas' {SoundEntriesForm},
-  Functions in 'Functions.pas',
-  LocNPCFrame in 'LocNPCFrame.pas' {NPCTextLoc: TFrame};
+  Functions in 'Functions.pas';
 
 {$R *.res}
+
 begin
   Application.Initialize;
   Application.Title := 'Quice';
-  Application.ShowMainForm:=false;
+  Application.ShowMainForm := false;
   Application.CreateForm(TdmMain, dmMain);
   Application.CreateForm(TMainForm, MainForm);
   Application.CreateForm(TSpellsForm, SpellsForm);
   Application.CreateForm(TCheckForm, CheckForm);
   Application.CreateForm(TAreaTableForm, AreaTableForm);
-  Application.CreateForm(TSoundEntriesForm, SoundEntriesForm);
   Application.Run;
+
 end.

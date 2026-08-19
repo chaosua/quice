@@ -26,10 +26,6 @@ object SpellsForm: TSpellsForm
     TabOrder = 0
     object tsSearch: TTabSheet
       Caption = 'Search'
-      ExplicitLeft = 0
-      ExplicitTop = 0
-      ExplicitWidth = 0
-      ExplicitHeight = 0
       object pnSearch: TPanel
         Left = 0
         Top = 0
@@ -60,11 +56,11 @@ object SpellsForm: TSpellsForm
         Columns = <
           item
             Caption = 'Spell ID'
-            Width = 50
+            Width = 70
           end
           item
             Caption = 'Spell Name'
-            Width = 300
+            Width = 290
           end>
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clWindowText

@@ -11,19 +11,19 @@ object SettingsForm: TSettingsForm
   Font.Height = -11
   Font.Name = 'MS Sans Serif'
   Font.Style = []
-  OldCreateOrder = False
   Position = poOwnerFormCenter
   OnCreate = FormCreate
-  PixelsPerInch = 96
   TextHeight = 13
   object pcSettings: TPageControl
     Left = 0
     Top = 0
     Width = 350
     Height = 391
-    ActivePage = tsColumns
+    ActivePage = tsLanguage
     Align = alClient
     TabOrder = 0
+    ExplicitWidth = 346
+    ExplicitHeight = 390
     object tsColumns: TTabSheet
       Caption = 'Columns'
       object Panel1: TPanel
@@ -80,6 +80,7 @@ object SettingsForm: TSettingsForm
           end
           item
           end>
+        ExplicitWidth = 346
       end
       object Panel2: TPanel
         Left = 0
@@ -366,6 +367,7 @@ object SettingsForm: TSettingsForm
           ParentShowHint = False
           ShowHint = True
           TabOrder = 0
+          Text = ''
         end
         object edWidth: TLabeledEdit
           Left = 216
@@ -379,16 +381,13 @@ object SettingsForm: TSettingsForm
           ParentShowHint = False
           ShowHint = True
           TabOrder = 1
+          Text = ''
         end
       end
     end
     object tsSite: TTabSheet
       Caption = 'Site'
       ImageIndex = 1
-      ExplicitLeft = 0
-      ExplicitTop = 0
-      ExplicitWidth = 0
-      ExplicitHeight = 0
       object Panel4: TPanel
         Left = 0
         Top = 0
@@ -445,10 +444,6 @@ object SettingsForm: TSettingsForm
     object tsLanguage: TTabSheet
       Caption = 'Language'
       ImageIndex = 2
-      ExplicitLeft = 0
-      ExplicitTop = 0
-      ExplicitWidth = 0
-      ExplicitHeight = 0
       object Panel6: TPanel
         Left = 0
         Top = 65
@@ -458,19 +453,30 @@ object SettingsForm: TSettingsForm
         BevelInner = bvLowered
         BevelOuter = bvLowered
         TabOrder = 0
+        ExplicitWidth = 338
+        ExplicitHeight = 297
         object lbLanguage: TLabel
           Left = 16
           Top = 16
-          Width = 48
+          Width = 134
           Height = 13
-          Caption = 'Language'
+          Caption = 'Language ( Truice interface)'
         end
         object lbLocales: TLabel
           Left = 16
           Top = 64
-          Width = 37
+          Width = 295
           Height = 13
-          Caption = 'Locales'
+          Caption = 
+            'Locales (Quest locales tab will load propper translation if exis' +
+            'ts)'
+        end
+        object LbLocales2: TLabel
+          Left = 16
+          Top = 80
+          Width = 255
+          Height = 13
+          Caption = 'Affects Search Tabs (search names in *_locale tables)'
         end
         object cbxLanguage: TComboBox
           Left = 16
@@ -481,21 +487,22 @@ object SettingsForm: TSettingsForm
           TabOrder = 0
         end
         object cbxLocales: TComboBox
-          Left = 16
-          Top = 83
+          Left = 15
+          Top = 99
           Width = 313
           Height = 21
           Style = csDropDownList
           TabOrder = 1
           Items.Strings = (
-            '*_loc1'
-            '*_loc2'
-            '*_loc3'
-            '*_loc4'
-            '*_loc5'
-            '*_loc6'
-            '*_loc7'
-            '*_loc8')
+            'enUS'
+            'koKR'
+            'frFR'
+            'deDE'
+            'zhCN'
+            'zhTW'
+            'esES'
+            'esMX'
+            'ruRU')
         end
       end
       object Panel7: TPanel
@@ -507,6 +514,7 @@ object SettingsForm: TSettingsForm
         BevelOuter = bvLowered
         Color = clInfoBk
         TabOrder = 1
+        ExplicitWidth = 338
         object Label3: TLabel
           Left = 8
           Top = 8
@@ -527,10 +535,6 @@ object SettingsForm: TSettingsForm
     object tsInternet: TTabSheet
       Caption = 'Internet'
       ImageIndex = 3
-      ExplicitLeft = 0
-      ExplicitTop = 0
-      ExplicitWidth = 0
-      ExplicitHeight = 0
       object cbAutomaticCheckForUpdates: TCheckBox
         Left = 16
         Top = 24
@@ -557,6 +561,7 @@ object SettingsForm: TSettingsForm
         EditLabel.Height = 13
         EditLabel.Caption = 'ProxyServer'
         TabOrder = 2
+        Text = ''
       end
       object edUsername: TLabeledEdit
         Left = 16
@@ -567,6 +572,7 @@ object SettingsForm: TSettingsForm
         EditLabel.Height = 13
         EditLabel.Caption = 'User'
         TabOrder = 4
+        Text = ''
       end
       object edPassword: TLabeledEdit
         Left = 143
@@ -578,6 +584,7 @@ object SettingsForm: TSettingsForm
         EditLabel.Caption = 'Password'
         PasswordChar = '*'
         TabOrder = 5
+        Text = ''
       end
       object edProxyPort: TLabeledEdit
         Left = 143
@@ -588,6 +595,7 @@ object SettingsForm: TSettingsForm
         EditLabel.Height = 13
         EditLabel.Caption = 'Port'
         TabOrder = 3
+        Text = ''
       end
     end
     object tsPreferences: TTabSheet
@@ -609,10 +617,6 @@ object SettingsForm: TSettingsForm
     object tsDBC: TTabSheet
       Caption = 'DBC'
       ImageIndex = 5
-      ExplicitLeft = 0
-      ExplicitTop = 0
-      ExplicitWidth = 0
-      ExplicitHeight = 0
       object lbDBCDir: TLabel
         Left = 3
         Top = 13
@@ -632,7 +636,6 @@ object SettingsForm: TSettingsForm
         Top = 32
         Width = 326
         Height = 21
-        DialogKind = dkWin32
         TabOrder = 0
         Text = 'DBC'
       end
@@ -642,7 +645,6 @@ object SettingsForm: TSettingsForm
         Width = 326
         Height = 21
         Style = csDropDownList
-        DropDownCount = 16
         ItemIndex = 16
         TabOrder = 1
         Text = '255 = Auto Detect (Default)'
@@ -675,11 +677,13 @@ object SettingsForm: TSettingsForm
     Align = alBottom
     BevelOuter = bvNone
     TabOrder = 1
+    ExplicitTop = 390
+    ExplicitWidth = 346
     DesignSize = (
       350
       41)
     object btOK: TButton
-      Left = 184
+      Left = 176
       Top = 6
       Width = 75
       Height = 25
@@ -688,9 +692,10 @@ object SettingsForm: TSettingsForm
       ModalResult = 1
       TabOrder = 0
       OnClick = btOKClick
+      ExplicitLeft = 172
     end
     object btCancel: TButton
-      Left = 265
+      Left = 257
       Top = 6
       Width = 75
       Height = 25
@@ -699,6 +704,7 @@ object SettingsForm: TSettingsForm
       Caption = 'Cancel'
       ModalResult = 2
       TabOrder = 1
+      ExplicitLeft = 253
     end
   end
 end

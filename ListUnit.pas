@@ -22,7 +22,7 @@ type
     procedure lvList2DblClick(Sender: TObject);
     procedure lvListColumnClick(Sender: TObject; Column: TListColumn);
   private
-    prmID: integer;
+    prmName, prmID: integer;
     procedure Search();
   public
     procedure Prepare(Text: string);
@@ -89,7 +89,10 @@ begin
     prmID := -prmID;
   end
   else
-    lvList.CustomSort(@CustomNameSortProc, column.Index);
+  begin
+    lvList.CustomSort(@CustomNameSortProc, prmName);
+    prmName := -prmName;    
+  end;
 end;
 
 procedure TListForm.edSearchMaskChange(Sender: TObject);
@@ -99,6 +102,7 @@ end;
 
 procedure TListForm.FormCreate(Sender: TObject);
 begin
+  prmName := 1;
   prmID := 1;
   dmMain.Translate.CreateDefaultTranslation(TForm(Self));
   dmMain.Translate.TranslateForm(TForm(Self));
@@ -108,5 +112,6 @@ procedure TListForm.FormKeyDown(Sender: TObject; var Key: Word; Shift: TShiftSta
 begin
   if key = vk_escape then Close;
 end;
+
 
 end.

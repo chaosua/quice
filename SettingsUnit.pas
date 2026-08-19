@@ -52,6 +52,7 @@ type
     lbDBCLocale: TLabel;
     cbxLocales: TComboBox;
     lbLocales: TLabel;
+    LbLocales2: TLabel;
     procedure FormCreate(Sender: TObject);
     procedure btDelClick(Sender: TObject);
     procedure btUpClick(Sender: TObject);
@@ -199,7 +200,6 @@ begin
   dmMain.ProxyPort := edProxyPort.Text;
   dmMain.ProxyUser := edUsername.Text;
   dmMain.ProxyPass := edPassword.Text;
-  MainForm.CheckforUpdates(true);
 end;
 
 procedure TSettingsForm.btOKClick(Sender: TObject);

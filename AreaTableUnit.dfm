@@ -4,7 +4,7 @@ object AreaTableForm: TAreaTableForm
   BorderStyle = bsDialog
   Caption = 'AreaTable'
   ClientHeight = 453
-  ClientWidth = 643
+  ClientWidth = 392
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
@@ -19,28 +19,25 @@ object AreaTableForm: TAreaTableForm
   object PageControl1: TPageControl
     Left = 0
     Top = 0
-    Width = 643
+    Width = 392
     Height = 412
     ActivePage = tsSearch
     Align = alClient
     TabOrder = 0
-    ExplicitWidth = 480
     object tsSearch: TTabSheet
       Caption = 'Search'
-      ExplicitWidth = 472
       object pnSearch: TPanel
         Left = 0
         Top = 0
-        Width = 635
+        Width = 384
         Height = 41
         Align = alTop
         BevelOuter = bvNone
         TabOrder = 0
-        ExplicitWidth = 472
         object edSearchMask: TLabeledEdit
           Left = 0
           Top = 14
-          Width = 305
+          Width = 377
           Height = 21
           EditLabel.Width = 62
           EditLabel.Height = 13
@@ -52,26 +49,18 @@ object AreaTableForm: TAreaTableForm
       object lvList: TListView
         Left = 0
         Top = 41
-        Width = 635
+        Width = 384
         Height = 343
         Align = alClient
         BorderStyle = bsNone
         Columns = <
           item
             Caption = 'ID'
-            Width = 40
+            Width = 70
           end
           item
-            Caption = 'Map'
-            Width = 190
-          end
-          item
-            Caption = 'Parent Zone'
-            Width = 190
-          end
-          item
-            Caption = 'Zone'
-            Width = 190
+            Caption = 'Value'
+            Width = 290
           end>
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clWindowText
@@ -88,24 +77,22 @@ object AreaTableForm: TAreaTableForm
         OnChange = lvListChange
         OnColumnClick = lvListColumnClick
         OnDblClick = lvListDblClick
-        ExplicitWidth = 472
       end
     end
   end
   object Panel1: TPanel
     Left = 0
     Top = 412
-    Width = 643
+    Width = 392
     Height = 41
     Align = alBottom
     BevelOuter = bvNone
     TabOrder = 1
-    ExplicitWidth = 480
     DesignSize = (
-      643
+      392
       41)
     object btOK: TButton
-      Left = 480
+      Left = 229
       Top = 8
       Width = 75
       Height = 25
@@ -114,10 +101,9 @@ object AreaTableForm: TAreaTableForm
       Enabled = False
       ModalResult = 1
       TabOrder = 0
-      ExplicitLeft = 317
     end
     object btCancel: TButton
-      Left = 563
+      Left = 312
       Top = 8
       Width = 75
       Height = 25
@@ -126,7 +112,6 @@ object AreaTableForm: TAreaTableForm
       Caption = 'Cancel'
       ModalResult = 2
       TabOrder = 1
-      ExplicitLeft = 400
     end
   end
 end
