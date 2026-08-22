@@ -11,11 +11,9 @@ object WhoQuestForm: TWhoQuestForm
   Font.Height = -11
   Font.Name = 'MS Sans Serif'
   Font.Style = []
-  OldCreateOrder = False
   Position = poOwnerFormCenter
   OnCreate = FormCreate
   OnShow = FormShow
-  PixelsPerInch = 96
   TextHeight = 13
   object PageControl1: TPageControl
     Left = 0
@@ -47,6 +45,7 @@ object WhoQuestForm: TWhoQuestForm
           EditLabel.Height = 13
           EditLabel.Caption = 'ID'
           TabOrder = 0
+          Text = ''
         end
         object edWhoName: TLabeledEdit
           Left = 136
@@ -57,6 +56,7 @@ object WhoQuestForm: TWhoQuestForm
           EditLabel.Height = 13
           EditLabel.Caption = 'Name'
           TabOrder = 1
+          Text = ''
         end
         object btSearch: TButton
           Left = 476
@@ -127,7 +127,7 @@ object WhoQuestForm: TWhoQuestForm
         object Label1: TLabel
           Left = 7
           Top = 6
-          Width = 536
+          Width = 534
           Height = 26
           Caption = 
             '   At this page you can choose a Quester. Set quester type, ente' +
@@ -221,7 +221,6 @@ object WhoQuestForm: TWhoQuestForm
   end
   object MyQuery: TFDQuery
     Connection = MainForm.MyTrinityConnection
-    Params = <>
     Left = 464
     Top = 72
   end

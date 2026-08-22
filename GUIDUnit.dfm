@@ -11,11 +11,9 @@ object GUIDForm: TGUIDForm
   Font.Height = -11
   Font.Name = 'MS Sans Serif'
   Font.Style = []
-  OldCreateOrder = False
   Position = poOwnerFormCenter
   OnCreate = FormCreate
   OnShow = FormShow
-  PixelsPerInch = 96
   TextHeight = 13
   object PageControl1: TPageControl
     Left = 0
@@ -47,6 +45,7 @@ object GUIDForm: TGUIDForm
           EditLabel.Height = 13
           EditLabel.Caption = 'ID'
           TabOrder = 0
+          Text = ''
         end
         object edName: TLabeledEdit
           Left = 136
@@ -57,6 +56,7 @@ object GUIDForm: TGUIDForm
           EditLabel.Height = 13
           EditLabel.Caption = 'Name'
           TabOrder = 1
+          Text = ''
         end
         object btSearch: TButton
           Left = 418
@@ -108,7 +108,6 @@ object GUIDForm: TGUIDForm
         OnSelectItem = lvGUIDSelectItem
         AutoSelect = False
         ColumnsOrder = '0=60,1=80,2=80,3=80,4=80'
-        Groups = <>
         ExtendedColumns = <
           item
           end
@@ -145,7 +144,6 @@ object GUIDForm: TGUIDForm
         OnSelectItem = lvCreatureOrGOSelectItem
         AutoSelect = False
         ColumnsOrder = '0=60,1=300'
-        Groups = <>
         ExtendedColumns = <
           item
           end
@@ -190,7 +188,6 @@ object GUIDForm: TGUIDForm
   end
   object MyQuery: TFDQuery
     Connection = MainForm.MyTrinityConnection
-    Params = <>
     Left = 328
     Top = 24
   end

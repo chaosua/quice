@@ -11,7 +11,7 @@ uses
 
 const
   DefaultLanguage = 'Default';
-  ProgramName = 'Truice';
+  ProgramName = 'Quice';
 
 type
   TType = (ttNPC, ttItem, ttObject, ttQuest, ttChar);

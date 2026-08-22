@@ -602,18 +602,18 @@ begin
  with TRegistry.Create do
   try
     RootKey := HKEY_CURRENT_USER;
-    if not OpenKey('SOFTWARE\Truice', false) then exit;
+    if not OpenKey('SOFTWARE\Quice', false) then exit;
     try
      case ReadInteger('Locales') of
-      0: result:= 'enUS';
-      1: result:= 'koKR';
-      2: result:= 'frFR';
-      3: result:= 'deDE';
-      4: result:= 'zhCN';
-      5: result:= 'zhTW';
-      6: result:= 'esES';
-      7: result:= 'esMX';
-      8: result:= 'ruRU';
+      0: result:= 'enUS';   //enUS
+      1: result:= '_loc1';   //koKR
+      2: result:= '_loc2';   //frFR
+      3: result:= '_loc3';   //deDE
+      4: result:= '_loc4';   //zhCN
+      5: result:= '_loc5';   //zhTW
+      6: result:= '_loc6';   //esES
+      7: result:= '_loc7';   //esMX
+      8: result:= '_loc8';   //ruRU
      end;
    except
       Result:= 'enUS';

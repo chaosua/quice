@@ -2,7 +2,7 @@
     <PropertyGroup>
         <ProjectGuid>{A5365669-B8DF-4BB4-A71F-A9A40132E993}</ProjectGuid>
         <MainSource>Quice.dpr</MainSource>
-        <Config Condition="'$(Config)'==''">Release</Config>
+        <Config Condition="'$(Config)'==''">Debug</Config>
         <DCC_DCCCompiler>DCC32</DCC_DCCCompiler>
         <ProjectVersion>19.5</ProjectVersion>
         <Base>True</Base>

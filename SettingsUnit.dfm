@@ -22,8 +22,6 @@ object SettingsForm: TSettingsForm
     ActivePage = tsLanguage
     Align = alClient
     TabOrder = 0
-    ExplicitWidth = 346
-    ExplicitHeight = 390
     object tsColumns: TTabSheet
       Caption = 'Columns'
       object Panel1: TPanel
@@ -80,7 +78,6 @@ object SettingsForm: TSettingsForm
           end
           item
           end>
-        ExplicitWidth = 346
       end
       object Panel2: TPanel
         Left = 0
@@ -453,8 +450,6 @@ object SettingsForm: TSettingsForm
         BevelInner = bvLowered
         BevelOuter = bvLowered
         TabOrder = 0
-        ExplicitWidth = 338
-        ExplicitHeight = 297
         object lbLanguage: TLabel
           Left = 16
           Top = 16
@@ -490,8 +485,8 @@ object SettingsForm: TSettingsForm
           Left = 15
           Top = 99
           Width = 313
-          Height = 21
-          Style = csDropDownList
+          Height = 22
+          Style = csOwnerDrawFixed
           TabOrder = 1
           Items.Strings = (
             'enUS'
@@ -514,7 +509,6 @@ object SettingsForm: TSettingsForm
         BevelOuter = bvLowered
         Color = clInfoBk
         TabOrder = 1
-        ExplicitWidth = 338
         object Label3: TLabel
           Left = 8
           Top = 8
@@ -677,8 +671,6 @@ object SettingsForm: TSettingsForm
     Align = alBottom
     BevelOuter = bvNone
     TabOrder = 1
-    ExplicitTop = 390
-    ExplicitWidth = 346
     DesignSize = (
       350
       41)
@@ -692,7 +684,6 @@ object SettingsForm: TSettingsForm
       ModalResult = 1
       TabOrder = 0
       OnClick = btOKClick
-      ExplicitLeft = 172
     end
     object btCancel: TButton
       Left = 257
@@ -704,7 +695,6 @@ object SettingsForm: TSettingsForm
       Caption = 'Cancel'
       ModalResult = 2
       TabOrder = 1
-      ExplicitLeft = 253
     end
   end
 end
