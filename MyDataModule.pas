@@ -82,7 +82,7 @@ begin
   DBCDir := ReadFromRegistry(CurrentUser, '', 'DBCDir', tpString, ProgramDir + 'DBC');
   DBCLocale := ReadFromRegistry(CurrentUser, '', 'DBCLocale', tpInteger, 16);
   Language := ReadFromRegistry(CurrentUser, '', 'Language', tpString, DefaultLanguage);
-  IsAutoUpdates := ReadFromRegistry(CurrentUser, '', 'IsAutoUpdates', tpBool, True);
+  IsAutoUpdates := ReadFromRegistry(CurrentUser, '', 'IsAutoUpdates', tpBool, False);
 
   ProxyServer := ReadFromRegistry(CurrentUser, '', 'ProxyServer', tpString, '');
   ProxyPort   := ReadFromRegistry(CurrentUser, '', 'ProxyPort', tpString, '');

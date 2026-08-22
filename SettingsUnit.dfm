@@ -19,7 +19,7 @@ object SettingsForm: TSettingsForm
     Top = 0
     Width = 350
     Height = 391
-    ActivePage = tsLanguage
+    ActivePage = tsColumns
     Align = alClient
     TabOrder = 0
     object tsColumns: TTabSheet
@@ -450,6 +450,7 @@ object SettingsForm: TSettingsForm
         BevelInner = bvLowered
         BevelOuter = bvLowered
         TabOrder = 0
+        ExplicitTop = 63
         object lbLanguage: TLabel
           Left = 16
           Top = 16
@@ -485,8 +486,8 @@ object SettingsForm: TSettingsForm
           Left = 15
           Top = 99
           Width = 313
-          Height = 22
-          Style = csOwnerDrawFixed
+          Height = 21
+          Style = csDropDownList
           TabOrder = 1
           Items.Strings = (
             'enUS'

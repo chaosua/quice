@@ -2610,10 +2610,10 @@ begin
   begin
     GetWhoAndKey(edQuestEnderSearch.Text, who, key);
     if who = 'creature' then
-      MyTempQuery.SQL.Text := Format('SELECT `quest` FROM `quest_relations` WHERE `quest`=%s AND `actor`=0 AND `role`=1',[key])
+      MyTempQuery.SQL.Text := Format('SELECT `quest` FROM `quest_relations` WHERE `entry`=%s AND `actor`=0 AND `role`=1',[key])
     else
     if who = 'gameobject' then
-      MyTempQuery.SQL.Text := Format('SELECT `quest` FROM `quest_relations` WHERE `quest`=%s AND `actor`=1 AND `role`=1',[key]);
+      MyTempQuery.SQL.Text := Format('SELECT `quest` FROM `quest_relations` WHERE `entry`=%s AND `actor`=1 AND `role`=1',[key]);
     if MyTempQuery.SQL.Text<>'' then
     begin
       MyTempQuery.Open;
@@ -2649,31 +2649,31 @@ begin
   begin
     if loc<>'enUS' then begin
       if WhereStr<> '' then
-        WhereStr := Format('%s AND ((qt.`LogTitle` LIKE ''%s'') OR (lq.`title` LIKE ''%1:s'' AND lq.`locale`=''%2:s''))',[WhereStr, QTilte, loc])
+        WhereStr := Format('%0:s AND ((qt.`Title` LIKE ''%1:s'') OR (lq.`title%2:s` LIKE ''%1:s''))',[WhereStr, QTilte, loc])
       else
-        WhereStr := Format('WHERE ((qt.`LogTitle` LIKE ''%s'') OR (lq.`title`'+loc+' LIKE ''%0:s'' AND lq.`locale`=''%1:s''))',[QTilte, loc]);
+        WhereStr := Format('WHERE ((qt.`Title` LIKE ''%0:s'') OR (lq.`title%1:s` LIKE ''%0:s''))',[QTilte, loc]);
     end else begin
       if WhereStr<> '' then
-        WhereStr := Format('%s AND `LogTitle` LIKE ''%s'' ',[WhereStr, QTilte])
+        WhereStr := Format('%s AND `Title` LIKE ''%s'' ',[WhereStr, QTilte])
       else
-        WhereStr := Format('WHERE `LogTitle` LIKE ''%s''',[QTilte]);
+        WhereStr := Format('WHERE `Title` LIKE ''%s''',[QTilte]);
     end;
   end;
 
   if qgq<>'' then
   begin
     if WhereStr<> '' then
-      WhereStr := Format('%s AND (qt.`ID` IN (%s))',[WhereStr, qgq])
+      WhereStr := Format('%s AND (qt.`entry` IN (%s))',[WhereStr, qgq])
     else
-      WhereStr := Format('WHERE (qt.`ID` IN (%s))',[qgq]);
+      WhereStr := Format('WHERE (qt.`entry` IN (%s))',[qgq]);
   end;
 
   if qtq<>'' then
   begin
     if WhereStr<> '' then
-      WhereStr := Format('%s AND (qt.`ID` IN (%s))',[WhereStr, qtq])
+      WhereStr := Format('%s AND (qt.`entry` IN (%s))',[WhereStr, qtq])
     else
-      WhereStr := Format('WHERE (qt.`ID` IN (%s))',[qtq]);
+      WhereStr := Format('WHERE (qt.`entry` IN (%s))',[qtq]);
   end;
 
   QuestSortID := edQuestSortIDSearch.Text;
@@ -2682,9 +2682,9 @@ begin
   if QuestSortID<>'' then
   begin
     if WhereStr<> '' then
-      WhereStr := Format('%s AND (qt.`QuestSortID`=%s)',[WhereStr, QuestSortID])
+      WhereStr := Format('%s AND (qt.`ZoneOrSort`=%s)',[WhereStr, QuestSortID])
     else
-      WhereStr := Format('WHERE (qt.`QuestSortID`=%s)',[QuestSortID]);
+      WhereStr := Format('WHERE (qt.`ZoneOrSort`=%s)',[QuestSortID]);
   end;
 
   if QuestFlags<>'' then
@@ -2692,16 +2692,16 @@ begin
     if (rbExact.Checked=true) then
     begin
       if WhereStr<> '' then
-        WhereStr := Format('%s AND (qt.`Flags`=%s)',[WhereStr, QuestFlags])
+        WhereStr := Format('%s AND (qt.`QuestFlags`=%s)',[WhereStr, QuestFlags])
       else
-        WhereStr := Format('WHERE (qt.`Flags`=%s)',[QuestFlags]);
+        WhereStr := Format('WHERE (qt.`QuestFlags`=%s)',[QuestFlags]);
     end
     else
     begin
       if WhereStr<> '' then
-        WhereStr := Format('%s AND (qt.`Flags` & %1:s = %1:s)',[WhereStr, QuestFlags])
+        WhereStr := Format('%s AND (qt.`QuestFlags` & %1:s = %1:s)',[WhereStr, QuestFlags])
       else
-        WhereStr := Format('WHERE (qt.`Flags` & %0:s = %0:s)',[QuestFlags]);
+        WhereStr := Format('WHERE (qt.`QuestFlags` & %0:s = %0:s)',[QuestFlags]);
     end;
   end;
 
@@ -2727,12 +2727,12 @@ begin
     if MessageDlg(dmMain.Text[134], mtConfirmation, mbYesNoCancel, -1)<>mrYes then Exit;
 
    if loc<>'enUS' then
-   QueryStr := Format('SELECT qt.`entry`, MAX(qt.`LogTitle`) AS `LogTitle`, MAX(''%s'') AS `locale`, '+
-       '(SELECT `Title` FROM `quest_template_locale` WHERE `ID` = qt.`ID` AND `locale` = ''%0:s'') AS `Title`, '+
-       '(SELECT `Details` FROM `quest_template_locale` WHERE `ID` = qt.`ID` AND `locale` = ''%0:s'') AS `Details` '+
-       'FROM `quest_template` qt LEFT OUTER JOIN `quest_template_locale` lq ON qt.`ID` = lq.`ID` '+
-       ' %1:s GROUP BY qt.`ID`',[loc, WhereStr])
-   else QueryStr := Format('SELECT `entry`, `LogTitle`, `QuestDescription` as `Details` FROM `quest_template` qt %s',[WhereStr]);
+   QueryStr := Format('SELECT qt.`entry`, qt.`Title` AS `Title`,'+
+       '(SELECT `Title%0:s` FROM `locales_quest` WHERE `entry` = qt.`entry`) AS `Title_loc`, '+
+       '(SELECT `Details%0:s` FROM `locales_quest` WHERE `entry` = qt.`entry`) AS `Details`, '''+loc+''' AS `locale`'+
+       'FROM `quest_template` qt LEFT OUTER JOIN `locales_quest` lq ON qt.`entry` = lq.`entry` '+
+       ' %1:s GROUP BY qt.`entry`',[loc, WhereStr])
+   else QueryStr := Format('SELECT `entry`, `Title`, `Details`, '''+loc+''' AS `locale` FROM `quest_template` qt %s',[WhereStr]);
 
   MyQuery.SQL.Text := QueryStr;
   lvQuest.Items.BeginUpdate;
@@ -3953,7 +3953,7 @@ begin
       with lvQuest.Columns.Add do
       begin
         Caption := ReadFromRegistry(Functions.TRootKey.CurrentUser, 'QuestList', Format('N%d', [i]), Functions.TParameter.tpString, 'Error');
-        if LowerCase(Caption) = 'entry' then Caption := 'Id';
+        if LowerCase(Caption) = 'entry' then Caption := 'entry';
 
         Width := ReadFromRegistry(Functions.TRootKey.CurrentUser, 'QuestList', Format('W%d', [i]), Functions.TParameter.tpInteger, 40);
       end;
@@ -5063,8 +5063,8 @@ begin
   begin
     with lvCreatureStarts.Items.Add do
     begin
-      Caption := MyTempQuery.FieldByName('Id').AsString;
-      SubItems.Add(MyTempQuery.FieldByName('LogTitle').AsString);
+      Caption := MyTempQuery.FieldByName('Entry').AsString;
+      SubItems.Add(MyTempQuery.FieldByName('Title').AsString);
       SubItems.Add(MyTempQuery.FieldByName('QuestLevel').AsString);
       SubItems.Add(GetRaceAcronym(MyTempQuery.FieldByName('AllowableRaces').AsInteger));
 
@@ -5094,8 +5094,8 @@ begin
   begin
     with lvCreatureEnds.Items.Add do
     begin
-      Caption := MyTempQuery.FieldByName('Id').AsString;
-      SubItems.Add(MyTempQuery.FieldByName('LogTitle').AsString);
+      Caption := MyTempQuery.FieldByName('Entry').AsString;
+      SubItems.Add(MyTempQuery.FieldByName('Title').AsString);
       SubItems.Add(MyTempQuery.FieldByName('QuestLevel').AsString);
       SubItems.Add(GetRaceAcronym(MyTempQuery.FieldByName('AllowableRaces').AsInteger));
 
@@ -5126,8 +5126,8 @@ begin
   begin
     with lvCreatureObjectiveOf.Items.Add do
     begin
-      Caption := MyTempQuery.FieldByName('Id').AsString;
-      SubItems.Add(MyTempQuery.FieldByName('LogTitle').AsString);
+      Caption := MyTempQuery.FieldByName('Entry').AsString;
+      SubItems.Add(MyTempQuery.FieldByName('Title').AsString);
       SubItems.Add(MyTempQuery.FieldByName('QuestLevel').AsString);
       SubItems.Add(GetRaceAcronym(MyTempQuery.FieldByName('AllowableRaces').AsInteger));
 
@@ -5139,7 +5139,7 @@ begin
       else temp := a + b;
       SubItems.Add(temp);
 
-      SubItems.Add(GetQuestSortIDAcronym(MyTempQuery.FieldByName('QuestSortID').AsInteger));
+      SubItems.Add(GetQuestSortIDAcronym(MyTempQuery.FieldByName('ZoneOrSort').AsInteger));
     end;
     MyTempQuery.Next;
   end;
@@ -5168,8 +5168,8 @@ begin
   begin
     with lvGameObjectStarts.Items.Add do
     begin
-      Caption := MyTempQuery.FieldByName('Id').AsString;
-      SubItems.Add(MyTempQuery.FieldByName('LogTitle').AsString);
+      Caption := MyTempQuery.FieldByName('entry').AsString;
+      SubItems.Add(MyTempQuery.FieldByName('Title').AsString);
       SubItems.Add(MyTempQuery.FieldByName('QuestLevel').AsString);
       SubItems.Add(GetRaceAcronym(MyTempQuery.FieldByName('AllowableRaces').AsInteger));
 
@@ -5199,8 +5199,8 @@ begin
   begin
     with lvGameObjectEnds.Items.Add do
     begin
-      Caption := MyTempQuery.FieldByName('Id').AsString;
-      SubItems.Add(MyTempQuery.FieldByName('LogTitle').AsString);
+      Caption := MyTempQuery.FieldByName('entry').AsString;
+      SubItems.Add(MyTempQuery.FieldByName('Title').AsString);
       SubItems.Add(MyTempQuery.FieldByName('QuestLevel').AsString);
       SubItems.Add(GetRaceAcronym(MyTempQuery.FieldByName('AllowableRaces').AsInteger));
 
@@ -5231,8 +5231,8 @@ begin
   begin
     with lvGameObjectObjectiveOf.Items.Add do
     begin
-      Caption := MyTempQuery.FieldByName('Id').AsString;
-      SubItems.Add(MyTempQuery.FieldByName('LogTitle').AsString);
+      Caption := MyTempQuery.FieldByName('entry').AsString;
+      SubItems.Add(MyTempQuery.FieldByName('Title').AsString);
       SubItems.Add(MyTempQuery.FieldByName('QuestLevel').AsString);
       SubItems.Add(GetRaceAcronym(MyTempQuery.FieldByName('AllowableRaces').AsInteger));
 
@@ -5272,8 +5272,8 @@ begin
   begin
     with lvItemStarts.Items.Add do
     begin
-      Caption := MyTempQuery.FieldByName('Id').AsString;
-      SubItems.Add(MyTempQuery.FieldByName('LogTitle').AsString);
+      Caption := MyTempQuery.FieldByName('entry').AsString;
+      SubItems.Add(MyTempQuery.FieldByName('Title').AsString);
       SubItems.Add(MyTempQuery.FieldByName('QuestLevel').AsString);
       SubItems.Add(GetRaceAcronym(MyTempQuery.FieldByName('AllowableRaces').AsInteger));
 
@@ -5304,8 +5304,8 @@ begin
   begin
     with lvItemObjectiveOf.Items.Add do
     begin
-      Caption := MyTempQuery.FieldByName('Id').AsString;
-      SubItems.Add(MyTempQuery.FieldByName('LogTitle').AsString);
+      Caption := MyTempQuery.FieldByName('entry').AsString;
+      SubItems.Add(MyTempQuery.FieldByName('Title').AsString);
       SubItems.Add(MyTempQuery.FieldByName('QuestLevel').AsString);
       SubItems.Add(GetRaceAcronym(MyTempQuery.FieldByName('AllowableRaces').AsInteger));
 
@@ -5336,8 +5336,8 @@ begin
   begin
     with lvItemSourceFor.Items.Add do
     begin
-      Caption := MyTempQuery.FieldByName('Id').AsString;
-      SubItems.Add(MyTempQuery.FieldByName('LogTitle').AsString);
+      Caption := MyTempQuery.FieldByName('entry').AsString;
+      SubItems.Add(MyTempQuery.FieldByName('Title').AsString);
       SubItems.Add(MyTempQuery.FieldByName('QuestLevel').AsString);
       SubItems.Add(GetRaceAcronym(MyTempQuery.FieldByName('AllowableRaces').AsInteger));
 
@@ -5366,8 +5366,8 @@ begin
   begin
     with lvItemProvidedFor.Items.Add do
     begin
-      Caption := MyTempQuery.FieldByName('Id').AsString;
-      SubItems.Add(MyTempQuery.FieldByName('LogTitle').AsString);
+      Caption := MyTempQuery.FieldByName('entry').AsString;
+      SubItems.Add(MyTempQuery.FieldByName('Title').AsString);
       SubItems.Add(MyTempQuery.FieldByName('QuestLevel').AsString);
       SubItems.Add(GetRaceAcronym(MyTempQuery.FieldByName('AllowableRaces').AsInteger));
 
@@ -5401,8 +5401,8 @@ begin
   begin
     with lvItemRewardFrom.Items.Add do
     begin
-      Caption := MyTempQuery.FieldByName('Id').AsString;
-      SubItems.Add(MyTempQuery.FieldByName('LogTitle').AsString);
+      Caption := MyTempQuery.FieldByName('entry').AsString;
+      SubItems.Add(MyTempQuery.FieldByName('Title').AsString);
       SubItems.Add(MyTempQuery.FieldByName('QuestLevel').AsString);
       SubItems.Add(GetRaceAcronym(MyTempQuery.FieldByName('AllowableRaces').AsInteger));
 

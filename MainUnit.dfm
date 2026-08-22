@@ -50,7 +50,7 @@ object MainForm: TMainForm
         Top = 9
         Width = 880
         Height = 631
-        ActivePage = tsQuestStarter
+        ActivePage = tsQuestPart2
         Align = alClient
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clWindowText
@@ -108,9 +108,9 @@ object MainForm: TMainForm
               Top = 24
               Width = 361
               Height = 21
-              EditLabel.Width = 38
+              EditLabel.Width = 20
               EditLabel.Height = 13
-              EditLabel.Caption = 'LogTitle'
+              EditLabel.Caption = 'Title'
               TabOrder = 1
               Text = ''
               OnChange = edSearchChange
@@ -432,20 +432,23 @@ object MainForm: TMainForm
             BorderStyle = bsNone
             Columns = <
               item
-                Caption = 'Id'
+                Caption = 'entry'
                 Width = 60
               end
               item
-                Caption = 'locale'
-                Width = 45
+                Caption = 'Title'
+                Width = 180
               end
               item
-                Caption = 'LogTitle'
+                Caption = 'Title_loc'
                 Width = 180
               end
               item
                 Caption = 'Details'
                 Width = 300
+              end
+              item
+                Caption = 'locale'
               end>
             HideSelection = False
             ReadOnly = True
@@ -454,8 +457,10 @@ object MainForm: TMainForm
             ViewStyle = vsReport
             OnChange = lvQuestChange
             OnDblClick = lvQuestDblClick
-            ColumnsOrder = '0=60,1=45,2=180,3=300'
+            ColumnsOrder = '0=60,1=180,4=180,2=300,3=50'
             ExtendedColumns = <
+              item
+              end
               item
               end
               item
@@ -5105,7 +5110,7 @@ object MainForm: TMainForm
                 'gger id that need to explore'
               ButtonWidth = 22
               ClickKey = 13
-              Color = clMenuBar
+              Color = clGradientInactiveCaption
               Glyph.Data = {
                 36030000424D3603000000000000360000002800000010000000100000000100
                 18000000000000030000120B0000120B00000000000000000000FFFFFFFFFFFF
@@ -5908,7 +5913,7 @@ object MainForm: TMainForm
         Top = 9
         Width = 880
         Height = 631
-        ActivePage = tsCreatureLocation
+        ActivePage = tsSearchCreature
         Align = alClient
         MultiLine = True
         TabOrder = 0
