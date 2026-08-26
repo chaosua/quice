@@ -339,9 +339,9 @@ type
 
     //creature_template columns
     edctEntry: TJvComboEdit;
-    edctdifficulty_entry_1: TJvComboEdit;
-    edctdifficulty_entry_2: TJvComboEdit;
-    edctdifficulty_entry_3: TJvComboEdit;
+    edctDifficultyEntry1: TJvComboEdit;
+    edctDifficultyEntry2: TJvComboEdit;
+    edctDifficultyEntry3: TJvComboEdit;
     edctKillCredit1: TLabeledEdit;
     edctKillCredit2: TLabeledEdit;
     edctname: TLabeledEdit;
@@ -352,7 +352,7 @@ type
     edctmaxlevel: TLabeledEdit;
     edctexp: TLabeledEdit;
     edctfaction: TJvComboEdit;
-    edctnpcflag: TJvComboEdit;
+    edctnpcflags: TJvComboEdit;
     edctspeed_walk: TLabeledEdit;
     edctspeed_run: TLabeledEdit;
     edctscale: TLabeledEdit;
@@ -398,7 +398,7 @@ type
     edctVerifiedBuild: TLabeledEdit;
     gbCreature2: TGroupBox;
     lbctfaction: TLabel;
-    lbctnpcflag: TLabel;
+    lbctnpcflags: TLabel;
     lbctrank: TLabel;
     lbctfamily: TLabel;
     lbcttype: TLabel;
@@ -434,14 +434,11 @@ type
     lvcoCreatureLoot: TJvListView;
     edcoEntry: TLabeledEdit;
     edcoItem: TJvComboEdit;
-    edcoReference: TLabeledEdit;
-    edcoChance: TLabeledEdit;
-    edcoQuestRequired: TLabeledEdit;
-    edcoLootMode: TJvComboEdit;
+    edcoChanceOrQuestChance: TLabeledEdit;
     edcoGroupId: TLabeledEdit;
-    edcoMinCount: TLabeledEdit;
-    edcoMaxCount: TLabeledEdit;
-    edcoComment: TLabeledEdit;
+    edcomincountOrRef: TLabeledEdit;
+    edcomaxcount: TLabeledEdit;
+    edcocondition_id: TLabeledEdit;
     btScriptCreatureLoot: TButton;
     btFullScriptCreatureLoot: TButton;
     tsPickpocketLoot: TTabSheet;
@@ -1144,7 +1141,6 @@ type
     edhibag: TLabeledEdit;
     edhislot: TLabeledEdit;
     edhiitem: TLabeledEdit;
-    lbcoLootMode: TLabel;
     lbcplootmode: TLabel;
     lbcsLootMode: TLabel;
     lbgoLootMode: TLabel;
@@ -1189,7 +1185,9 @@ type
     rbqtQuestSort: TRadioButton;
     rbqtZoneID: TRadioButton;
     lbctflags_extra: TLabel;
-    lbctdifficulty_entry_1: TLabel;
+    lbctDifficultyEntry1: TLabel;
+    lbctDifficultyEntry2: TLabel;
+    lbctDifficultyEntry3: TLabel;
     edqtRewHonorAddition: TLabeledEdit;
     pmruwowhead: TMenuItem;
     nEditCreatureAI: TMenuItem;
@@ -1297,8 +1295,6 @@ type
     edSearchKillCredit1: TLabeledEdit;
     edSearchKillCredit2: TLabeledEdit;
     edSearchGOdata2: TLabeledEdit;
-    lbctdifficulty_entry_2: TLabel;
-    lbctdifficulty_entry_3: TLabel;
     edclspawnMask: TJvComboEdit;
     lbclspawnMask: TLabel;
     edglspawnMask: TJvComboEdit;
@@ -1546,12 +1542,10 @@ type
     btCreatureEquipTemplateDel: TSpeedButton;
     btShowCreatureEquipTemplate: TButton;
     btFullCreatureEquipTemplate: TButton;
-    edceCreatureID: TLabeledEdit;
-    edceID: TLabeledEdit;
-    edceItemID1: TJvComboEdit;
-    edceItemID2: TJvComboEdit;
-    edceItemID3: TJvComboEdit;
-    edceVerifiedBuild: TLabeledEdit;
+    edceentry: TLabeledEdit;
+    edceequipentry1: TJvComboEdit;
+    edceequipentry2: TJvComboEdit;
+    edceequipentry3: TJvComboEdit;
     lbceItemID2: TLabel;
     lbceItemID3: TLabel;
     lbceItemID1: TLabel;
@@ -1612,10 +1606,8 @@ type
     cbctRacialLeader: TCheckBox;
     gbCreatureLocale: TGroupBox;
     edctlocentry: TLabeledEdit;
-    edctloclocale: TLabeledEdit;
-    edctlocVerifiedBuild: TLabeledEdit;
-    edctlocName: TLabeledEdit;
-    edctlocTitle: TLabeledEdit;
+    edctlocname_loc: TLabeledEdit;
+    edctlocsubname_loc: TLabeledEdit;
     gbGameobjectLocale: TGroupBox;
     edgtlocentry: TLabeledEdit;
     edgtloclocale: TLabeledEdit;
@@ -1847,7 +1839,7 @@ type
     procedure tsCreatureScriptShow(Sender: TObject);
     procedure tsSmartAIScriptShow(Sender: TObject);
     procedure tsConditionsScriptShow(Sender: TObject);
-    procedure edctnpcflagButtonClick(Sender: TObject);
+    procedure edctnpcflagsButtonClick(Sender: TObject);
     procedure edctrankButtonClick(Sender: TObject);
     procedure edctfamilyButtonClick(Sender: TObject);
     procedure btNewCreatureClick(Sender: TObject);
@@ -3426,7 +3418,7 @@ begin
       SubItems.Add(MyQuery.Fields[0].AsString);
       lvqtStarterTemplate.Columns[2].Caption := 'name';
       SubItems.Add(MyQuery.Fields[1].AsString);
-      lvqtStarterTemplate.Columns[3].Caption := 'npcflag';
+      lvqtStarterTemplate.Columns[3].Caption := 'npcflags';
       SubItems.Add(MyQuery.Fields[2].AsString);
     end;
     MyQuery.Next;
@@ -4303,9 +4295,9 @@ begin
   if ID<>'' then
   begin
     if pos('-', ID)=0 then
-      WhereStr := Format('WHERE ((ct.`entry` in (%s)) OR (ct.`difficulty_entry_1` in (%0:s)))',[ID])
+      WhereStr := Format('WHERE ((ct.`entry` in (%s)) OR (ct.`DifficultyEntry1` in (%0:s)))',[ID])
     else
-      WhereStr := Format('WHERE (((ct.`entry` >= %s) AND (ct.`entry` <= %0:s)) OR ((ct.`difficulty_entry_1` >= %0:s) AND (ct.`heroic_entry` <= %0:s)))',[ID]);
+      WhereStr := Format('WHERE (((ct.`entry` >= %s) AND (ct.`entry` <= %0:s)) OR ((ct.`DifficultyEntry1` >= %0:s) AND (ct.`DifficultyEntry1` <= %0:s)))',[ID]);
   end;
 
   if CName<>'%%' then
@@ -4345,16 +4337,16 @@ begin
     if rbExactnpcflag.Checked then
     begin
       if WhereStr<> '' then
-        WhereStr := Format('%s AND (ct.`npcflag`=%s)',[WhereStr, npcflag])
+        WhereStr := Format('%s AND (ct.`npcflags`=%s)',[WhereStr, npcflag])
       else
-        WhereStr := Format('WHERE (ct.`npcflag`=%s)',[npcflag]);
+        WhereStr := Format('WHERE (ct.`npcflags`=%s)',[npcflag]);
     end
     else
     begin
       if WhereStr<> '' then
-        WhereStr := Format('%s AND (ct.`npcflag` & %1:s = %1:s)',[WhereStr, npcflag])
+        WhereStr := Format('%s AND (ct.`npcflags` & %1:s = %1:s)',[WhereStr, npcflag])
       else
-        WhereStr := Format('WHERE (ct.`npcflag` & %0:s = %0:s)',[npcflag]);
+        WhereStr := Format('WHERE (ct.`npcflags` & %0:s = %0:s)',[npcflag]);
     end;
   end;
 
@@ -4380,12 +4372,12 @@ begin
     if MessageDlg(dmMain.Text[134], mtConfirmation, mbYesNoCancel, -1)<>mrYes then Exit;
 
   if loc<>'enUS' then
-    QueryStr := Format('SELECT ct.`entry`, MAX(ct.`name`) as `name`, MAX(ct.`subname`) as `subname`, ct.`npcflag`, ct.`minlevel`, ct.`maxlevel`, '+
+    QueryStr := Format('SELECT ct.`entry`, MAX(ct.`name`) as `name`, MAX(ct.`subname`) as `subname`, ct.`npcflags`, ct.`minlevel`, ct.`maxlevel`, '+
       '(SELECT count(guid) from `creature` where creature.`id` = ct.`entry`) as `Count`, '+
-      '(SELECT `Title` FROM `creature_template_locale` WHERE `entry` = ct.`entry` AND `locale` = ''%0:s'') AS Title '+
-      'FROM `creature_template` ct LEFT OUTER JOIN creature_template_locale lc ON ct.`entry`=lc.`entry` %s'+
+      '(SELECT `subname%0:s` FROM `locales_creature` WHERE `entry` = ct.`entry`) AS subname_loc '+
+      'FROM `creature_template` ct LEFT OUTER JOIN locales_creature lc ON ct.`entry`=lc.`entry` %s'+
       'GROUP BY ct.`entry`',[loc, WhereStr])
-  else QueryStr := Format('SELECT `entry`, `name`, `subname`, `npcflag`, `minlevel`, `maxlevel`, '+
+  else QueryStr := Format('SELECT `entry`, `name`, `subname`, `npcflags`, `minlevel`, `maxlevel`, '+
       '(SELECT count(guid) from `creature` where creature.`id` = ct.`entry`) as `Count` '+
       'FROM `creature_template` ct %s',[WhereStr]);
 
@@ -4646,7 +4638,7 @@ begin
     edctEntry.Text := IntToStr(Entry);
     FillFields(MyQuery, PFX_CREATURE_TEMPLATE);
 
-    npcflag := MyQuery.FieldByName('npcflag').AsInteger;
+    npcflag := MyQuery.FieldByName('npcflags').AsInteger;
 
     // is creature vendor?
     if npcflag and 128 = 128 then
@@ -4662,8 +4654,8 @@ begin
 
     MyQuery.Close;
 
-    LoadQueryToListView(Format('SELECT `guid`, `id`, `map`, `zoneId`, `areaId`, `position_x`,'+
-      ' `position_y`,`position_z`,`orientation` FROM `creature` WHERE (`id`=%d)', [entry]),lvclCreatureLocation);
+    LoadQueryToListView(Format('SELECT `guid`, `id`, `map`,'+
+      ' `position_x`, `position_y`,`position_z`,`orientation` FROM `creature` WHERE (`id`=%d)', [entry]),lvclCreatureLocation);
 
     LoadQueryToListView(Format('SELECT clt.*, i.`name` FROM `creature_loot_template`'+
      ' clt LEFT OUTER JOIN `item_template` i ON i.`entry` = clt.`Item`'+
@@ -4677,17 +4669,17 @@ begin
      ' slt LEFT OUTER JOIN `item_template` i ON i.`entry` = slt.`Item`'+
      ' WHERE (slt.`Entry`=%d)',[StrToIntDef(edctskinloot.Text,0)]), lvcoSkinLoot);
 
-    LoadQueryToListView(Format('SELECT `CreatureEntry`, `idx`, `itemId`, `VerifiedBuild` FROM `creature_questitem` WHERE (`CreatureEntry`=%d)',
-     [Entry]),lvcqiCreatureQuestItem);
+   // LoadQueryToListView(Format('SELECT `CreatureEntry`, `idx`, `itemId`, `VerifiedBuild` FROM `creature_questitem` WHERE (`CreatureEntry`=%d)',
+   //  [Entry]),lvcqiCreatureQuestItem);
 
-    LoadQueryToListView(Format('SELECT `CreatureID`, `idx`, `CreatureDisplayID`, `DisplayScale`, `Probability`, `VerifiedBuild` FROM `creature_template_model` WHERE (`CreatureID`=%d)',
-     [Entry]),lvctmCreatureTemplateModel);
+   // LoadQueryToListView(Format('SELECT `CreatureID`, `idx`, `CreatureDisplayID`, `DisplayScale`, `Probability`, `VerifiedBuild` FROM `creature_template_model` WHERE (`CreatureID`=%d)',
+   //  [Entry]),lvctmCreatureTemplateModel);
 
-    LoadQueryToListView(Format('SELECT `CreatureID`, `School`, `Resistance`, `VerifiedBuild` FROM `creature_template_resistance` WHERE (`CreatureID`=%d)',
-     [Entry]),lvctrCreatureTemplateResistance);
+   // LoadQueryToListView(Format('SELECT `CreatureID`, `School`, `Resistance`, `VerifiedBuild` FROM `creature_template_resistance` WHERE (`CreatureID`=%d)',
+   //  [Entry]),lvctrCreatureTemplateResistance);
 
-    LoadQueryToListView(Format('SELECT `CreatureID`, `Index`, `Spell`, `VerifiedBuild` FROM `creature_template_spell` WHERE (`CreatureID`=%d)',
-     [Entry]),lvctsCreatureTemplateSpell);
+    //LoadQueryToListView(Format('SELECT `CreatureID`, `Index`, `Spell`, `VerifiedBuild` FROM `creature_template_spell` WHERE (`CreatureID`=%d)',
+   //  [Entry]),lvctsCreatureTemplateSpell);
 
     if (isvendor=true) then 
     begin
@@ -4716,7 +4708,7 @@ begin
     tsNPCVendor.TabVisible := isvendor;
     tsNPCTrainer.TabVisible := istrainer;
     LoadCreatureTemplateAddon(Entry);
-    LoadCreatureTemplateMovement(Entry);
+    //LoadCreatureTemplateMovement(Entry);
     edclid.Text := IntToStr(Entry);
     edcoEntry.Text := edctlootid.Text;
     edcpEntry.Text := edctpickpocketloot.Text;
@@ -4724,14 +4716,12 @@ begin
     edcventry.Text := IntToStr(Entry);    //vendor
     edcrID.Text := IntToStr(Entry);       //trainer
 
-    MyQuery.SQL.Text := Format('SELECT * FROM `creature_template_locale` WHERE `entry`=%d AND `locale`= ''%s'' ;', [Entry, loc]);
+    MyQuery.SQL.Text := Format('SELECT * FROM `locales_creature` WHERE `entry`=%d ;', [Entry]);
     MyQuery.Open;
       if (MyQuery.Eof=false) then begin
         edctlocentry.Text := MyQuery.FieldByName('entry').AsString;
-        edctloclocale.Text := MyQuery.FieldByName('locale').AsString;
-        edctlocName.Text := MyQuery.FieldByName('Name').AsString;
-        edctlocTitle.Text := MyQuery.FieldByName('Title').AsString;
-        edctlocVerifiedBuild.Text := MyQuery.FieldByName('VerifiedBuild').AsString;
+        edctlocname_loc.Text := MyQuery.FieldByName('name'+loc+'').AsString;
+        edctlocsubname_loc.Text := MyQuery.FieldByName('subname'+loc+'').AsString;
       end;
     MyQuery.Close;
 
@@ -4759,19 +4749,18 @@ begin
 
   if edctlocentry.Text<>'' then begin
     ctentry:=edctlocentry.Text;
-    loc:= edctloclocale.Text;
     if loc='' then loc:=LoadLocales();
     Fields:= ''; Values:= '';
-    SetFieldsAndValues(Fields, Values, 'creature_template_locale', PFX_CREATURE_TEMPLATE_LOCALE, mectLog);
+    SetFieldsAndValues(Fields, Values, 'locales_creature', PFX_CREATURE_TEMPLATE_LOCALE, mectLog);
     case SyntaxStyle of
       ssInsertDelete: s2 := Format(#13#10+
-                      'DELETE FROM `creature_template_locale` WHERE `entry`=''%s'' AND `locale`=''%s'';'#13#10+
-                      'INSERT INTO `creature_template_locale` (%s) VALUES '#13#10+'(%s);'#13#10
-                      ,[ctentry, loc, Fields, Values]);
+                      'DELETE FROM `locales_creature` WHERE `entry`=''%s'';'#13#10+
+                      'INSERT INTO `locales_creature` (%s) VALUES '#13#10+'(%s);'#13#10
+                      ,[ctentry, Fields, Values]);
       ssReplace: s2 := Format(#13#10+
-                      'REPLACE INTO `creature_template_locale` (%s) VALUES '#13#10+'(%s);'#13#10+#13#10
+                      'REPLACE INTO `locales_creature` (%s) VALUES '#13#10+'(%s);'#13#10+#13#10
                       ,[Fields, Values]);
-      ssUpdate: s2 := MakeUpdateLocales('creature_template_locale', PFX_CREATURE_TEMPLATE_LOCALE, 'entry', ctentry, loc);
+      ssUpdate: s2 := MakeUpdateLocales('locales_creature', PFX_CREATURE_TEMPLATE_LOCALE, 'entry', ctentry, loc);
     end;
   end;
     //Add all scripts together
@@ -4937,16 +4926,6 @@ begin
   if (edcaemote.Text='') then edcaemote.Text := '0';
   if (edcavisibilityDistanceType.Text='') then edcavisibilityDistanceType.Text := '0';
   if (edcaauras.Text='') then edcaauras.Text := '';
-end;
-
-procedure TMainForm.tsCreatureEquipTemplateShow(Sender: TObject);
-begin
-  if (edceCreatureID.Text='') then edceCreatureID.Text := edctEntry.Text;
-  if (edceID.Text='') then edceID.Text := '0';
-  if (edceItemID1.Text='') then edceItemID1.Text := '0';
-  if (edceItemID2.Text='') then edceItemID2.Text := '0';
-  if (edceItemID3.Text='') then edceItemID3.Text := '0';
-  if (edceVerifiedBuild.Text='') then edceVerifiedBuild.Text := '0';
 end;
 
 procedure TMainForm.tsCreatureModelInfoShow(Sender: TObject);
@@ -5437,7 +5416,7 @@ begin
     Result := GetValueFromDBC('QuestSort', -QuestSortID);
 end;
 
-procedure TMainForm.edctnpcflagButtonClick(Sender: TObject);
+procedure TMainForm.edctnpcflagsButtonClick(Sender: TObject);
 begin
   GetSomeFlags(Sender, 'NPCFlags');
 end;
@@ -5893,7 +5872,7 @@ end;
 procedure TMainForm.LoadCreatureTemplateMovement(creatureid: integer);
 begin
   if creatureid<1 then Exit;
-  MyQuery.SQL.Text := Format('SELECT * FROM `creature_template_movement` WHERE (`CreatureId`=%d)',[creatureid]);
+  MyQuery.SQL.Text := Format('SELECT * FROM `creature_movement_template` WHERE (`entry`=%d)',[creatureid]);
   MyQuery.Open;
   try
     FillFields(MyQuery, PFX_CREATURE_TEMPLATE_MOVEMENT);
@@ -5920,15 +5899,15 @@ end;
 procedure TMainForm.LoadCreatureEquip(entry: integer);
 begin
   if entry<1 then Exit;
-  MyQuery.SQL.Text := Format('SELECT * FROM `creature_equip_template` WHERE (`CreatureID`=%d)',[entry]);
+  MyQuery.SQL.Text := Format('SELECT * FROM `creature_equip_template` WHERE `entry`=%d;',[entry]);
   MyQuery.Open;
   try
     FillFields(MyQuery, PFX_CREATURE_EQUIP_TEMPLATE);
-    MyQuery.Close;
 
-   LoadQueryToListView(Format('SELECT `CreatureID`, `ID`, `ItemID1`, `ItemID2`, `ItemID3`, `VerifiedBuild` FROM `creature_equip_template` WHERE (`CreatureID`=%d)',
+
+   LoadQueryToListView(Format('SELECT `entry`, `equipentry1`, `equipentry2`, `equipentry3` FROM `creature_equip_template` WHERE (`entry`=%d)',
      [Entry]),lvceCreatureEquipTemplate);
-
+  MyQuery.Close;
   except
     on E: Exception do
       raise Exception.Create(dmMain.Text[139]+#10#13+E.Message);
@@ -5988,11 +5967,10 @@ var
   ceentry, ceid, Fields, Values: string;
 begin
   mectLog.Clear;
-  ceentry :=  edceCreatureID.Text;
-  ceid := edceID.Text;
+  ceentry :=  edceentry.Text;
   if (ceentry='') or (ceid='') then Exit;
   SetFieldsAndValues(Fields, Values, 'creature_equip_template', PFX_CREATURE_EQUIP_TEMPLATE, mectLog);
-  mectScript.Text := Format('DELETE FROM `creature_equip_template` WHERE (`CreatureID`=%s) AND (`ID`=%s);'#13#10+
+  mectScript.Text := Format('DELETE FROM `creature_equip_template` WHERE (`entry`=%s);'#13#10+
     'INSERT INTO `creature_equip_template` (%s) VALUES '#13#10+
     '(%s);'#13#10,[ceentry, ceid, Fields, Values])
 end;
@@ -6001,12 +5979,10 @@ procedure TMainForm.btCreatureEquipTemplateAddClick(Sender: TObject);
 begin
   with lvceCreatureEquipTemplate.Items.Add do
   begin
-    Caption := edceCreatureID.Text;
-    SubItems.Add(edceID.Text);
-    SubItems.Add(edceItemID1.Text);
-    SubItems.Add(edceItemID2.Text);
-    SubItems.Add(edceItemID3.Text);
-    SubItems.Add(edceVerifiedBuild.Text);
+    Caption := edceentry.Text;
+    SubItems.Add(edceequipentry1.Text);
+    SubItems.Add(edceequipentry2.Text);
+    SubItems.Add(edceequipentry3.Text);
   end;
 end;
 
@@ -6016,14 +5992,20 @@ begin
   begin
     with lvcqiCreatureQuestItem.Selected do
     begin
-      Caption := edceCreatureID.Text;
-      SubItems[0] := edceID.Text;
-      SubItems[1] := edceItemID1.Text;
-      SubItems[2] := edceItemID2.Text;
-      SubItems[3] := edceItemID3.Text;
-      SubItems[4] := edceVerifiedBuild.Text;
+      Caption := edceentry.Text;
+      SubItems[1] := edceequipentry1.Text;
+      SubItems[2] := edceequipentry2.Text;
+      SubItems[3] := edceequipentry3.Text;
     end;
   end;
+end;
+
+procedure TMainForm.tsCreatureEquipTemplateShow(Sender: TObject);
+begin
+  if (edceentry.Text='') then edceentry.Text := edctEntry.Text;
+  if (edceequipentry1.Text='') then edceequipentry1.Text := '0';
+  if (edceequipentry2.Text='') then edceequipentry2.Text := '0';
+  if (edceequipentry3.Text='') then edceequipentry3.Text := '0';
 end;
 
 procedure TMainForm.btCreatureEquipTemplateDelClick(Sender: TObject);
@@ -6038,7 +6020,7 @@ var
   entry, Values: string;
 begin
   PageControl3.ActivePageIndex := SCRIPT_TAB_NO_CREATURE;
-  entry := edceCreatureID.Text;
+  entry := edceentry.Text;
   mectScript.Clear;
   Values := '';
   if lvceCreatureEquipTemplate.Items.Count<>0 then
@@ -6046,35 +6028,31 @@ begin
     for i := 0 to lvceCreatureEquipTemplate.Items.Count - 2 do
     begin
       if lvceCreatureEquipTemplate.Items[i].SubItems[2]='' then lvceCreatureEquipTemplate.Items[i].SubItems[2] := '0';
-      Values := Values + Format('(%s, %s, %s, %s, %s, %s),'#13#10,[
+      Values := Values + Format('(%s, %s, %s, %s),'#13#10,[
         lvceCreatureEquipTemplate.Items[i].Caption,
         lvceCreatureEquipTemplate.Items[i].SubItems[0],
         lvceCreatureEquipTemplate.Items[i].SubItems[1],
-        lvceCreatureEquipTemplate.Items[i].SubItems[2],
-        lvceCreatureEquipTemplate.Items[i].SubItems[3],
-        lvceCreatureEquipTemplate.Items[i].SubItems[4]
+        lvceCreatureEquipTemplate.Items[i].SubItems[2]
       ]);
     end;
     i := lvceCreatureEquipTemplate.Items.Count - 1;
     if lvceCreatureEquipTemplate.Items[i].SubItems[2]='' then lvceCreatureEquipTemplate.Items[i].SubItems[2] := '0';
-    Values := Values + Format('(%s, %s, %s, %s, %s, %s);',[
+    Values := Values + Format('(%s, %s, %s, %s);',[
         lvceCreatureEquipTemplate.Items[i].Caption,
         lvceCreatureEquipTemplate.Items[i].SubItems[0],
         lvceCreatureEquipTemplate.Items[i].SubItems[1],
-        lvceCreatureEquipTemplate.Items[i].SubItems[2],
-        lvceCreatureEquipTemplate.Items[i].SubItems[3],
-        lvceCreatureEquipTemplate.Items[i].SubItems[4]
+        lvceCreatureEquipTemplate.Items[i].SubItems[2]
     ]);
   end;
 
   if Values<>'' then
   begin
-    mectScript.Text := Format('DELETE FROM `creature_equip_template` WHERE `CreatureID`= %s ;'#13#10+
-    'INSERT INTO `creature_equip_template` (CreatureID, IID, ItemID1, ItemID2, ItemID3, VerifiedBuild) VALUES '#13#10'%s ',
+    mectScript.Text := Format('DELETE FROM `creature_equip_template` WHERE `entry`= %s ;'#13#10+
+    'INSERT INTO `creature_equip_template` (entry, equipentry1, equipentry2, equipentry3) VALUES '#13#10'%s ',
      [entry, Values])
   end
   else
-    mectScript.Text := Format('DELETE FROM `creature_equip_template` WHERE `CreatureID`= %s;',[entry]);
+    mectScript.Text := Format('DELETE FROM `creature_equip_template` WHERE `entry`= %s;',[entry]);
 end;
 
 procedure TMainForm.lvceCreatureEquipTemplateChange(Sender: TObject; Item: TListItem;
@@ -6091,16 +6069,13 @@ begin
   begin
     with TJvListView(Sender).Selected do
     begin
-      edceCreatureID.Text := Caption;
-      edceID.Text := SubItems[0];
-      edceItemID1.Text := SubItems[1];
-      edceItemID2.Text := SubItems[2];
-      edceItemID3.Text := SubItems[3];
-      edceVerifiedBuild.Text := SubItems[4];
+      edceentry.Text := Caption;
+      edceequipentry1.Text := SubItems[0];
+      edceequipentry2.Text := SubItems[1];
+      edceequipentry3.Text := SubItems[2];
     end;
   end;
 end;
-
 // --creature equip template end
 
 // --creature template resistance
@@ -6400,9 +6375,9 @@ begin
   mectLog.Clear;
   creatureid := trim(edcmcreatureid.Text);
   if creatureid='' then exit;
-  SetFieldsAndValues(Fields, Values, 'creature_template_movement', PFX_CREATURE_TEMPLATE_MOVEMENT, mectLog);
-  mectScript.Text := Format('DELETE FROM `creature_template_movement` WHERE `creatureid`=''%s'';'#13#10+
-      'INSERT INTO `creature_template_movement` (%s) VALUES (%s);'#13#10,[creatureid, Fields, Values]);
+  SetFieldsAndValues(Fields, Values, 'creature_movement_template', PFX_CREATURE_TEMPLATE_MOVEMENT, mectLog);
+  mectScript.Text := Format('DELETE FROM `creature_movement_template` WHERE `entry`=''%s'';'#13#10+
+      'INSERT INTO `creature_movement_template` (%s) VALUES (%s);'#13#10,[creatureid, Fields, Values]);
 end;
 
 procedure TMainForm.CompleteCreatureOnKillReputationScript;
@@ -7698,7 +7673,7 @@ begin
     MyQuery.SQL.Text := Format('SELECT `entry`, `item`, `ChanceOrQuestChance`, '+
       '`GroupId`, `mincountOrRef`, `maxcount`, `condition_id`, '+
       '''creature_loot_template'' as `table` '+
-      'FROM `creature_loot_template` WHERE (`Item`=%s)',[key]);
+      'FROM `creature_loot_template` WHERE (`item`=%s)',[key]);
     QueryResult_AddToList;
 
     // load gameobject loot
@@ -8215,14 +8190,11 @@ begin
     begin
       Caption := TCustomEdit(FindComponent(pfx + 'Entry')).Text;
       SubItems[0] := TCustomEdit(FindComponent(pfx + 'Item')).Text;
-      SubItems[1] := TCustomEdit(FindComponent(pfx + 'Reference')).Text;
-      SubItems[2] := TCustomEdit(FindComponent(pfx + 'Chance')).Text;
-      SubItems[3] := TCustomEdit(FindComponent(pfx + 'QuestRequired')).Text;
-      SubItems[4] := TCustomEdit(FindComponent(pfx + 'LootMode')).Text;
-      SubItems[5] := TCustomEdit(FindComponent(pfx + 'GroupId')).Text;
-      SubItems[6] := TCustomEdit(FindComponent(pfx + 'MinCount')).Text;
-      SubItems[7] := TCustomEdit(FindComponent(pfx + 'MaxCount')).Text;
-      SubItems[8] := TCustomEdit(FindComponent(pfx + 'Comment')).Text;
+      SubItems[1] := TCustomEdit(FindComponent(pfx + 'ChanceOrQuestChance')).Text;
+      SubItems[2] := TCustomEdit(FindComponent(pfx + 'groupid')).Text;
+      SubItems[3] := TCustomEdit(FindComponent(pfx + 'mincountOrRef')).Text;
+      SubItems[4] := TCustomEdit(FindComponent(pfx + 'maxcount')).Text;
+      SubItems[5] := TCustomEdit(FindComponent(pfx + 'condition_id')).Text;
     end;
   end;
 end;
@@ -8242,14 +8214,11 @@ begin
     begin
       TCustomEdit(FindComponent(pfx + 'Entry')).Text := Caption;
       TCustomEdit(FindComponent(pfx + 'Item')).Text := SubItems[0];
-      TCustomEdit(FindComponent(pfx + 'Reference')).Text := SubItems[1];
-      TCustomEdit(FindComponent(pfx + 'Chance')).Text := SubItems[2];
-      TCustomEdit(FindComponent(pfx + 'QuestRequired')).Text := SubItems[3];
-      TCustomEdit(FindComponent(pfx + 'LootMode')).Text := SubItems[4];
-      TCustomEdit(FindComponent(pfx + 'GroupId')).Text := SubItems[5];
-      TCustomEdit(FindComponent(pfx + 'MinCount')).Text := SubItems[6];
-      TCustomEdit(FindComponent(pfx + 'MaxCount')).Text := SubItems[7];
-      TCustomEdit(FindComponent(pfx + 'Comment')).Text := SubItems[8];
+      TCustomEdit(FindComponent(pfx + 'ChanceOrQuestChance')).Text := SubItems[1];
+      TCustomEdit(FindComponent(pfx + 'groupid')).Text := SubItems[2];
+      TCustomEdit(FindComponent(pfx + 'mincountOrRef')).Text := SubItems[3];
+      TCustomEdit(FindComponent(pfx + 'maxcount')).Text := SubItems[4];
+      TCustomEdit(FindComponent(pfx + 'condition_id')).Text := SubItems[5];
     end;
   end;
 end;
@@ -8761,7 +8730,7 @@ end;
 procedure TMainForm.btFullCreatureMovementScriptClick(Sender: TObject);
 begin
   PageControl3.ActivePageIndex := SCRIPT_TAB_NO_CREATURE;
-  mectScript.Text := FullScript('creature_template_movement', 'CreatureId', edcmcreatureid.Text);
+  mectScript.Text := FullScript('creature_movement_template', 'entry', edcmcreatureid.Text);
 end;
 
 procedure TMainForm.btFullScriptGOLocationClick(Sender: TObject);

@@ -24,7 +24,7 @@ object MainForm: TMainForm
     Top = 0
     Width = 888
     Height = 668
-    ActivePage = tsQuest
+    ActivePage = tsCreature
     Align = alClient
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clWindowText
@@ -6256,7 +6256,7 @@ object MainForm: TMainForm
                   FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF}
                 TabOrder = 0
                 Text = ''
-                OnButtonClick = edctnpcflagButtonClick
+                OnButtonClick = edctnpcflagsButtonClick
                 OnChange = edSearchCreatureChange
               end
               object rbExactnpcflag: TRadioButton
@@ -6325,15 +6325,14 @@ object MainForm: TMainForm
                 Width = 150
               end
               item
+                Caption = 'subname_loc'
+              end
+              item
                 Caption = 'subname'
                 Width = 150
               end
               item
                 Caption = 'npcflag'
-              end
-              item
-                Caption = 'Title'
-                Width = 150
               end
               item
                 Caption = 'minlevel'
@@ -6353,7 +6352,7 @@ object MainForm: TMainForm
             ViewStyle = vsReport
             OnChange = lvSearchCreatureChange
             OnDblClick = lvSearchCreatureDblClick
-            ColumnsOrder = '0=50,1=150,2=150,3=50,4=150,5=50,6=53,7=40'
+            ColumnsOrder = '0=50,1=150,7=50,2=150,3=50,4=50,5=53,6=40'
             ExtendedColumns = <
               item
               end
@@ -6702,26 +6701,26 @@ object MainForm: TMainForm
               Height = 13
               Caption = 'Entry'
             end
-            object lbctdifficulty_entry_1: TLabel
+            object lbctDifficultyEntry1: TLabel
               Left = 87
               Top = 14
-              Width = 79
+              Width = 70
               Height = 13
-              Caption = 'difficulty_entry_1'
+              Caption = 'DifficultyEntry1'
             end
-            object lbctdifficulty_entry_2: TLabel
+            object lbctDifficultyEntry2: TLabel
               Left = 176
               Top = 14
-              Width = 79
+              Width = 70
               Height = 13
-              Caption = 'difficulty_entry_2'
+              Caption = 'DifficultyEntry2'
             end
-            object lbctdifficulty_entry_3: TLabel
+            object lbctDifficultyEntry3: TLabel
               Left = 258
               Top = 14
-              Width = 79
+              Width = 70
               Height = 13
-              Caption = 'difficulty_entry_3'
+              Caption = 'DifficultyEntry1'
             end
             object edctEntry: TJvComboEdit
               Left = 8
@@ -6889,7 +6888,7 @@ object MainForm: TMainForm
               TabOrder = 8
               Text = ''
             end
-            object edctdifficulty_entry_1: TJvComboEdit
+            object edctDifficultyEntry1: TJvComboEdit
               Left = 88
               Top = 28
               Width = 75
@@ -6967,7 +6966,7 @@ object MainForm: TMainForm
               TabOrder = 11
               Text = ''
             end
-            object edctdifficulty_entry_2: TJvComboEdit
+            object edctDifficultyEntry2: TJvComboEdit
               Left = 178
               Top = 28
               Width = 75
@@ -7021,7 +7020,7 @@ object MainForm: TMainForm
               Text = ''
               OnButtonClick = edctEntryButtonClick
             end
-            object edctdifficulty_entry_3: TJvComboEdit
+            object edctDifficultyEntry3: TJvComboEdit
               Left = 257
               Top = 28
               Width = 75
@@ -7122,12 +7121,12 @@ object MainForm: TMainForm
               Height = 13
               Caption = 'faction'
             end
-            object lbctnpcflag: TLabel
+            object lbctnpcflags: TLabel
               Left = 3
               Top = 55
-              Width = 35
+              Width = 40
               Height = 13
-              Caption = 'npcflag'
+              Caption = 'npcflags'
             end
             object lbctrank: TLabel
               Left = 3
@@ -7241,7 +7240,7 @@ object MainForm: TMainForm
               Text = ''
               OnButtonClick = GetFactionTemplate
             end
-            object edctnpcflag: TJvComboEdit
+            object edctnpcflags: TJvComboEdit
               Left = 3
               Top = 74
               Width = 89
@@ -7281,7 +7280,7 @@ object MainForm: TMainForm
                 FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF}
               TabOrder = 8
               Text = ''
-              OnButtonClick = edctnpcflagButtonClick
+              OnButtonClick = edctnpcflagsButtonClick
             end
             object edctrank: TJvComboEdit
               Left = 3
@@ -8330,30 +8329,7 @@ object MainForm: TMainForm
               TabOrder = 0
               Text = ''
             end
-            object edctloclocale: TLabeledEdit
-              Left = 128
-              Top = 30
-              Width = 89
-              Height = 21
-              Hint = 'locale'
-              EditLabel.Width = 28
-              EditLabel.Height = 13
-              EditLabel.Caption = 'locale'
-              TabOrder = 1
-              Text = ''
-            end
-            object edctlocVerifiedBuild: TLabeledEdit
-              Left = 242
-              Top = 30
-              Width = 89
-              Height = 21
-              EditLabel.Width = 58
-              EditLabel.Height = 13
-              EditLabel.Caption = 'VerifiedBuild'
-              TabOrder = 2
-              Text = ''
-            end
-            object edctlocName: TLabeledEdit
+            object edctlocname_loc: TLabeledEdit
               Left = 8
               Top = 70
               Width = 155
@@ -8361,10 +8337,10 @@ object MainForm: TMainForm
               EditLabel.Width = 28
               EditLabel.Height = 13
               EditLabel.Caption = 'Name'
-              TabOrder = 3
+              TabOrder = 1
               Text = ''
             end
-            object edctlocTitle: TLabeledEdit
+            object edctlocsubname_loc: TLabeledEdit
               Left = 169
               Top = 70
               Width = 162
@@ -8373,7 +8349,7 @@ object MainForm: TMainForm
               EditLabel.Width = 75
               EditLabel.Height = 13
               EditLabel.Caption = 'Title  (subname)'
-              TabOrder = 4
+              TabOrder = 2
               Text = ''
             end
           end
@@ -8473,12 +8449,6 @@ object MainForm: TMainForm
               end
               item
                 Width = 100
-              end
-              item
-                Width = 100
-              end
-              item
-                Width = 100
               end>
             HideSelection = False
             ReadOnly = True
@@ -8486,12 +8456,8 @@ object MainForm: TMainForm
             TabOrder = 0
             ViewStyle = vsReport
             OnSelectItem = lvclCreatureLocationSelectItem
-            ColumnsOrder = '0=60,1=60,2=70,3=100,4=100,5=100,6=100,7=100,8=100'
+            ColumnsOrder = '0=60,1=60,2=70,3=100,4=100,5=100,6=100'
             ExtendedColumns = <
-              item
-              end
-              item
-              end
               item
               end
               item
@@ -8867,7 +8833,7 @@ object MainForm: TMainForm
               FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF}
             TabOrder = 19
             Text = ''
-            OnButtonClick = edctnpcflagButtonClick
+            OnButtonClick = edctnpcflagsButtonClick
           end
           object edclunit_flags: TJvComboEdit
             Left = 89
@@ -9680,27 +9646,19 @@ object MainForm: TMainForm
             Columns = <
               item
                 AutoSize = True
-                Caption = 'CreatureID'
+                Caption = 'entry'
               end
               item
                 AutoSize = True
-                Caption = 'ID'
+                Caption = 'equipentry1'
               end
               item
                 AutoSize = True
-                Caption = 'ItemID1'
+                Caption = 'equipentry2'
               end
               item
                 AutoSize = True
-                Caption = 'ItemID2'
-              end
-              item
-                AutoSize = True
-                Caption = 'ItemID3'
-              end
-              item
-                AutoSize = True
-                Caption = 'VerifiedBuild'
+                Caption = 'equipentry3'
               end>
             ReadOnly = True
             RowSelect = True
@@ -9708,12 +9666,8 @@ object MainForm: TMainForm
             ViewStyle = vsReport
             OnChange = lvceCreatureEquipTemplateChange
             OnSelectItem = lvceCreatureEquipTemplateSelectItem
-            ColumnsOrder = '0=94,1=94,2=94,3=94,4=94,5=94'
+            ColumnsOrder = '0=94,1=94,2=94,3=94'
             ExtendedColumns = <
-              item
-              end
-              item
-              end
               item
               end
               item
@@ -9741,36 +9695,60 @@ object MainForm: TMainForm
             TabOrder = 2
             OnClick = btFullCreatureEquipTemplateScriptClick
           end
-          object edceCreatureID: TLabeledEdit
+          object edceentry: TLabeledEdit
             Left = 17
             Top = 207
             Width = 70
             Height = 21
             Ctl3D = True
-            EditLabel.Width = 51
+            EditLabel.Width = 23
             EditLabel.Height = 13
-            EditLabel.Caption = 'CreatureID'
+            EditLabel.Caption = 'entry'
             ParentCtl3D = False
             TabOrder = 3
             Text = ''
             OnChange = edSearchCreatureChange
           end
-          object edceID: TLabeledEdit
-            Left = 93
+          object edceequipentry1: TJvComboEdit
+            Left = 169
             Top = 207
             Width = 70
             Height = 21
-            Ctl3D = True
-            EditLabel.Width = 11
-            EditLabel.Height = 13
-            EditLabel.Caption = 'ID'
-            ParentCtl3D = False
+            ButtonWidth = 22
+            ClickKey = 13
+            Glyph.Data = {
+              36030000424D3603000000000000360000002800000010000000100000000100
+              18000000000000030000120B0000120B00000000000000000000FFFFFFFFFFFF
+              FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+              FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+              FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+              FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+              FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+              FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+              FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+              FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+              FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFD79C64
+              DB9E63FFFFFFFFFFFFFFFFFFFFFFFFDA9E63D89D65FFFFFFFFFFFFFFFFFFFFFF
+              FFD79C64DB9E63FFFFFFC2773FEBB36FEDB570D19059FFFFFFFFFFFFC57D44ED
+              B571EBB26ECC9164FFFFFFFFFFFFC27840EBB36FECB470D1915AC48355D5955B
+              D89960CA8C5FFFFFFFFFFFFFC68457D8995FD6965BCE9974FFFFFFFFFFFFC380
+              52D6975DD99A61CB8D5FFFFFFFC68A65C17F54FFFFFFFFFFFFFFFFFFFFFFFFC2
+              8157C58963FFFFFFFFFFFFFFFFFFFFFFFFC68B65C17F54FFFFFFFFFFFFFFFFFF
+              FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+              FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+              FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+              FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+              FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+              FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+              FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+              FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+              FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF}
             TabOrder = 4
             Text = ''
-            OnChange = edSearchCreatureChange
+            OnButtonClick = GetItem
           end
-          object edceItemID1: TJvComboEdit
-            Left = 169
+          object edceequipentry2: TJvComboEdit
+            Left = 245
             Top = 207
             Width = 70
             Height = 21
@@ -9807,8 +9785,8 @@ object MainForm: TMainForm
             Text = ''
             OnButtonClick = GetItem
           end
-          object edceItemID2: TJvComboEdit
-            Left = 245
+          object edceequipentry3: TJvComboEdit
+            Left = 321
             Top = 207
             Width = 70
             Height = 21
@@ -9844,55 +9822,6 @@ object MainForm: TMainForm
             TabOrder = 6
             Text = ''
             OnButtonClick = GetItem
-          end
-          object edceItemID3: TJvComboEdit
-            Left = 321
-            Top = 207
-            Width = 70
-            Height = 21
-            ButtonWidth = 22
-            ClickKey = 13
-            Glyph.Data = {
-              36030000424D3603000000000000360000002800000010000000100000000100
-              18000000000000030000120B0000120B00000000000000000000FFFFFFFFFFFF
-              FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
-              FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
-              FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
-              FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
-              FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
-              FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
-              FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
-              FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
-              FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFD79C64
-              DB9E63FFFFFFFFFFFFFFFFFFFFFFFFDA9E63D89D65FFFFFFFFFFFFFFFFFFFFFF
-              FFD79C64DB9E63FFFFFFC2773FEBB36FEDB570D19059FFFFFFFFFFFFC57D44ED
-              B571EBB26ECC9164FFFFFFFFFFFFC27840EBB36FECB470D1915AC48355D5955B
-              D89960CA8C5FFFFFFFFFFFFFC68457D8995FD6965BCE9974FFFFFFFFFFFFC380
-              52D6975DD99A61CB8D5FFFFFFFC68A65C17F54FFFFFFFFFFFFFFFFFFFFFFFFC2
-              8157C58963FFFFFFFFFFFFFFFFFFFFFFFFC68B65C17F54FFFFFFFFFFFFFFFFFF
-              FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
-              FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
-              FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
-              FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
-              FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
-              FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
-              FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
-              FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
-              FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF}
-            TabOrder = 7
-            Text = ''
-            OnButtonClick = GetItem
-          end
-          object edceVerifiedBuild: TLabeledEdit
-            Left = 397
-            Top = 207
-            Width = 70
-            Height = 21
-            EditLabel.Width = 58
-            EditLabel.Height = 13
-            EditLabel.Caption = 'VerifiedBuild'
-            TabOrder = 8
-            Text = ''
           end
         end
         object tsCreatureLoot: TTabSheet
@@ -10090,16 +10019,9 @@ object MainForm: TMainForm
             Color = clInfoBk
             ParentColor = False
           end
-          object lbcoLootMode: TLabel
-            Left = 378
-            Top = 436
-            Width = 48
-            Height = 13
-            Caption = 'LootMode'
-          end
           object lvcoCreatureLoot: TJvListView
-            Left = 8
-            Top = 32
+            Left = 3
+            Top = 27
             Width = 766
             Height = 390
             Anchors = [akLeft, akTop, akRight]
@@ -10113,40 +10035,27 @@ object MainForm: TMainForm
                 Width = 60
               end
               item
-                Caption = 'Reference'
+                Caption = 'ChanceOrQuestChance'
                 Width = 100
               end
               item
-                Caption = 'Chance'
+                Caption = 'groupid'
                 Width = 60
               end
               item
-                Caption = 'QuestRequired'
+                Caption = 'mincountOrRef'
                 Width = 70
               end
               item
-                Caption = 'LootMode'
+                Caption = 'maxcount'
                 Width = 60
               end
               item
-                Caption = 'GroupId'
+                Caption = 'condition_id'
                 Width = 60
               end
               item
-                Caption = 'MinCount'
                 Width = 60
-              end
-              item
-                Caption = 'MaxCount'
-                Width = 60
-              end
-              item
-                Caption = 'Comment'
-                Width = 150
-              end
-              item
-                Caption = 'name'
-                Width = 200
               end>
             HideSelection = False
             ReadOnly = True
@@ -10156,14 +10065,8 @@ object MainForm: TMainForm
             OnChange = lvcoCreatureLootChange
             OnDblClick = lvcoCreatureLootDblClick
             OnSelectItem = lvcoCreatureLootSelectItem
-            ColumnsOrder = '0=60,1=60,2=100,3=60,4=70,5=60,6=60,7=60,8=60,9=150,10=200'
+            ColumnsOrder = '0=60,1=60,2=100,3=60,4=70,5=60,6=60,7=60'
             ExtendedColumns = <
-              item
-              end
-              item
-              end
-              item
-              end
               item
               end
               item
@@ -10192,51 +10095,29 @@ object MainForm: TMainForm
             TabOrder = 1
             Text = ''
           end
-          object edcoReference: TLabeledEdit
-            Left = 148
+          object edcoChanceOrQuestChance: TLabeledEdit
+            Left = 164
             Top = 452
-            Width = 80
+            Width = 109
             Height = 21
-            EditLabel.Width = 50
+            EditLabel.Width = 113
             EditLabel.Height = 13
-            EditLabel.Caption = 'Reference'
+            EditLabel.Caption = 'ChanceOrQuestChance'
             TabOrder = 3
             Text = ''
           end
-          object edcoChance: TLabeledEdit
-            Left = 234
-            Top = 452
-            Width = 52
-            Height = 21
-            EditLabel.Width = 37
-            EditLabel.Height = 13
-            EditLabel.Caption = 'Chance'
-            TabOrder = 4
-            Text = ''
-          end
-          object edcoQuestRequired: TLabeledEdit
-            Left = 292
-            Top = 452
-            Width = 80
-            Height = 21
-            EditLabel.Width = 71
-            EditLabel.Height = 13
-            EditLabel.Caption = 'QuestRequired'
-            TabOrder = 5
-            Text = ''
-          end
           object edcoGroupId: TLabeledEdit
-            Left = 464
+            Left = 304
             Top = 452
             Width = 105
             Height = 21
             EditLabel.Width = 38
             EditLabel.Height = 13
             EditLabel.Caption = 'GroupId'
-            TabOrder = 7
+            TabOrder = 4
             Text = ''
           end
-          object edcoMinCount: TLabeledEdit
+          object edcomincountOrRef: TLabeledEdit
             Left = 8
             Top = 492
             Width = 80
@@ -10244,10 +10125,10 @@ object MainForm: TMainForm
             EditLabel.Width = 45
             EditLabel.Height = 13
             EditLabel.Caption = 'MinCount'
-            TabOrder = 8
+            TabOrder = 5
             Text = ''
           end
-          object edcoMaxCount: TLabeledEdit
+          object edcomaxcount: TLabeledEdit
             Left = 94
             Top = 492
             Width = 80
@@ -10255,10 +10136,10 @@ object MainForm: TMainForm
             EditLabel.Width = 48
             EditLabel.Height = 13
             EditLabel.Caption = 'MaxCount'
-            TabOrder = 9
+            TabOrder = 6
             Text = ''
           end
-          object edcoComment: TLabeledEdit
+          object edcocondition_id: TLabeledEdit
             Left = 180
             Top = 491
             Width = 291
@@ -10266,7 +10147,7 @@ object MainForm: TMainForm
             EditLabel.Width = 44
             EditLabel.Height = 13
             EditLabel.Caption = 'Comment'
-            TabOrder = 10
+            TabOrder = 7
             Text = ''
           end
           object btScriptCreatureLoot: TButton
@@ -10275,7 +10156,7 @@ object MainForm: TMainForm
             Width = 169
             Height = 25
             Caption = 'Show Creature Loot Script'
-            TabOrder = 11
+            TabOrder = 8
             OnClick = btScriptCreatureTemplateClick
           end
           object btFullScriptCreatureLoot: TButton
@@ -10284,7 +10165,7 @@ object MainForm: TMainForm
             Width = 185
             Height = 25
             Caption = 'Show FULL Creature Loot Script'
-            TabOrder = 12
+            TabOrder = 9
             OnClick = btFullScriptCreatureLootClick
           end
           object edcoItem: TJvComboEdit
@@ -10324,44 +10205,6 @@ object MainForm: TMainForm
             TabOrder = 2
             Text = ''
             OnButtonClick = GetItem
-          end
-          object edcoLootMode: TJvComboEdit
-            Left = 378
-            Top = 452
-            Width = 80
-            Height = 21
-            ButtonWidth = 22
-            ClickKey = 13
-            Glyph.Data = {
-              36030000424D3603000000000000360000002800000010000000100000000100
-              18000000000000030000120B0000120B00000000000000000000FFFFFFFFFFFF
-              FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
-              FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
-              FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
-              FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
-              FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
-              FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
-              FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
-              FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
-              FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFD79C64
-              DB9E63FFFFFFFFFFFFFFFFFFFFFFFFDA9E63D89D65FFFFFFFFFFFFFFFFFFFFFF
-              FFD79C64DB9E63FFFFFFC2773FEBB36FEDB570D19059FFFFFFFFFFFFC57D44ED
-              B571EBB26ECC9164FFFFFFFFFFFFC27840EBB36FECB470D1915AC48355D5955B
-              D89960CA8C5FFFFFFFFFFFFFC68457D8995FD6965BCE9974FFFFFFFFFFFFC380
-              52D6975DD99A61CB8D5FFFFFFFC68A65C17F54FFFFFFFFFFFFFFFFFFFFFFFFC2
-              8157C58963FFFFFFFFFFFFFFFFFFFFFFFFC68B65C17F54FFFFFFFFFFFFFFFFFF
-              FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
-              FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
-              FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
-              FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
-              FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
-              FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
-              FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
-              FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
-              FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF}
-            TabOrder = 6
-            Text = ''
-            OnButtonClick = GetLootCondition
           end
         end
         object tsPickpocketLoot: TTabSheet
