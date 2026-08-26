@@ -5913,7 +5913,7 @@ object MainForm: TMainForm
         Top = 9
         Width = 880
         Height = 631
-        ActivePage = tsSearchCreature
+        ActivePage = tsEditCreature
         Align = alClient
         MultiLine = True
         TabOrder = 0
@@ -6656,42 +6656,18 @@ object MainForm: TMainForm
         object tsEditCreature: TTabSheet
           Caption = 'Creature Template'
           ImageIndex = 1
-          object lbctmechanic_immune_mask: TLabel
-            Left = 428
-            Top = 285
-            Width = 119
+          object lbctMechanicImmuneMask: TLabel
+            Left = 448
+            Top = 405
+            Width = 110
             Height = 13
-            Caption = 'mechanic_immune_mask'
-          end
-          object lbctflags_extra: TLabel
-            Left = 428
-            Top = 368
-            Width = 51
-            Height = 13
-            Caption = 'flags_extra'
-          end
-          object lbctspell_school_immune_mask: TLabel
-            Left = 428
-            Top = 414
-            Width = 131
-            Height = 13
-            Caption = 'spell_school_immune_mask'
-          end
-          object lbctGoToSmartAI: TLabel
-            Left = 114
-            Top = 460
-            Width = 397
-            Height = 26
-            Caption = 
-              'Jump to SmartAI-Tab and load current creature.'#13#10'If there is alre' +
-              'ady something loaded in SmartAI-Tab, all unsaved changes will be' +
-              ' lost.'
+            Caption = 'MechanicImmuneMask'
           end
           object gbCreature: TGroupBox
-            Left = -4
-            Top = 8
+            Left = 0
+            Top = 0
             Width = 345
-            Height = 248
+            Height = 286
             Caption = 'Creature I'
             TabOrder = 0
             object lbctEntry: TLabel
@@ -6725,7 +6701,7 @@ object MainForm: TMainForm
             object edctEntry: TJvComboEdit
               Left = 8
               Top = 28
-              Width = 75
+              Width = 73
               Height = 21
               Hint = 'Creature'#39's id, related to field creature.id'
               ButtonWidth = 22
@@ -6779,8 +6755,8 @@ object MainForm: TMainForm
             end
             object edctname: TLabeledEdit
               Left = 8
-              Top = 102
-              Width = 324
+              Top = 66
+              Width = 155
               Height = 21
               Hint = 'Base name of the creature.'
               EditLabel.Width = 26
@@ -6791,7 +6767,7 @@ object MainForm: TMainForm
             end
             object edctsubname: TLabeledEdit
               Left = 8
-              Top = 145
+              Top = 100
               Width = 156
               Height = 21
               Hint = 'Subname of the creature (if any).'
@@ -6802,9 +6778,9 @@ object MainForm: TMainForm
               Text = ''
             end
             object edctminlevel: TLabeledEdit
-              Left = 178
+              Left = 177
               Top = 179
-              Width = 75
+              Width = 73
               Height = 21
               Hint = 
                 'Creature'#39's minimum level. '#13#10'Spawned creature have level in range' +
@@ -6812,13 +6788,13 @@ object MainForm: TMainForm
               EditLabel.Width = 38
               EditLabel.Height = 13
               EditLabel.Caption = 'minlevel'
-              TabOrder = 6
+              TabOrder = 5
               Text = ''
             end
             object edctmaxlevel: TLabeledEdit
-              Left = 258
+              Left = 257
               Top = 179
-              Width = 75
+              Width = 73
               Height = 21
               Hint = 
                 'Creature'#39's maximum level. '#13#10'Spawned creature have level in range' +
@@ -6826,72 +6802,60 @@ object MainForm: TMainForm
               EditLabel.Width = 41
               EditLabel.Height = 13
               EditLabel.Caption = 'maxlevel'
-              TabOrder = 7
+              TabOrder = 6
               Text = ''
             end
-            object edctHealthModifier: TLabeledEdit
-              Left = 10
+            object edctHealthMultiplier: TLabeledEdit
+              Left = 8
               Top = 216
               Width = 73
               Height = 21
               Hint = 'Creature'#39's Mana Mod'
-              EditLabel.Width = 68
+              EditLabel.Width = 72
               EditLabel.Height = 13
-              EditLabel.Caption = 'HealthModifier'
-              TabOrder = 16
+              EditLabel.Caption = 'HealthMultiplier'
+              TabOrder = 14
               Text = ''
             end
-            object edctManaModifier: TLabeledEdit
-              Left = 90
-              Top = 216
-              Width = 75
-              Height = 21
-              Hint = 'Creature'#39's Mana Mod'
-              EditLabel.Width = 64
-              EditLabel.Height = 13
-              EditLabel.Caption = 'ManaModifier'
-              TabOrder = 3
-              Text = ''
-            end
-            object edctmingold: TLabeledEdit
-              Left = 10
+            object edctMinLootGold: TLabeledEdit
+              Left = 8
               Top = 179
               Width = 73
               Height = 21
               Hint = 'Minimum gold drop'
-              EditLabel.Width = 36
+              EditLabel.Width = 60
               EditLabel.Height = 13
-              EditLabel.Caption = 'mingold'
+              EditLabel.Caption = 'MinLootGold'
+              TabOrder = 3
+              Text = ''
+            end
+            object edctMaxLootGold: TLabeledEdit
+              Left = 88
+              Top = 179
+              Width = 73
+              Height = 21
+              Hint = 'Maximum gold drop. 0 = creature don'#39't drop any gold.'
+              EditLabel.Width = 63
+              EditLabel.Height = 13
+              EditLabel.Caption = 'MaxLootGold'
               TabOrder = 4
               Text = ''
             end
-            object edctmaxgold: TLabeledEdit
-              Left = 90
-              Top = 179
-              Width = 75
-              Height = 21
-              Hint = 'Maximum gold drop. 0 = creature don'#39't drop any gold.'
-              EditLabel.Width = 39
-              EditLabel.Height = 13
-              EditLabel.Caption = 'maxgold'
-              TabOrder = 5
-              Text = ''
-            end
             object edctIconName: TLabeledEdit
-              Left = 176
-              Top = 145
+              Left = 177
+              Top = 100
               Width = 156
               Height = 21
               EditLabel.Width = 49
               EditLabel.Height = 13
               EditLabel.Caption = 'IconName'
-              TabOrder = 8
+              TabOrder = 7
               Text = ''
             end
             object edctDifficultyEntry1: TJvComboEdit
               Left = 88
               Top = 28
-              Width = 75
+              Width = 73
               Height = 21
               ButtonWidth = 22
               ClickKey = 13
@@ -6938,38 +6902,92 @@ object MainForm: TMainForm
                 072D342A3C4A4A4A4A4A4A4A4A4A420D322005374A4A4A4A4A4A4A4A4A1B4018
                 1C26174A4A4A4A4A4A4A4A4A4A4A2E082F2C4A4A4A4A4A4A4A4A4A4A4A4A4A10
                 0E4A4A4A4A4A4A4A4A4A4A4A4A4A4A4A4A4A4A4A4A4A4A4A4A4A}
-              TabOrder = 9
+              TabOrder = 8
               Text = ''
               OnButtonClick = edctEntryButtonClick
             end
             object edctKillCredit1: TLabeledEdit
-              Left = 8
+              Left = 177
               Top = 66
-              Width = 156
+              Width = 73
               Height = 21
               Hint = 'KillCredit1'
               EditLabel.Width = 46
               EditLabel.Height = 13
               EditLabel.Caption = 'KillCredit1'
-              TabOrder = 10
+              TabOrder = 9
               Text = ''
             end
             object edctKillCredit2: TLabeledEdit
-              Left = 178
+              Left = 257
               Top = 66
-              Width = 156
+              Width = 73
               Height = 21
               Hint = 'KillCredit2'
               EditLabel.Width = 46
               EditLabel.Height = 13
               EditLabel.Caption = 'KillCredit2'
-              TabOrder = 11
+              TabOrder = 10
               Text = ''
             end
             object edctDifficultyEntry2: TJvComboEdit
-              Left = 178
+              Left = 177
               Top = 28
-              Width = 75
+              Width = 73
+              Height = 21
+              ButtonWidth = 22
+              ClickKey = 13
+              Glyph.Data = {
+                36050000424D3605000000000000360400002800000010000000100000000100
+                080000000000000100000000000000000000000100000000000000000000FFFF
+                FF00F28C0000FBC87E00B2795C00B8570C00E69D4B00CC782E00D39C7900A961
+                3300D66E0000F9B85A00ED972800CE854B00B6917700D97C1700B7642000F6A7
+                3700AE684D00EDB36C00CB6D1900F5971600DF8D3000B7856800D0946A00E680
+                0000C25A0000BF712900D08E5700CB650100B4652D00EFA64800D2813500CC76
+                2100DD770000CB6A0E00E9860900AF715500BA5B1500A8654600F5B86C00C06A
+                2300BB540000D8740700BA8D7000D27A2600C6702200BE631E00EB850000BB67
+                2700CF854400B7611A00D6771400CF6A0200B7806400B57D6000B68D7200D36A
+                0000CB6F1500B8886B00B0745800AC6B4F00B8692900C16D2500D0966D00E079
+                0000C06D2100CD752400CD660000B2662E00A8664800AA623400F18B0000CA65
+                0100C0C0C0000000000000000000000000000000000000000000000000000000
+                0000000000000000000000000000000000000000000000000000000000000000
+                0000000000000000000000000000000000000000000000000000000000000000
+                0000000000000000000000000000000000000000000000000000000000000000
+                0000000000000000000000000000000000000000000000000000000000000000
+                0000000000000000000000000000000000000000000000000000000000000000
+                0000000000000000000000000000000000000000000000000000000000000000
+                0000000000000000000000000000000000000000000000000000000000000000
+                0000000000000000000000000000000000000000000000000000000000000000
+                0000000000000000000000000000000000000000000000000000000000000000
+                0000000000000000000000000000000000000000000000000000000000000000
+                0000000000000000000000000000000000000000000000000000000000000000
+                0000000000000000000000000000000000000000000000000000000000000000
+                0000000000000000000000000000000000000000000000000000000000000000
+                0000000000000000000000000000000000000000000000000000000000000000
+                0000000000000000000000000000000000000000000000000000000000000000
+                0000000000000000000000000000000000000000000000000000000000000000
+                0000000000000000000000000000000000000000000000000000000000000000
+                0000000000000000000000000000000000000000000000000000000000000000
+                0000000000000000000000000000000000000000000000000000000000000000
+                0000000000000000000000000000000000000000000000000000000000000000
+                0000000000000000000000000000000000000000000000000000000000000000
+                00000000000000000000000000000000000000000000000000004A4A4A4A4A4A
+                4A4A4A4A4A4A4A4A4A4A4A4A4A4A4A33384A4A4A4A4A4A4A4A4A4A4A4A4A2103
+                433B4A4A4A4A4A4A4A4A4A4A4A3F13280B14364A4A4A4A4A4A4A4A4A4A4A2906
+                1F1123044A4A4A4A4A4A4A4A4A4A4A3E160C151D254A4A4A4A4A4A4A4A4A4A4A
+                450F244844124A4A4A4A4A4A4A4A4A4A4A093519020A274A4A4A4A4A4A4A4A4A
+                4A4749413039464A4A4A4A4A4A4A4A4A1E3A2B221A3D4A4A4A4A4A4A4A4A4A31
+                072D342A3C4A4A4A4A4A4A4A4A4A420D322005374A4A4A4A4A4A4A4A4A1B4018
+                1C26174A4A4A4A4A4A4A4A4A4A4A2E082F2C4A4A4A4A4A4A4A4A4A4A4A4A4A10
+                0E4A4A4A4A4A4A4A4A4A4A4A4A4A4A4A4A4A4A4A4A4A4A4A4A4A}
+              TabOrder = 11
+              Text = ''
+              OnButtonClick = edctEntryButtonClick
+            end
+            object edctDifficultyEntry3: TJvComboEdit
+              Left = 257
+              Top = 28
+              Width = 73
               Height = 21
               ButtonWidth = 22
               ClickKey = 13
@@ -7020,191 +7038,241 @@ object MainForm: TMainForm
               Text = ''
               OnButtonClick = edctEntryButtonClick
             end
-            object edctDifficultyEntry3: TJvComboEdit
+            object edctExpansion: TLabeledEdit
               Left = 257
-              Top = 28
-              Width = 75
-              Height = 21
-              ButtonWidth = 22
-              ClickKey = 13
-              Glyph.Data = {
-                36050000424D3605000000000000360400002800000010000000100000000100
-                080000000000000100000000000000000000000100000000000000000000FFFF
-                FF00F28C0000FBC87E00B2795C00B8570C00E69D4B00CC782E00D39C7900A961
-                3300D66E0000F9B85A00ED972800CE854B00B6917700D97C1700B7642000F6A7
-                3700AE684D00EDB36C00CB6D1900F5971600DF8D3000B7856800D0946A00E680
-                0000C25A0000BF712900D08E5700CB650100B4652D00EFA64800D2813500CC76
-                2100DD770000CB6A0E00E9860900AF715500BA5B1500A8654600F5B86C00C06A
-                2300BB540000D8740700BA8D7000D27A2600C6702200BE631E00EB850000BB67
-                2700CF854400B7611A00D6771400CF6A0200B7806400B57D6000B68D7200D36A
-                0000CB6F1500B8886B00B0745800AC6B4F00B8692900C16D2500D0966D00E079
-                0000C06D2100CD752400CD660000B2662E00A8664800AA623400F18B0000CA65
-                0100C0C0C0000000000000000000000000000000000000000000000000000000
-                0000000000000000000000000000000000000000000000000000000000000000
-                0000000000000000000000000000000000000000000000000000000000000000
-                0000000000000000000000000000000000000000000000000000000000000000
-                0000000000000000000000000000000000000000000000000000000000000000
-                0000000000000000000000000000000000000000000000000000000000000000
-                0000000000000000000000000000000000000000000000000000000000000000
-                0000000000000000000000000000000000000000000000000000000000000000
-                0000000000000000000000000000000000000000000000000000000000000000
-                0000000000000000000000000000000000000000000000000000000000000000
-                0000000000000000000000000000000000000000000000000000000000000000
-                0000000000000000000000000000000000000000000000000000000000000000
-                0000000000000000000000000000000000000000000000000000000000000000
-                0000000000000000000000000000000000000000000000000000000000000000
-                0000000000000000000000000000000000000000000000000000000000000000
-                0000000000000000000000000000000000000000000000000000000000000000
-                0000000000000000000000000000000000000000000000000000000000000000
-                0000000000000000000000000000000000000000000000000000000000000000
-                0000000000000000000000000000000000000000000000000000000000000000
-                0000000000000000000000000000000000000000000000000000000000000000
-                0000000000000000000000000000000000000000000000000000000000000000
-                0000000000000000000000000000000000000000000000000000000000000000
-                00000000000000000000000000000000000000000000000000004A4A4A4A4A4A
-                4A4A4A4A4A4A4A4A4A4A4A4A4A4A4A33384A4A4A4A4A4A4A4A4A4A4A4A4A2103
-                433B4A4A4A4A4A4A4A4A4A4A4A3F13280B14364A4A4A4A4A4A4A4A4A4A4A2906
-                1F1123044A4A4A4A4A4A4A4A4A4A4A3E160C151D254A4A4A4A4A4A4A4A4A4A4A
-                450F244844124A4A4A4A4A4A4A4A4A4A4A093519020A274A4A4A4A4A4A4A4A4A
-                4A4749413039464A4A4A4A4A4A4A4A4A1E3A2B221A3D4A4A4A4A4A4A4A4A4A31
-                072D342A3C4A4A4A4A4A4A4A4A4A420D322005374A4A4A4A4A4A4A4A4A1B4018
-                1C26174A4A4A4A4A4A4A4A4A4A4A2E082F2C4A4A4A4A4A4A4A4A4A4A4A4A4A10
-                0E4A4A4A4A4A4A4A4A4A4A4A4A4A4A4A4A4A4A4A4A4A4A4A4A4A}
-              TabOrder = 13
-              Text = ''
-              OnButtonClick = edctEntryButtonClick
-            end
-            object edctVehicleId: TLabeledEdit
-              Left = 178
               Top = 216
-              Width = 75
-              Height = 21
-              Hint = 'Creature'#39's VehicleID'
-              DoubleBuffered = False
-              EditLabel.Width = 44
-              EditLabel.Height = 13
-              EditLabel.Caption = 'VehicleId'
-              EditLabel.Transparent = True
-              ParentDoubleBuffered = False
-              TabOrder = 14
-              Text = ''
-            end
-            object edctexp: TLabeledEdit
-              Left = 258
-              Top = 216
-              Width = 75
+              Width = 73
               Height = 21
               Hint = 
                 'The expansion table the creatures health value is taken from. Va' +
                 'lues are from 0 to 2. See creature_classlevelstats'
               DoubleBuffered = False
-              EditLabel.Width = 17
+              EditLabel.Width = 49
               EditLabel.Height = 13
-              EditLabel.Caption = 'exp'
+              EditLabel.Caption = 'Expansion'
               EditLabel.Transparent = True
               ParentDoubleBuffered = False
+              TabOrder = 13
+              Text = ''
+            end
+            object edctModelId1: TLabeledEdit
+              Left = 8
+              Top = 137
+              Width = 73
+              Height = 21
+              EditLabel.Width = 44
+              EditLabel.Height = 13
+              EditLabel.Caption = 'ModelId1'
               TabOrder = 15
+              Text = ''
+            end
+            object edctModelId2: TLabeledEdit
+              Left = 88
+              Top = 137
+              Width = 73
+              Height = 21
+              EditLabel.Width = 44
+              EditLabel.Height = 13
+              EditLabel.Caption = 'ModelId2'
+              TabOrder = 16
+              Text = ''
+            end
+            object edctModelId3: TLabeledEdit
+              Left = 177
+              Top = 137
+              Width = 73
+              Height = 21
+              EditLabel.Width = 44
+              EditLabel.Height = 13
+              EditLabel.Caption = 'ModelId3'
+              TabOrder = 17
+              Text = ''
+            end
+            object edctModelId4: TLabeledEdit
+              Left = 257
+              Top = 137
+              Width = 73
+              Height = 21
+              EditLabel.Width = 44
+              EditLabel.Height = 13
+              EditLabel.Caption = 'ModelId4'
+              TabOrder = 18
+              Text = ''
+            end
+            object edctMinLevelHealth: TLabeledEdit
+              Left = 8
+              Top = 254
+              Width = 73
+              Height = 21
+              EditLabel.Width = 74
+              EditLabel.Height = 13
+              EditLabel.Caption = 'MinLevelHealth'
+              TabOrder = 19
+              Text = ''
+            end
+            object edctMaxLevelHealth: TLabeledEdit
+              Left = 87
+              Top = 254
+              Width = 73
+              Height = 21
+              EditLabel.Width = 77
+              EditLabel.Height = 13
+              EditLabel.Caption = 'MaxLevelHealth'
+              TabOrder = 20
+              Text = ''
+            end
+            object edctMinLevelMana: TLabeledEdit
+              Left = 177
+              Top = 254
+              Width = 73
+              Height = 21
+              EditLabel.Width = 70
+              EditLabel.Height = 13
+              EditLabel.Caption = 'MinLevelMana'
+              TabOrder = 21
+              Text = ''
+            end
+            object edctMaxLevelMana: TLabeledEdit
+              Left = 257
+              Top = 254
+              Width = 73
+              Height = 21
+              EditLabel.Width = 73
+              EditLabel.Height = 13
+              EditLabel.Caption = 'MaxLevelMana'
+              TabOrder = 22
+              Text = ''
+            end
+            object edctRegenerateStats: TLabeledEdit
+              Left = 87
+              Top = 216
+              Width = 75
+              Height = 21
+              Hint = 'Controls the range at which creatures detect and see players.'
+              EditLabel.Width = 80
+              EditLabel.Height = 13
+              EditLabel.Caption = 'RegenerateStats'
+              TabOrder = 23
+              Text = ''
+            end
+            object edctscale: TLabeledEdit
+              Left = 176
+              Top = 216
+              Width = 75
+              Height = 21
+              Hint = 'Creature'#39's custom scale'
+              EditLabel.Width = 25
+              EditLabel.Height = 13
+              EditLabel.Caption = 'scale'
+              TabOrder = 24
               Text = ''
             end
           end
           object gbCreature2: TGroupBox
             Left = 359
-            Top = 8
+            Top = 0
             Width = 514
-            Height = 158
+            Height = 184
             Caption = 'Creature II'
             TabOrder = 1
-            object lbctfaction: TLabel
+            object lbctFactionHorde: TLabel
               Left = 297
-              Top = 55
-              Width = 32
+              Top = 50
+              Width = 64
               Height = 13
-              Caption = 'faction'
+              Caption = 'FactionHorde'
             end
             object lbctnpcflags: TLabel
               Left = 3
-              Top = 55
+              Top = 50
               Width = 40
               Height = 13
               Caption = 'npcflags'
             end
             object lbctrank: TLabel
               Left = 3
-              Top = 101
+              Top = 85
               Width = 21
               Height = 13
               Caption = 'rank'
             end
             object lbctfamily: TLabel
-              Left = 107
-              Top = 55
+              Left = 98
+              Top = 50
               Width = 26
               Height = 13
               Caption = 'family'
             end
-            object lbcttype: TLabel
-              Left = 391
-              Top = 55
-              Width = 20
+            object lbctCreatureType: TLabel
+              Left = 295
+              Top = 86
+              Width = 64
               Height = 13
-              Caption = 'type'
+              Caption = 'CreatureType'
             end
-            object lbctunit_flags: TLabel
-              Left = 107
-              Top = 101
-              Width = 45
+            object lbctUnitFlags: TLabel
+              Left = 98
+              Top = 86
+              Width = 44
               Height = 13
-              Caption = 'unit_flags'
+              Caption = 'UnitFlags'
             end
-            object lbctunit_flags2: TLabel
-              Left = 208
-              Top = 55
-              Width = 51
+            object lbctCreatureTypeFlags: TLabel
+              Left = 189
+              Top = 50
+              Width = 89
               Height = 13
-              Caption = 'unit_flags2'
-            end
-            object lbcttype_flags: TLabel
-              Left = 202
-              Top = 101
-              Width = 48
-              Height = 13
-              Caption = 'type_flags'
+              Caption = 'CreatureTypeFlags'
             end
             object lbctdynamicflags: TLabel
-              Left = 296
-              Top = 101
+              Left = 192
+              Top = 86
               Width = 61
               Height = 13
               Caption = 'dynamicflags'
             end
-            object edctbaseattacktime: TLabeledEdit
+            object lbctFactionAlliance: TLabel
               Left = 392
+              Top = 50
+              Width = 72
+              Height = 13
+              Caption = 'FactionAlliance'
+            end
+            object lbctExtraFlags: TLabel
+              Left = 395
+              Top = 86
+              Width = 49
+              Height = 13
+              Caption = 'ExtraFlags'
+            end
+            object edctMeleeAttackPower: TLabeledEdit
+              Left = 181
               Top = 28
-              Width = 89
+              Width = 75
               Height = 21
               Hint = 'Time between each creature'#39's melee attacks.'
-              EditLabel.Width = 72
+              EditLabel.Width = 78
               EditLabel.Height = 13
-              EditLabel.Caption = 'baseattacktime'
+              EditLabel.Caption = 'MeleeAttackPwr'
               TabOrder = 0
               Text = ''
             end
-            object edctrangeattacktime: TLabeledEdit
-              Left = 297
+            object edctRangedAttackPower: TLabeledEdit
+              Left = 84
               Top = 28
-              Width = 89
+              Width = 75
               Height = 21
               Hint = 'Time between each creature'#39's range attacks.'
-              EditLabel.Width = 76
+              EditLabel.Width = 81
               EditLabel.Height = 13
-              EditLabel.Caption = 'rangeattacktime'
+              EditLabel.Caption = 'RangeAttackPwr'
               TabOrder = 1
               Text = ''
             end
-            object edctfaction: TJvComboEdit
+            object edctFactionHorde: TJvComboEdit
               Left = 296
-              Top = 74
-              Width = 89
+              Top = 64
+              Width = 73
               Height = 21
               Hint = 'Creature'#39's faction.'
               ButtonWidth = 22
@@ -7236,14 +7304,14 @@ object MainForm: TMainForm
                 FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
                 FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
                 FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF}
-              TabOrder = 6
+              TabOrder = 4
               Text = ''
               OnButtonClick = GetFactionTemplate
             end
             object edctnpcflags: TJvComboEdit
               Left = 3
-              Top = 74
-              Width = 89
+              Top = 64
+              Width = 75
               Height = 21
               Hint = 
                 'This is way to cliet know how info you see if you clic(RMB) on N' +
@@ -7278,14 +7346,14 @@ object MainForm: TMainForm
                 FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
                 FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
                 FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF}
-              TabOrder = 8
+              TabOrder = 6
               Text = ''
               OnButtonClick = edctnpcflagsButtonClick
             end
             object edctrank: TJvComboEdit
               Left = 3
-              Top = 121
-              Width = 89
+              Top = 99
+              Width = 75
               Height = 21
               Hint = 'Creature'#39's honor rank.'
               ButtonWidth = 22
@@ -7317,14 +7385,14 @@ object MainForm: TMainForm
                 FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
                 FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
                 FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF}
-              TabOrder = 4
+              TabOrder = 2
               Text = ''
               OnButtonClick = edctrankButtonClick
             end
             object edctfamily: TJvComboEdit
-              Left = 105
-              Top = 74
-              Width = 89
+              Left = 98
+              Top = 64
+              Width = 75
               Height = 21
               Hint = 'Creature'#39's family.'
               ButtonWidth = 22
@@ -7356,14 +7424,52 @@ object MainForm: TMainForm
                 FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
                 FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
                 FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF}
-              TabOrder = 5
+              TabOrder = 3
               Text = ''
               OnButtonClick = edctfamilyButtonClick
             end
-            object edcttype: TJvComboEdit
-              Left = 391
-              Top = 74
-              Width = 89
+            object edctCreatureType: TJvComboEdit
+              Left = 295
+              Top = 100
+              Width = 75
+              Height = 21
+              ButtonWidth = 22
+              ClickKey = 13
+              Glyph.Data = {
+                36030000424D3603000000000000360000002800000010000000100000000100
+                18000000000000030000120B0000120B00000000000000000000FFFFFFFFFFFF
+                FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+                FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+                FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+                FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+                FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+                FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+                FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+                FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+                FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFD79C64
+                DB9E63FFFFFFFFFFFFFFFFFFFFFFFFDA9E63D89D65FFFFFFFFFFFFFFFFFFFFFF
+                FFD79C64DB9E63FFFFFFC2773FEBB36FEDB570D19059FFFFFFFFFFFFC57D44ED
+                B571EBB26ECC9164FFFFFFFFFFFFC27840EBB36FECB470D1915AC48355D5955B
+                D89960CA8C5FFFFFFFFFFFFFC68457D8995FD6965BCE9974FFFFFFFFFFFFC380
+                52D6975DD99A61CB8D5FFFFFFFC68A65C17F54FFFFFFFFFFFFFFFFFFFFFFFFC2
+                8157C58963FFFFFFFFFFFFFFFFFFFFFFFFC68B65C17F54FFFFFFFFFFFFFFFFFF
+                FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+                FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+                FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+                FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+                FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+                FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+                FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+                FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+                FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF}
+              TabOrder = 5
+              Text = ''
+              OnButtonClick = CreatureTypeButtonClick
+            end
+            object edctUnitFlags: TJvComboEdit
+              Left = 98
+              Top = 100
+              Width = 75
               Height = 21
               ButtonWidth = 22
               ClickKey = 13
@@ -7396,34 +7502,50 @@ object MainForm: TMainForm
                 FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF}
               TabOrder = 7
               Text = ''
-              OnButtonClick = edcttypeButtonClick
+              OnButtonClick = GetUnitFlags
             end
-            object edctdmgschool: TLabeledEdit
-              Left = 202
-              Top = 28
-              Width = 89
+            object edctCreatureTypeFlags: TJvComboEdit
+              Left = 188
+              Top = 64
+              Width = 73
               Height = 21
-              EditLabel.Width = 51
-              EditLabel.Height = 13
-              EditLabel.Caption = 'dmgschool'
-              TabOrder = 2
+              ButtonWidth = 22
+              ClickKey = 13
+              Glyph.Data = {
+                36030000424D3603000000000000360000002800000010000000100000000100
+                18000000000000030000120B0000120B00000000000000000000FFFFFFFFFFFF
+                FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+                FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+                FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+                FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+                FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+                FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+                FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+                FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+                FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFD79C64
+                DB9E63FFFFFFFFFFFFFFFFFFFFFFFFDA9E63D89D65FFFFFFFFFFFFFFFFFFFFFF
+                FFD79C64DB9E63FFFFFFC2773FEBB36FEDB570D19059FFFFFFFFFFFFC57D44ED
+                B571EBB26ECC9164FFFFFFFFFFFFC27840EBB36FECB470D1915AC48355D5955B
+                D89960CA8C5FFFFFFFFFFFFFC68457D8995FD6965BCE9974FFFFFFFFFFFFC380
+                52D6975DD99A61CB8D5FFFFFFFC68A65C17F54FFFFFFFFFFFFFFFFFFFFFFFFC2
+                8157C58963FFFFFFFFFFFFFFFFFFFFFFFFC68B65C17F54FFFFFFFFFFFFFFFFFF
+                FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+                FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+                FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+                FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+                FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+                FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+                FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+                FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+                FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF}
+              TabOrder = 8
               Text = ''
+              OnButtonClick = GetCreatureFlag1
             end
-            object edctRegenHealth: TLabeledEdit
-              Left = 3
-              Top = 28
-              Width = 89
-              Height = 21
-              EditLabel.Width = 63
-              EditLabel.Height = 13
-              EditLabel.Caption = 'RegenHealth'
-              TabOrder = 3
-              Text = ''
-            end
-            object edctunit_flags: TJvComboEdit
-              Left = 107
-              Top = 120
-              Width = 89
+            object edctdynamicflags: TJvComboEdit
+              Left = 192
+              Top = 100
+              Width = 73
               Height = 21
               ButtonWidth = 22
               ClickKey = 13
@@ -7456,89 +7578,25 @@ object MainForm: TMainForm
                 FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF}
               TabOrder = 9
               Text = ''
-              OnButtonClick = GetUnitFlags
+              OnButtonClick = GetCreatureDynamicFlags
             end
-            object edctunit_flags2: TJvComboEdit
-              Left = 201
-              Top = 72
-              Width = 89
+            object edctUnitClass: TLabeledEdit
+              Left = 3
+              Top = 28
+              Width = 75
               Height = 21
-              ButtonWidth = 22
-              ClickKey = 13
-              Glyph.Data = {
-                36030000424D3603000000000000360000002800000010000000100000000100
-                18000000000000030000120B0000120B00000000000000000000FFFFFFFFFFFF
-                FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
-                FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
-                FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
-                FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
-                FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
-                FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
-                FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
-                FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
-                FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFD79C64
-                DB9E63FFFFFFFFFFFFFFFFFFFFFFFFDA9E63D89D65FFFFFFFFFFFFFFFFFFFFFF
-                FFD79C64DB9E63FFFFFFC2773FEBB36FEDB570D19059FFFFFFFFFFFFC57D44ED
-                B571EBB26ECC9164FFFFFFFFFFFFC27840EBB36FECB470D1915AC48355D5955B
-                D89960CA8C5FFFFFFFFFFFFFC68457D8995FD6965BCE9974FFFFFFFFFFFFC380
-                52D6975DD99A61CB8D5FFFFFFFC68A65C17F54FFFFFFFFFFFFFFFFFFFFFFFFC2
-                8157C58963FFFFFFFFFFFFFFFFFFFFFFFFC68B65C17F54FFFFFFFFFFFFFFFFFF
-                FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
-                FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
-                FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
-                FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
-                FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
-                FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
-                FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
-                FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
-                FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF}
-              TabOrder = 14
-              Text = ''
-              OnButtonClick = GetUnitFlags2
-            end
-            object edcttype_flags: TJvComboEdit
-              Left = 201
-              Top = 120
-              Width = 89
-              Height = 21
-              ButtonWidth = 22
-              ClickKey = 13
-              Glyph.Data = {
-                36030000424D3603000000000000360000002800000010000000100000000100
-                18000000000000030000120B0000120B00000000000000000000FFFFFFFFFFFF
-                FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
-                FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
-                FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
-                FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
-                FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
-                FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
-                FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
-                FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
-                FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFD79C64
-                DB9E63FFFFFFFFFFFFFFFFFFFFFFFFDA9E63D89D65FFFFFFFFFFFFFFFFFFFFFF
-                FFD79C64DB9E63FFFFFFC2773FEBB36FEDB570D19059FFFFFFFFFFFFC57D44ED
-                B571EBB26ECC9164FFFFFFFFFFFFC27840EBB36FECB470D1915AC48355D5955B
-                D89960CA8C5FFFFFFFFFFFFFC68457D8995FD6965BCE9974FFFFFFFFFFFFC380
-                52D6975DD99A61CB8D5FFFFFFFC68A65C17F54FFFFFFFFFFFFFFFFFFFFFFFFC2
-                8157C58963FFFFFFFFFFFFFFFFFFFFFFFFC68B65C17F54FFFFFFFFFFFFFFFFFF
-                FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
-                FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
-                FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
-                FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
-                FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
-                FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
-                FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
-                FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
-                FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF}
+              EditLabel.Width = 44
+              EditLabel.Height = 13
+              EditLabel.Caption = 'UnitClass'
               TabOrder = 10
               Text = ''
-              OnButtonClick = GetCreatureFlag1
             end
-            object edctdynamicflags: TJvComboEdit
-              Left = 296
-              Top = 120
-              Width = 89
+            object edctFactionAlliance: TJvComboEdit
+              Left = 391
+              Top = 64
+              Width = 75
               Height = 21
+              Hint = 'Creature'#39's faction.'
               ButtonWidth = 22
               ClickKey = 13
               Glyph.Data = {
@@ -7570,34 +7628,122 @@ object MainForm: TMainForm
                 FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF}
               TabOrder = 11
               Text = ''
-              OnButtonClick = GetCreatureDynamicFlags
+              OnButtonClick = GetFactionTemplate
             end
-            object edctunit_class: TLabeledEdit
-              Left = 107
+            object edctMeleeBaseAttackTime: TLabeledEdit
+              Left = 278
               Top = 28
-              Width = 89
+              Width = 75
               Height = 21
-              EditLabel.Width = 47
+              Hint = 'Creature'#39's Mana Mod'
+              EditLabel.Width = 107
               EditLabel.Height = 13
-              EditLabel.Caption = 'unit_class'
+              EditLabel.Caption = 'MeleeBaseAttackTime'
               TabOrder = 12
               Text = ''
             end
-            object edctVerifiedBuild: TLabeledEdit
-              Left = 391
-              Top = 121
-              Width = 90
+            object edctRangedBaseAttackTime: TLabeledEdit
+              Left = 392
+              Top = 28
+              Width = 75
               Height = 21
-              EditLabel.Width = 58
+              Hint = 'Creature'#39's Mana Mod'
+              EditLabel.Width = 106
               EditLabel.Height = 13
-              EditLabel.Caption = 'VerifiedBuild'
+              EditLabel.Caption = 'RangedBaseATKTime'
               TabOrder = 13
+              Text = ''
+            end
+            object edctTrainerTemplateId: TLabeledEdit
+              Left = 3
+              Top = 140
+              Width = 75
+              Height = 21
+              EditLabel.Width = 86
+              EditLabel.Height = 13
+              EditLabel.Caption = 'TrainerTemplateId'
+              TabOrder = 14
+              Text = ''
+            end
+            object edctVendorTemplateId: TLabeledEdit
+              Left = 104
+              Top = 140
+              Width = 75
+              Height = 21
+              EditLabel.Width = 87
+              EditLabel.Height = 13
+              EditLabel.Caption = 'VendorTemplateId'
+              TabOrder = 15
+              Text = ''
+            end
+            object edctEquipmentTemplateId: TLabeledEdit
+              Left = 203
+              Top = 140
+              Width = 75
+              Height = 21
+              EditLabel.Width = 103
+              EditLabel.Height = 13
+              EditLabel.Caption = 'EquipmentTemplateId'
+              TabOrder = 16
+              Text = ''
+            end
+            object edctExtraFlags: TJvComboEdit
+              Left = 391
+              Top = 105
+              Width = 75
+              Height = 21
+              Hint = 'These flags control certain creature specific attributes. '
+              ButtonWidth = 22
+              ClickKey = 13
+              Glyph.Data = {
+                36030000424D3603000000000000360000002800000010000000100000000100
+                18000000000000030000120B0000120B00000000000000000000FFFFFFFFFFFF
+                FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+                FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+                FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+                FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+                FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+                FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+                FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+                FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+                FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFD79C64
+                DB9E63FFFFFFFFFFFFFFFFFFFFFFFFDA9E63D89D65FFFFFFFFFFFFFFFFFFFFFF
+                FFD79C64DB9E63FFFFFFC2773FEBB36FEDB570D19059FFFFFFFFFFFFC57D44ED
+                B571EBB26ECC9164FFFFFFFFFFFFC27840EBB36FECB470D1915AC48355D5955B
+                D89960CA8C5FFFFFFFFFFFFFC68457D8995FD6965BCE9974FFFFFFFFFFFFC380
+                52D6975DD99A61CB8D5FFFFFFFC68A65C17F54FFFFFFFFFFFFFFFFFFFFFFFFC2
+                8157C58963FFFFFFFFFFFFFFFFFFFFFFFFC68B65C17F54FFFFFFFFFFFFFFFFFF
+                FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+                FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+                FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+                FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+                FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+                FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+                FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+                FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+                FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF}
+              TabOrder = 17
+              Text = ''
+              OnButtonClick = GetFlagsExtra
+            end
+            object edctPetSpellDataId: TLabeledEdit
+              Left = 297
+              Top = 140
+              Width = 75
+              Height = 21
+              Hint = 
+                'ID, found in CreatureSpellData.dbc, that displays what spells th' +
+                'e pet has in the client.'
+              EditLabel.Width = 71
+              EditLabel.Height = 13
+              EditLabel.Caption = 'PetSpellDataId'
+              TabOrder = 18
               Text = ''
             end
           end
           object gbLoot: TGroupBox
-            Left = -4
-            Top = 262
+            Left = 0
+            Top = 301
             Width = 345
             Height = 61
             Caption = 'Loot'
@@ -7617,7 +7763,7 @@ object MainForm: TMainForm
               TabOrder = 0
               Text = ''
             end
-            object edctpickpocketloot: TLabeledEdit
+            object edctPickpocketLootId: TLabeledEdit
               Left = 128
               Top = 30
               Width = 89
@@ -7626,13 +7772,13 @@ object MainForm: TMainForm
                 'Refered to field pickpocket_loot_template.entry'#13#10'pickpocketloot ' +
                 'does not need to be same as creature entry'#13#10'Use other pickpocket' +
                 'loot if creature should have same loot as other creatures'
-              EditLabel.Width = 70
+              EditLabel.Width = 84
               EditLabel.Height = 13
-              EditLabel.Caption = 'pickpocketloot'
+              EditLabel.Caption = 'PickpocketLootId'
               TabOrder = 1
               Text = ''
             end
-            object edctskinloot: TLabeledEdit
+            object edctSkinningLootId: TLabeledEdit
               Left = 242
               Top = 30
               Width = 89
@@ -7641,18 +7787,18 @@ object MainForm: TMainForm
                 'Refered to field skinning_loot_template.entry'#13#10'skinloot does not' +
                 ' need to be same as creature entry'#13#10'Use other skinloot if creatu' +
                 're should have same loot as other creatures'
-              EditLabel.Width = 36
+              EditLabel.Width = 71
               EditLabel.Height = 13
-              EditLabel.Caption = 'skinloot'
+              EditLabel.Caption = 'SkinningLootId'
               TabOrder = 2
               Text = ''
             end
           end
           object gbctbehaviour: TGroupBox
-            Left = 733
+            Left = 731
             Top = 172
             Width = 140
-            Height = 282
+            Height = 279
             Caption = 'Behaviour'
             TabOrder = 5
             object lbctMovementType: TLabel
@@ -7663,16 +7809,23 @@ object MainForm: TMainForm
               Caption = 'MovementType'
             end
             object lbctgossip_menu_id: TLabel
-              Left = 8
-              Top = 168
-              Width = 76
+              Left = 9
+              Top = 210
+              Width = 68
               Height = 13
               Hint = 
                 'The gossip ID of this creature. This field is obtained from snif' +
                 'f (update fields). If you can not sniff this value, and need to ' +
                 'make one up, it must be > 50000. This field is the link to gossi' +
                 'p_menu.entry.'
-              Caption = 'gossip_menu_id'
+              Caption = 'GossipMenuId'
+            end
+            object lbctInhabitType: TLabel
+              Left = 9
+              Top = 88
+              Width = 56
+              Height = 13
+              Caption = 'InhabitType'
             end
             object edctAIName: TLabeledEdit
               Left = 8
@@ -7686,22 +7839,10 @@ object MainForm: TMainForm
               TabOrder = 0
               Text = ''
             end
-            object edctScriptName: TLabeledEdit
-              Left = 8
-              Top = 230
-              Width = 121
-              Height = 21
-              Hint = 'Script'#39's name creature uses.'
-              EditLabel.Width = 55
-              EditLabel.Height = 13
-              EditLabel.Caption = 'ScriptName'
-              TabOrder = 2
-              Text = ''
-            end
             object edctMovementType: TJvComboEdit
               Left = 9
-              Top = 63
-              Width = 121
+              Top = 61
+              Width = 120
               Height = 21
               ButtonWidth = 22
               ClickKey = 13
@@ -7736,24 +7877,24 @@ object MainForm: TMainForm
               Text = ''
               OnButtonClick = GetMovementType
             end
-            object edctmovementId: TLabeledEdit
-              Left = 8
-              Top = 99
-              Width = 121
+            object edctMovementTemplateId: TLabeledEdit
+              Left = 9
+              Top = 141
+              Width = 120
               Height = 21
               Hint = 
                 'We have no idea what this field does. It is passed directly to t' +
                 'he client.'
-              EditLabel.Width = 58
+              EditLabel.Width = 103
               EditLabel.Height = 13
-              EditLabel.Caption = 'movementId'
-              TabOrder = 3
+              EditLabel.Caption = 'MovementTemplateId'
+              TabOrder = 2
               Text = ''
             end
-            object edctgossip_menu_id: TJvComboEdit
-              Left = 8
-              Top = 187
-              Width = 121
+            object edctGossipMenuId: TJvComboEdit
+              Left = 9
+              Top = 229
+              Width = 120
               Height = 21
               ButtonWidth = 22
               ClickKey = 13
@@ -7800,22 +7941,60 @@ object MainForm: TMainForm
                 072D342A3C4A4A4A4A4A4A4A4A4A420D322005374A4A4A4A4A4A4A4A4A1B4018
                 1C26174A4A4A4A4A4A4A4A4A4A4A2E082F2C4A4A4A4A4A4A4A4A4A4A4A4A4A10
                 0E4A4A4A4A4A4A4A4A4A4A4A4A4A4A4A4A4A4A4A4A4A4A4A4A4A}
-              TabOrder = 4
+              TabOrder = 3
               Text = ''
             end
-            object edctHoverHeight: TLabeledEdit
-              Left = 8
-              Top = 141
-              Width = 121
+            object edctVehicleTemplateId: TLabeledEdit
+              Left = 9
+              Top = 183
+              Width = 120
               Height = 21
               Hint = 
                 'Distance above the ground that the creature will hover if it has' +
                 ' MOVEMENTFLAG_DISABLE_GRAVITY enabled. Value taken from sniffs. '
-              EditLabel.Width = 60
+              EditLabel.Width = 88
               EditLabel.Height = 13
-              EditLabel.Caption = 'HoverHeight'
+              EditLabel.Caption = 'VehicleTemplateId'
+              TabOrder = 4
+              Text = ''
+            end
+            object edctInhabitType: TJvComboEdit
+              Left = 9
+              Top = 104
+              Width = 120
+              Height = 21
+              ButtonWidth = 22
+              ClickKey = 13
+              Glyph.Data = {
+                36030000424D3603000000000000360000002800000010000000100000000100
+                18000000000000030000120B0000120B00000000000000000000FFFFFFFFFFFF
+                FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+                FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+                FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+                FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+                FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+                FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+                FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+                FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+                FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFD79C64
+                DB9E63FFFFFFFFFFFFFFFFFFFFFFFFDA9E63D89D65FFFFFFFFFFFFFFFFFFFFFF
+                FFD79C64DB9E63FFFFFFC2773FEBB36FEDB570D19059FFFFFFFFFFFFC57D44ED
+                B571EBB26ECC9164FFFFFFFFFFFFC27840EBB36FECB470D1915AC48355D5955B
+                D89960CA8C5FFFFFFFFFFFFFC68457D8995FD6965BCE9974FFFFFFFFFFFFC380
+                52D6975DD99A61CB8D5FFFFFFFC68A65C17F54FFFFFFFFFFFFFFFFFFFFFFFFC2
+                8157C58963FFFFFFFFFFFFFFFFFFFFFFFFC68B65C17F54FFFFFFFFFFFFFFFFFF
+                FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+                FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+                FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+                FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+                FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+                FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+                FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+                FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+                FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF}
               TabOrder = 5
               Text = ''
+              OnButtonClick = GetInhabitType
             end
           end
           object gbTrainer: TGroupBox
@@ -7825,38 +8004,38 @@ object MainForm: TMainForm
             Height = 114
             Caption = 'Trainer'
             TabOrder = 3
-            object lbcttrainer_type: TLabel
+            object lbctTrainerType: TLabel
               Left = 10
               Top = 18
-              Width = 55
+              Width = 57
               Height = 13
-              Caption = 'trainer_type'
+              Caption = 'TrainerType'
             end
-            object lbcttrainer_spell: TLabel
+            object lbctTrainerSpell: TLabel
               Left = 105
               Top = 18
               Width = 56
               Height = 13
-              Caption = 'trainer_spell'
+              Caption = 'TrainerSpell'
             end
-            object lbctclass: TLabel
+            object lbctTrainerClass: TLabel
               Left = 105
+              Top = 58
+              Width = 58
+              Height = 13
+              Caption = 'TrainerClass'
+            end
+            object lbctTrainerRace: TLabel
+              Left = 10
               Top = 58
               Width = 59
               Height = 13
-              Caption = 'trainer_class'
+              Caption = 'TrainerRace'
             end
-            object lbctrace: TLabel
-              Left = 10
-              Top = 58
-              Width = 56
-              Height = 13
-              Caption = 'trainer_race'
-            end
-            object edcttrainer_type: TJvComboEdit
+            object edctTrainerType: TJvComboEdit
               Left = 8
               Top = 34
-              Width = 89
+              Width = 75
               Height = 21
               ButtonWidth = 22
               ClickKey = 13
@@ -7889,12 +8068,12 @@ object MainForm: TMainForm
                 FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF}
               TabOrder = 0
               Text = ''
-              OnButtonClick = edcttrainer_typeButtonClick
+              OnButtonClick = edctTrainerTypeButtonClick
             end
-            object edcttrainer_spell: TJvComboEdit
+            object edctTrainerSpell: TJvComboEdit
               Left = 104
               Top = 34
-              Width = 89
+              Width = 75
               Height = 21
               Hint = 
                 'Spell ID. '#13#10'Used for check in case npcflag include trainer flag ' +
@@ -7933,10 +8112,10 @@ object MainForm: TMainForm
               Text = ''
               OnButtonClick = GetSpell
             end
-            object edcttrainer_class: TJvComboEdit
+            object edctTrainerClass: TJvComboEdit
               Left = 104
               Top = 74
-              Width = 89
+              Width = 75
               Height = 21
               Hint = 
                 'Creature'#39's class, like '#39'character.class'#39' field. '#13#10'Used for check' +
@@ -7975,10 +8154,10 @@ object MainForm: TMainForm
               Text = ''
               OnButtonClick = GetClass
             end
-            object edcttrainer_race: TJvComboEdit
+            object edctTrainerRace: TJvComboEdit
               Left = 8
               Top = 74
-              Width = 89
+              Width = 75
               Height = 21
               Hint = 
                 'Creature'#39's race, like '#39'character.race'#39' field. '#13#10'Used for check i' +
@@ -8022,301 +8201,185 @@ object MainForm: TMainForm
             Left = 559
             Top = 172
             Width = 169
-            Height = 282
+            Height = 293
             Caption = 'Modifyers'
             TabOrder = 4
-            object edctArmorModifier: TLabeledEdit
+            object edctArmorMultiplier: TLabeledEdit
               Left = 3
               Top = 28
-              Width = 70
+              Width = 75
               Height = 21
               Hint = 'Creature'#39's armor mod.'
-              EditLabel.Width = 64
+              EditLabel.Width = 68
               EditLabel.Height = 13
-              EditLabel.Caption = 'ArmorModifier'
+              EditLabel.Caption = 'ArmorMultiplier'
               TabOrder = 0
               Text = ''
             end
-            object edctspeed_walk: TLabeledEdit
+            object edctSpeedWalk: TLabeledEdit
               Left = 3
               Top = 68
-              Width = 70
+              Width = 75
               Height = 21
               Hint = 
                 'Controls how fast the creature can walk. For vehicles: increases' +
                 ' fly speed.'
-              EditLabel.Width = 57
+              EditLabel.Width = 56
               EditLabel.Height = 13
-              EditLabel.Caption = 'speed_walk'
+              EditLabel.Caption = 'SpeedWalk'
               TabOrder = 1
               Text = ''
             end
-            object edctscale: TLabeledEdit
-              Left = 88
-              Top = 28
-              Width = 70
-              Height = 21
-              Hint = 'Creature'#39's custom scale'
-              EditLabel.Width = 25
-              EditLabel.Height = 13
-              EditLabel.Caption = 'scale'
-              TabOrder = 2
-              Text = ''
-            end
-            object edctspeed_run: TLabeledEdit
-              Left = 88
+            object edctSpeedRun: TLabeledEdit
+              Left = 91
               Top = 68
-              Width = 70
+              Width = 75
               Height = 21
               Hint = 
                 'Controls how fast the creature can run. For vehicles: increases ' +
                 'ground movement speed.'
-              EditLabel.Width = 50
+              EditLabel.Width = 51
               EditLabel.Height = 13
-              EditLabel.Caption = 'speed_run'
+              EditLabel.Caption = 'SpeedRun'
+              TabOrder = 2
+              Text = ''
+            end
+            object edctDamageMultiplier: TLabeledEdit
+              Left = 3
+              Top = 111
+              Width = 75
+              Height = 21
+              Hint = 'Used to modify the Minimum/Maximum damage of a creature.'
+              EditLabel.Width = 63
+              EditLabel.Height = 13
+              EditLabel.Caption = 'DmgMultiplier'
               TabOrder = 3
               Text = ''
             end
-            object edctDamageModifier: TLabeledEdit
+            object edctExperienceMultiplier: TLabeledEdit
               Left = 3
-              Top = 191
-              Width = 70
-              Height = 21
-              Hint = 'Used to modify the Minimum/Maximum damage of a creature.'
-              EditLabel.Width = 77
-              EditLabel.Height = 13
-              EditLabel.Caption = 'DamageModifier'
-              TabOrder = 5
-              Text = ''
-            end
-            object edctExperienceModifier: TLabeledEdit
-              Left = 88
-              Top = 191
-              Width = 70
+              Top = 237
+              Width = 75
               Height = 21
               Hint = 'Experience Modifier'
               EditLabel.Width = 55
               EditLabel.Height = 13
               EditLabel.Caption = 'ExpModifier'
-              TabOrder = 7
+              TabOrder = 5
               Text = ''
             end
-            object edctRangeVariance: TLabeledEdit
-              Left = 88
-              Top = 151
-              Width = 70
+            object edctDamageVariance: TLabeledEdit
+              Left = 91
+              Top = 113
+              Width = 75
               Height = 21
-              Hint = 'Range Variance'
-              EditLabel.Width = 74
+              Hint = 'Base Variance'
+              EditLabel.Width = 64
               EditLabel.Height = 13
-              EditLabel.Caption = 'RangeVariance'
+              EditLabel.Caption = 'DmgVariance'
               TabOrder = 4
               Text = ''
             end
-            object edctBaseVariance: TLabeledEdit
-              Left = 3
-              Top = 151
-              Width = 71
+            object edctArmor: TLabeledEdit
+              Left = 91
+              Top = 28
+              Width = 75
               Height = 21
-              Hint = 'Base Variance'
-              EditLabel.Width = 66
+              Hint = 'Controls how fast the creature can swim.'
+              EditLabel.Width = 27
               EditLabel.Height = 13
-              EditLabel.Caption = 'BaseVariance'
+              EditLabel.Caption = 'Armor'
               TabOrder = 6
               Text = ''
             end
-            object edctspeed_swim: TLabeledEdit
-              Left = 3
-              Top = 108
-              Width = 70
-              Height = 21
-              Hint = 'Controls how fast the creature can swim.'
-              EditLabel.Width = 58
-              EditLabel.Height = 13
-              EditLabel.Caption = 'speed_swim'
-              TabOrder = 8
-              Text = ''
-            end
-            object edctspeed_flight: TLabeledEdit
-              Left = 88
-              Top = 108
-              Width = 70
-              Height = 21
-              Hint = 'Controls how fast the creature can fly'
-              EditLabel.Width = 57
-              EditLabel.Height = 13
-              EditLabel.Caption = 'speed_flight'
-              TabOrder = 9
-              Text = ''
-            end
-            object edctdetection_range: TLabeledEdit
-              Left = 3
+            object edctPowerMultiplier: TLabeledEdit
+              Left = 91
               Top = 231
-              Width = 70
+              Width = 75
               Height = 21
               Hint = 'Controls the range at which creatures detect and see players.'
-              EditLabel.Width = 77
+              EditLabel.Width = 71
               EditLabel.Height = 13
-              EditLabel.Caption = 'detection_range'
-              TabOrder = 10
+              EditLabel.Caption = 'PowerMultiplier'
+              TabOrder = 7
               Text = ''
             end
             object cbctRacialLeader: TCheckBox
-              Left = 82
-              Top = 233
+              Left = 3
+              Top = 270
               Width = 84
               Height = 17
               Caption = 'RacialLeader'
+              TabOrder = 8
+            end
+            object edctMinMeleeDmg: TLabeledEdit
+              Left = 3
+              Top = 195
+              Width = 75
+              Height = 21
+              Hint = 'Creature'#39's Mana Mod'
+              EditLabel.Width = 68
+              EditLabel.Height = 13
+              EditLabel.Caption = 'MinMeleeDmg'
+              TabOrder = 9
+              Text = ''
+            end
+            object edctMaxMeleeDmg: TLabeledEdit
+              Left = 91
+              Top = 195
+              Width = 75
+              Height = 21
+              Hint = 'Creature'#39's Mana Mod'
+              EditLabel.Width = 71
+              EditLabel.Height = 13
+              EditLabel.Caption = 'MaxMeleeDmg'
+              TabOrder = 10
+              Text = ''
+            end
+            object edctMinRangedDmg: TLabeledEdit
+              Left = 3
+              Top = 147
+              Width = 75
+              Height = 21
+              Hint = 'Creature'#39's Mana Mod'
+              EditLabel.Width = 77
+              EditLabel.Height = 13
+              EditLabel.Caption = 'MinRangedDmg'
               TabOrder = 11
+              Text = ''
+            end
+            object edctMaxRangedDmg: TLabeledEdit
+              Left = 91
+              Top = 147
+              Width = 75
+              Height = 21
+              Hint = 'Creature'#39's Mana Mod'
+              EditLabel.Width = 80
+              EditLabel.Height = 13
+              EditLabel.Caption = 'MaxRangedDmg'
+              TabOrder = 12
+              Text = ''
             end
           end
           object btScriptCreatureTemplate: TButton
-            Left = 623
-            Top = 471
+            Left = 643
+            Top = 482
             Width = 217
             Height = 25
             Caption = 'Show Creature Template Script'
-            TabOrder = 7
+            TabOrder = 6
             OnClick = btScriptCreatureTemplateClick
           end
-          object edctmechanic_immune_mask: TJvComboEdit
-            Left = 428
-            Top = 304
-            Width = 120
-            Height = 21
-            ButtonWidth = 22
-            ClickKey = 13
-            Glyph.Data = {
-              36030000424D3603000000000000360000002800000010000000100000000100
-              18000000000000030000120B0000120B00000000000000000000FFFFFFFFFFFF
-              FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
-              FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
-              FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
-              FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
-              FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
-              FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
-              FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
-              FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
-              FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFD79C64
-              DB9E63FFFFFFFFFFFFFFFFFFFFFFFFDA9E63D89D65FFFFFFFFFFFFFFFFFFFFFF
-              FFD79C64DB9E63FFFFFFC2773FEBB36FEDB570D19059FFFFFFFFFFFFC57D44ED
-              B571EBB26ECC9164FFFFFFFFFFFFC27840EBB36FECB470D1915AC48355D5955B
-              D89960CA8C5FFFFFFFFFFFFFC68457D8995FD6965BCE9974FFFFFFFFFFFFC380
-              52D6975DD99A61CB8D5FFFFFFFC68A65C17F54FFFFFFFFFFFFFFFFFFFFFFFFC2
-              8157C58963FFFFFFFFFFFFFFFFFFFFFFFFC68B65C17F54FFFFFFFFFFFFFFFFFF
-              FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
-              FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
-              FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
-              FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
-              FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
-              FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
-              FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
-              FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
-              FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF}
-            TabOrder = 6
-            Text = ''
-            OnButtonClick = GetMechanicImmuneMask
-          end
-          object edctPetSpellDataId: TLabeledEdit
-            Left = 428
-            Top = 344
-            Width = 120
-            Height = 21
-            Hint = 
-              'ID, found in CreatureSpellData.dbc, that displays what spells th' +
-              'e pet has in the client.'
-            EditLabel.Width = 71
-            EditLabel.Height = 13
-            EditLabel.Caption = 'PetSpellDataId'
-            TabOrder = 8
-            Text = ''
-          end
-          object edctflags_extra: TJvComboEdit
-            Left = 428
-            Top = 387
-            Width = 120
-            Height = 21
-            Hint = 'These flags control certain creature specific attributes. '
-            ButtonWidth = 22
-            ClickKey = 13
-            Glyph.Data = {
-              36030000424D3603000000000000360000002800000010000000100000000100
-              18000000000000030000120B0000120B00000000000000000000FFFFFFFFFFFF
-              FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
-              FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
-              FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
-              FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
-              FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
-              FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
-              FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
-              FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
-              FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFD79C64
-              DB9E63FFFFFFFFFFFFFFFFFFFFFFFFDA9E63D89D65FFFFFFFFFFFFFFFFFFFFFF
-              FFD79C64DB9E63FFFFFFC2773FEBB36FEDB570D19059FFFFFFFFFFFFC57D44ED
-              B571EBB26ECC9164FFFFFFFFFFFFC27840EBB36FECB470D1915AC48355D5955B
-              D89960CA8C5FFFFFFFFFFFFFC68457D8995FD6965BCE9974FFFFFFFFFFFFC380
-              52D6975DD99A61CB8D5FFFFFFFC68A65C17F54FFFFFFFFFFFFFFFFFFFFFFFFC2
-              8157C58963FFFFFFFFFFFFFFFFFFFFFFFFC68B65C17F54FFFFFFFFFFFFFFFFFF
-              FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
-              FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
-              FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
-              FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
-              FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
-              FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
-              FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
-              FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
-              FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF}
-            TabOrder = 9
-            Text = ''
-            OnButtonClick = GetFlagsExtra
-          end
-          object edctspell_school_immune_mask: TJvComboEdit
-            Left = 428
-            Top = 433
-            Width = 120
-            Height = 21
-            ButtonWidth = 22
-            Glyph.Data = {
-              36030000424D3603000000000000360000002800000010000000100000000100
-              18000000000000030000120B0000120B00000000000000000000FFFFFFFFFFFF
-              FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
-              FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
-              FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
-              FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
-              FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
-              FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
-              FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
-              FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
-              FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFD79C64
-              DB9E63FFFFFFFFFFFFFFFFFFFFFFFFDA9E63D89D65FFFFFFFFFFFFFFFFFFFFFF
-              FFD79C64DB9E63FFFFFFC2773FEBB36FEDB570D19059FFFFFFFFFFFFC57D44ED
-              B571EBB26ECC9164FFFFFFFFFFFFC27840EBB36FECB470D1915AC48355D5955B
-              D89960CA8C5FFFFFFFFFFFFFC68457D8995FD6965BCE9974FFFFFFFFFFFFC380
-              52D6975DD99A61CB8D5FFFFFFFC68A65C17F54FFFFFFFFFFFFFFFFFFFFFFFFC2
-              8157C58963FFFFFFFFFFFFFFFFFFFFFFFFC68B65C17F54FFFFFFFFFFFFFFFFFF
-              FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
-              FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
-              FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
-              FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
-              FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
-              FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
-              FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
-              FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
-              FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF}
-            TabOrder = 10
-            Text = ''
-            OnButtonClick = GetSpellSchImmuneMask
-          end
           object gbCreatureLocale: TGroupBox
-            Left = -4
-            Top = 326
+            Left = 0
+            Top = 368
             Width = 345
-            Height = 108
+            Height = 97
             Caption = 'Creature locale'
             Color = clMenuBar
             ParentBackground = False
             ParentColor = False
-            TabOrder = 11
+            TabOrder = 7
             object edctlocentry: TLabeledEdit
               Left = 8
               Top = 30
@@ -8354,22 +8417,236 @@ object MainForm: TMainForm
             end
           end
           object btGoCreatureText: TButton
-            Left = 3
-            Top = 440
+            Left = 7
+            Top = 482
             Width = 105
             Height = 25
             Caption = 'Goto creature_text'
-            TabOrder = 12
+            TabOrder = 8
             OnClick = btctGotoCreatureTextClick
           end
           object btctGoToSmartAI: TButton
-            Left = 3
-            Top = 471
+            Left = 7
+            Top = 513
             Width = 105
             Height = 25
             Caption = 'Goto SmartAI'
-            TabOrder = 13
+            TabOrder = 9
             OnClick = btctGoToSmartAIClick
+          end
+          object edctResistanceHoly: TLabeledEdit
+            Left = 366
+            Top = 304
+            Width = 75
+            Height = 21
+            EditLabel.Width = 74
+            EditLabel.Height = 13
+            EditLabel.Caption = 'ResistanceHoly'
+            TabOrder = 10
+            Text = ''
+          end
+          object edctResistanceFire: TLabeledEdit
+            Left = 366
+            Top = 344
+            Width = 75
+            Height = 21
+            EditLabel.Width = 70
+            EditLabel.Height = 13
+            EditLabel.Caption = 'ResistanceFire'
+            TabOrder = 11
+            Text = ''
+          end
+          object edctResistanceFrost: TLabeledEdit
+            Left = 366
+            Top = 379
+            Width = 75
+            Height = 21
+            EditLabel.Width = 76
+            EditLabel.Height = 13
+            EditLabel.Caption = 'ResistanceFrost'
+            TabOrder = 12
+            Text = ''
+          end
+          object edctResistanceShadow: TLabeledEdit
+            Left = 448
+            Top = 379
+            Width = 75
+            Height = 21
+            EditLabel.Width = 92
+            EditLabel.Height = 13
+            EditLabel.Caption = 'ResistanceShadow'
+            TabOrder = 13
+            Text = ''
+          end
+          object edctResistanceArcane: TLabeledEdit
+            Left = 448
+            Top = 344
+            Width = 75
+            Height = 21
+            EditLabel.Width = 87
+            EditLabel.Height = 13
+            EditLabel.Caption = 'ResistanceArcane'
+            TabOrder = 14
+            Text = ''
+          end
+          object edctResistanceNature: TLabeledEdit
+            Left = 448
+            Top = 304
+            Width = 75
+            Height = 21
+            EditLabel.Width = 85
+            EditLabel.Height = 13
+            EditLabel.Caption = 'ResistanceNature'
+            TabOrder = 15
+            Text = ''
+          end
+          object GroupBox8: TGroupBox
+            Left = 362
+            Top = 465
+            Width = 241
+            Height = 87
+            Caption = 'QuestItem'
+            TabOrder = 16
+            object edctQuestItem1: TLabeledEdit
+              Left = 8
+              Top = 30
+              Width = 75
+              Height = 21
+              Hint = 
+                'Refered to field loot_template.entry'#13#10'lootid does not need to be' +
+                ' same as creature entry'#13#10'Use other lootid if creature should hav' +
+                'e same loot as other creatures'
+              EditLabel.Width = 54
+              EditLabel.Height = 13
+              EditLabel.Caption = 'QuestItem1'
+              TabOrder = 0
+              Text = ''
+            end
+            object edctQuestItem2: TLabeledEdit
+              Left = 84
+              Top = 30
+              Width = 75
+              Height = 21
+              Hint = 
+                'Refered to field pickpocket_loot_template.entry'#13#10'pickpocketloot ' +
+                'does not need to be same as creature entry'#13#10'Use other pickpocket' +
+                'loot if creature should have same loot as other creatures'
+              EditLabel.Width = 54
+              EditLabel.Height = 13
+              EditLabel.Caption = 'QuestItem2'
+              TabOrder = 1
+              Text = ''
+            end
+            object edctQuestItem3: TLabeledEdit
+              Left = 160
+              Top = 30
+              Width = 75
+              Height = 21
+              Hint = 
+                'Refered to field skinning_loot_template.entry'#13#10'skinloot does not' +
+                ' need to be same as creature entry'#13#10'Use other skinloot if creatu' +
+                're should have same loot as other creatures'
+              EditLabel.Width = 54
+              EditLabel.Height = 13
+              EditLabel.Caption = 'QuestItem3'
+              TabOrder = 2
+              Text = ''
+            end
+            object edctQuestItem4: TLabeledEdit
+              Left = 8
+              Top = 65
+              Width = 75
+              Height = 21
+              Hint = 
+                'Refered to field loot_template.entry'#13#10'lootid does not need to be' +
+                ' same as creature entry'#13#10'Use other lootid if creature should hav' +
+                'e same loot as other creatures'
+              EditLabel.Width = 54
+              EditLabel.Height = 13
+              EditLabel.Caption = 'QuestItem4'
+              TabOrder = 3
+              Text = ''
+            end
+            object edctQuestItem5: TLabeledEdit
+              Left = 84
+              Top = 65
+              Width = 75
+              Height = 21
+              Hint = 
+                'Refered to field pickpocket_loot_template.entry'#13#10'pickpocketloot ' +
+                'does not need to be same as creature entry'#13#10'Use other pickpocket' +
+                'loot if creature should have same loot as other creatures'
+              EditLabel.Width = 54
+              EditLabel.Height = 13
+              EditLabel.Caption = 'QuestItem5'
+              TabOrder = 4
+              Text = ''
+            end
+            object edctQuestItem6: TLabeledEdit
+              Left = 160
+              Top = 65
+              Width = 75
+              Height = 21
+              Hint = 
+                'Refered to field skinning_loot_template.entry'#13#10'skinloot does not' +
+                ' need to be same as creature entry'#13#10'Use other skinloot if creatu' +
+                're should have same loot as other creatures'
+              EditLabel.Width = 54
+              EditLabel.Height = 13
+              EditLabel.Caption = 'QuestItem6'
+              TabOrder = 5
+              Text = ''
+            end
+          end
+          object edctDamageSchool: TLabeledEdit
+            Left = 366
+            Top = 420
+            Width = 75
+            Height = 21
+            Hint = 'Time between each creature'#39's range attacks.'
+            EditLabel.Width = 73
+            EditLabel.Height = 13
+            EditLabel.Caption = 'DamageSchool'
+            TabOrder = 17
+            Text = ''
+          end
+          object edctMechanicImmuneMask: TJvComboEdit
+            Left = 448
+            Top = 420
+            Width = 105
+            Height = 21
+            ButtonWidth = 22
+            ClickKey = 13
+            Glyph.Data = {
+              36030000424D3603000000000000360000002800000010000000100000000100
+              18000000000000030000120B0000120B00000000000000000000FFFFFFFFFFFF
+              FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+              FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+              FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+              FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+              FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+              FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+              FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+              FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+              FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFD79C64
+              DB9E63FFFFFFFFFFFFFFFFFFFFFFFFDA9E63D89D65FFFFFFFFFFFFFFFFFFFFFF
+              FFD79C64DB9E63FFFFFFC2773FEBB36FEDB570D19059FFFFFFFFFFFFC57D44ED
+              B571EBB26ECC9164FFFFFFFFFFFFC27840EBB36FECB470D1915AC48355D5955B
+              D89960CA8C5FFFFFFFFFFFFFC68457D8995FD6965BCE9974FFFFFFFFFFFFC380
+              52D6975DD99A61CB8D5FFFFFFFC68A65C17F54FFFFFFFFFFFFFFFFFFFFFFFFC2
+              8157C58963FFFFFFFFFFFFFFFFFFFFFFFFC68B65C17F54FFFFFFFFFFFFFFFFFF
+              FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+              FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+              FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+              FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+              FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+              FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+              FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+              FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+              FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF}
+            TabOrder = 18
+            Text = ''
+            OnButtonClick = GetMechanicImmuneMask
           end
         end
         object tsCreatureLocation: TTabSheet
@@ -31040,8 +31317,8 @@ object MainForm: TMainForm
   end
   object MyTempQuery: TFDQuery
     Connection = MyTrinityConnection
-    Left = 832
-    Top = 128
+    Left = 864
+    Top = 176
   end
   object MyLootQuery: TFDQuery
     Connection = MyTrinityConnection
@@ -31050,8 +31327,8 @@ object MainForm: TMainForm
   end
   object MyQueryAll: TFDQuery
     Connection = MyTrinityConnection
-    Left = 853
-    Top = 489
+    Left = 813
+    Top = 577
   end
   object pmCreature: TPopupMenu
     Left = 241
@@ -31150,12 +31427,12 @@ object MainForm: TMainForm
   end
   object DataSource: TDataSource
     DataSet = MyQuery
-    Left = 825
-    Top = 442
+    Left = 729
+    Top = 594
   end
   object ActionList1: TActionList
-    Left = 856
-    Top = 401
+    Left = 864
+    Top = 241
     object BrowseURL1: TBrowseURL
       Category = 'Internet'
       Caption = '&Browse URL'
@@ -31165,7 +31442,7 @@ object MainForm: TMainForm
   object Timer1: TTimer
     Interval = 60000
     OnTimer = Timer1Timer
-    Left = 304
+    Left = 16
     Top = 624
   end
   object Timer2: TTimer

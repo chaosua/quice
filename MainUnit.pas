@@ -347,67 +347,55 @@ type
     edctname: TLabeledEdit;
     edctsubname: TLabeledEdit;
     edctIconName: TLabeledEdit;
-    edctgossip_menu_id: TJvComboEdit;
+    edctGossipMenuId: TJvComboEdit;
     edctminlevel: TLabeledEdit;
     edctmaxlevel: TLabeledEdit;
-    edctexp: TLabeledEdit;
-    edctfaction: TJvComboEdit;
+    edctExpansion: TLabeledEdit;
+    edctFactionHorde: TJvComboEdit;
     edctnpcflags: TJvComboEdit;
-    edctspeed_walk: TLabeledEdit;
-    edctspeed_run: TLabeledEdit;
-    edctscale: TLabeledEdit;
+    edctSpeedWalk: TLabeledEdit;
+    edctSpeedRun: TLabeledEdit;
     edctrank: TJvComboEdit;
-    edctdmgschool: TLabeledEdit;
-    edctbaseattacktime: TLabeledEdit;
-    edctrangeattacktime: TLabeledEdit;
-    edctBaseVariance: TLabeledEdit;
-    edctRangeVariance: TLabeledEdit;
-    edctunit_class: TLabeledEdit;
-    edctunit_flags: TJvComboEdit;
-    edctunit_flags2: TJvComboEdit;
+    edctMeleeAttackPower: TLabeledEdit;
+    edctRangedAttackPower: TLabeledEdit;
+    edctDamageVariance: TLabeledEdit;
+    edctUnitClass: TLabeledEdit;
+    edctUnitFlags: TJvComboEdit;
     edctdynamicflags: TJvComboEdit;
     edctfamily: TJvComboEdit;
-    edcttrainer_type: TJvComboEdit;
-    edcttrainer_spell: TJvComboEdit;
-    edcttrainer_class: TJvComboEdit;
-    edcttrainer_race: TJvComboEdit;
-    edcttype: TJvComboEdit;
-    edcttype_flags: TJvComboEdit;
+    edctTrainerType: TJvComboEdit;
+    edctTrainerSpell: TJvComboEdit;
+    edctTrainerClass: TJvComboEdit;
+    edctTrainerRace: TJvComboEdit;
+    edctCreatureType: TJvComboEdit;
+    edctCreatureTypeFlags: TJvComboEdit;
     gbLoot: TGroupBox;
     edctlootid: TLabeledEdit;
-    edctpickpocketloot: TLabeledEdit;
-    edctskinloot: TLabeledEdit;
-    edctPetSpellDataId: TLabeledEdit;
-    edctVehicleId: TLabeledEdit;
-    edctmingold: TLabeledEdit;
-    edctmaxgold: TLabeledEdit;
+    edctPickpocketLootId: TLabeledEdit;
+    edctSkinningLootId: TLabeledEdit;
+    edctMinLootGold: TLabeledEdit;
+    edctMaxLootGold: TLabeledEdit;
     edctAIName: TLabeledEdit;
     edctMovementType: TJvComboEdit;
-    edctHoverHeight: TLabeledEdit;
+    edctVehicleTemplateId: TLabeledEdit;
     gbModifyers: TGroupBox;
-    edctHealthModifier: TLabeledEdit;
-    edctManaModifier: TLabeledEdit;
-    edctArmorModifier: TLabeledEdit;
-    edctDamageModifier: TLabeledEdit;
-    edctExperienceModifier: TLabeledEdit;
-    edctmovementId: TLabeledEdit;
-    edctRegenHealth: TLabeledEdit;
-    edctmechanic_immune_mask: TJvComboEdit;
-    edctflags_extra: TJvComboEdit;
-    edctScriptName: TLabeledEdit;
-    edctVerifiedBuild: TLabeledEdit;
+    edctHealthMultiplier: TLabeledEdit;
+    edctArmorMultiplier: TLabeledEdit;
+    edctDamageMultiplier: TLabeledEdit;
+    edctExperienceMultiplier: TLabeledEdit;
+    edctMovementTemplateId: TLabeledEdit;
     gbCreature2: TGroupBox;
-    lbctfaction: TLabel;
+    lbctFactionHorde: TLabel;
     lbctnpcflags: TLabel;
     lbctrank: TLabel;
     lbctfamily: TLabel;
-    lbcttype: TLabel;
+    lbctCreatureType: TLabel;
     gbctbehaviour: TGroupBox;
     gbTrainer: TGroupBox;
-    lbcttrainer_type: TLabel;
-    lbcttrainer_spell: TLabel;
-    lbctclass: TLabel;
-    lbctrace: TLabel;
+    lbctTrainerType: TLabel;
+    lbctTrainerSpell: TLabel;
+    lbctTrainerClass: TLabel;
+    lbctTrainerRace: TLabel;
     btScriptCreatureTemplate: TButton;
     tsCreatureLocation: TTabSheet;
     lvclCreatureLocation: TJvListView;
@@ -1160,14 +1148,12 @@ type
     editspelltrigger_2: TJvComboEdit;
     lbitspelltrigger: TLabel;
     editspelltrigger_1: TJvComboEdit;
-    lbctunit_flags: TLabel;
-    lbctunit_flags2: TLabel;
-    lbcttype_flags: TLabel;
+    lbctUnitFlags: TLabel;
+    lbctCreatureTypeFlags: TLabel;
     lbctdynamicflags: TLabel;
     lbctMovementType: TLabel;
     linkSmartAIInfo: TLabel;
     linkConditionInfo: TLabel;
-    lbctmechanic_immune_mask: TLabel;
     lbotlootmode: TLabel;
     nDBCDir: TMenuItem;
     Timer1: TTimer;
@@ -1184,7 +1170,6 @@ type
     edqtZoneOrSort: TJvComboEdit;
     rbqtQuestSort: TRadioButton;
     rbqtZoneID: TRadioButton;
-    lbctflags_extra: TLabel;
     lbctDifficultyEntry1: TLabel;
     lbctDifficultyEntry2: TLabel;
     lbctDifficultyEntry3: TLabel;
@@ -1528,12 +1513,9 @@ type
     btCreatureQuestItemDel: TSpeedButton;
     btShowQuestItemScript: TButton;
     btFullQuestItemScript: TButton;
-    edctspeed_swim: TLabeledEdit;
-    edctspeed_flight: TLabeledEdit;
-    edctdetection_range: TLabeledEdit;
+    edctArmor: TLabeledEdit;
+    edctPowerMultiplier: TLabeledEdit;
     edcmInteractionPauseTimer: TLabeledEdit;
-    edctspell_school_immune_mask: TJvComboEdit;
-    lbctspell_school_immune_mask: TLabel;
     edclComment: TLabeledEdit;
 
     //creature_equip_template
@@ -1726,7 +1708,6 @@ type
     lbpttlocAboutID: TLabel;
     edSearchPageTextLocalelocale: TLabeledEdit;
     btctGoToSmartAI: TButton;
-    lbctGoToSmartAI: TLabel;
     lvctmCreatureTemplateModel: TJvListView;
     edctmCreatureID: TLabeledEdit;
     edctmIdx: TLabeledEdit;
@@ -1790,6 +1771,48 @@ type
     lbqtRewSpellCast: TLabel;
     edqtAreatrigger: TJvComboEdit;
     lbAreatrigger: TLabel;
+    edctModelId1: TLabeledEdit;
+    edctModelId2: TLabeledEdit;
+    edctModelId3: TLabeledEdit;
+    edctModelId4: TLabeledEdit;
+    edctFactionAlliance: TJvComboEdit;
+    lbctFactionAlliance: TLabel;
+    edctInhabitType: TJvComboEdit;
+    lbctInhabitType: TLabel;
+    edctMinLevelHealth: TLabeledEdit;
+    edctMaxLevelHealth: TLabeledEdit;
+    edctMinLevelMana: TLabeledEdit;
+    edctMaxLevelMana: TLabeledEdit;
+    edctResistanceHoly: TLabeledEdit;
+    edctResistanceFire: TLabeledEdit;
+    edctResistanceFrost: TLabeledEdit;
+    edctResistanceShadow: TLabeledEdit;
+    edctResistanceArcane: TLabeledEdit;
+    edctMeleeBaseAttackTime: TLabeledEdit;
+    edctRangedBaseAttackTime: TLabeledEdit;
+    edctResistanceNature: TLabeledEdit;
+    GroupBox8: TGroupBox;
+    edctQuestItem1: TLabeledEdit;
+    edctQuestItem2: TLabeledEdit;
+    edctQuestItem3: TLabeledEdit;
+    edctQuestItem4: TLabeledEdit;
+    edctQuestItem5: TLabeledEdit;
+    edctQuestItem6: TLabeledEdit;
+    edctTrainerTemplateId: TLabeledEdit;
+    edctVendorTemplateId: TLabeledEdit;
+    edctEquipmentTemplateId: TLabeledEdit;
+    edctRegenerateStats: TLabeledEdit;
+    edctMinMeleeDmg: TLabeledEdit;
+    edctMaxMeleeDmg: TLabeledEdit;
+    edctMinRangedDmg: TLabeledEdit;
+    edctscale: TLabeledEdit;
+    edctMaxRangedDmg: TLabeledEdit;
+    edctDamageSchool: TLabeledEdit;
+    edctExtraFlags: TJvComboEdit;
+    lbctExtraFlags: TLabel;
+    edctPetSpellDataId: TLabeledEdit;
+    edctMechanicImmuneMask: TJvComboEdit;
+    lbctMechanicImmuneMask: TLabel;
 
     procedure FormActivate(Sender: TObject);
     procedure btSearchClick(Sender: TObject);
@@ -1843,10 +1866,10 @@ type
     procedure edctrankButtonClick(Sender: TObject);
     procedure edctfamilyButtonClick(Sender: TObject);
     procedure btNewCreatureClick(Sender: TObject);
-    procedure edcttrainer_typeButtonClick(Sender: TObject);
+    procedure edctTrainerTypeButtonClick(Sender: TObject);
     procedure GetRace(Sender: TObject);
     procedure GetClass(Sender: TObject);
-    procedure edcttypeButtonClick(Sender: TObject);
+    procedure CreatureTypeButtonClick(Sender: TObject);
     procedure btcyScriptSmartAIClick(Sender: TObject);
     procedure btcScriptConditionsClick(Sender: TObject);
     procedure edgtentryButtonClick(Sender: TObject);
@@ -4663,11 +4686,11 @@ begin
 
     LoadQueryToListView(Format('SELECT plt.*, i.`name` FROM `pickpocketing_loot_template`'+
      ' plt LEFT OUTER JOIN `item_template` i ON i.`entry` = plt.`Item`'+
-     ' WHERE (plt.`Entry`=%d)',[StrToIntDef(edctpickpocketloot.Text,0)]), lvcoPickpocketLoot);
+     ' WHERE (plt.`Entry`=%d)',[StrToIntDef(edctPickpocketLootId.Text,0)]), lvcoPickpocketLoot);
 
     LoadQueryToListView(Format('SELECT slt.*, i.`name` FROM `skinning_loot_template`'+
      ' slt LEFT OUTER JOIN `item_template` i ON i.`entry` = slt.`Item`'+
-     ' WHERE (slt.`Entry`=%d)',[StrToIntDef(edctskinloot.Text,0)]), lvcoSkinLoot);
+     ' WHERE (slt.`Entry`=%d)',[StrToIntDef(edctSkinningLootId.Text,0)]), lvcoSkinLoot);
 
    // LoadQueryToListView(Format('SELECT `CreatureEntry`, `idx`, `itemId`, `VerifiedBuild` FROM `creature_questitem` WHERE (`CreatureEntry`=%d)',
    //  [Entry]),lvcqiCreatureQuestItem);
@@ -4695,9 +4718,9 @@ begin
 
     if (istrainer=true) then
     begin
-      LoadQueryToListView(Format('SELECT `ID`, `SpellID`,'+
-        ' `MoneyCost`, `ReqSkillLine`, `ReqSkillRank`, `ReqLevel`'+
-        ' FROM `npc_trainer` WHERE (`ID`=%d)',
+      LoadQueryToListView(Format('SELECT `entry`, `spell`,'+
+        ' `spellCost`, `reqskill`, `reqskillvalue`, `reqlevel`'+
+        ' FROM `npc_trainer` WHERE (`entry`=%d)',
         [Entry]),lvcrNPCTrainer);
       // set spellnames in list view
       lvcrNPCTrainer.Columns[lvcrNPCTrainer.Columns.Count-1].Caption := 'Spell Name';
@@ -4711,11 +4734,13 @@ begin
     //LoadCreatureTemplateMovement(Entry);
     edclid.Text := IntToStr(Entry);
     edcoEntry.Text := edctlootid.Text;
-    edcpEntry.Text := edctpickpocketloot.Text;
-    edcsEntry.Text := edctskinloot.Text;
+    edcpEntry.Text := edctPickpocketLootId.Text;
+    edcsEntry.Text := edctSkinningLootId.Text;
     edcventry.Text := IntToStr(Entry);    //vendor
     edcrID.Text := IntToStr(Entry);       //trainer
 
+    if loc<>'enUS' then
+    begin
     MyQuery.SQL.Text := Format('SELECT * FROM `locales_creature` WHERE `entry`=%d ;', [Entry]);
     MyQuery.Open;
       if (MyQuery.Eof=false) then begin
@@ -4724,6 +4749,7 @@ begin
         edctlocsubname_loc.Text := MyQuery.FieldByName('subname'+loc+'').AsString;
       end;
     MyQuery.Close;
+    end;
 
   except
     on E: Exception do
@@ -5622,7 +5648,7 @@ begin
   PageControl3.ActivePageIndex := 1;
 end;
 
-procedure TMainForm.edcttrainer_typeButtonClick(Sender: TObject);
+procedure TMainForm.edctTrainerTypeButtonClick(Sender: TObject);
 begin
   GetValueFromSimpleList(Sender, 141, 'trainer_type', false);
 end;
@@ -5715,7 +5741,7 @@ begin
   GetValueFromSimpleList(Sender, 143, 'ChrClasses', false);
 end;
 
-procedure TMainForm.edcttypeButtonClick(Sender: TObject);
+procedure TMainForm.CreatureTypeButtonClick(Sender: TObject);
 begin
   GetValueFromSimpleList(Sender, 85, 'CreatureType', false);
 end;
@@ -8589,7 +8615,7 @@ end;
 procedure TMainForm.btFullScriptPickpocketLootClick(Sender: TObject);
 begin
   PageControl3.ActivePageIndex := SCRIPT_TAB_NO_CREATURE;
-  ShowFullLootScript('pickpocketing_loot_template', lvcoPickpocketLoot, mectScript, edctpickpocketloot.Text);
+  ShowFullLootScript('pickpocketing_loot_template', lvcoPickpocketLoot, mectScript, edctPickpocketLootId.Text);
 end;
 
 procedure TMainForm.btSkinLootAddClick(Sender: TObject);
@@ -8610,7 +8636,7 @@ end;
 procedure TMainForm.btFullScriptSkinLootClick(Sender: TObject);
 begin
   PageControl3.ActivePageIndex := SCRIPT_TAB_NO_CREATURE;
-  ShowFullLootScript('skinning_loot_template', lvcoSkinLoot, mectScript, edctskinloot.Text);
+  ShowFullLootScript('skinning_loot_template', lvcoSkinLoot, mectScript, edctSkinningLootId.Text);
 end;
 
 procedure TMainForm.btGOLootAddClick(Sender: TObject);
