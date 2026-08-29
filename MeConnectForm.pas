@@ -279,10 +279,15 @@ begin
 end;
 
 procedure TMeConnectForm.FormCreate(Sender: TObject);
+var
+  Major, Minor, Release, Build: Word;
 begin
   ClientHeight:=292;
-  DoInit;  
-  Caption := Format('Quice %s',[VERSION_EXE]);
+  DoInit;
+  if GetFileVersion(Application.ExeName, Major, Minor, Release, Build) then
+    Caption := Format('Quice %d.%d.%d.%d',[Major, Minor, Release, Build])
+  else
+    Caption := Format('Quice %s',[VERSION_EXE]);
   dmMain.Translate.CreateDefaultTranslation(TForm(Self));
 end;
 
@@ -290,9 +295,13 @@ procedure TMeConnectForm.FormShow(Sender: TObject);
 var
   mDBname, cDBname, rDBname, sDBname: string;
   AC: TWinControl;
+  Major, Minor, Release, Build: Word;
 begin
   dmMain.Translate.TranslateForm(TForm(Self));
-  Caption := Format('Quice %s',[VERSION_EXE]);
+  if GetFileVersion(Application.ExeName, Major, Minor, Release, Build) then
+    Caption := Format('Quice %d.%d.%d.%d',[Major, Minor, Release, Build])
+  else
+    Caption := Format('Quice %s',[VERSION_EXE]);
   mDBname:=ReadFromRegistry(CurrentUser, '', 'mDatabase',  tpString, '');
   cDBname:=ReadFromRegistry(CurrentUser, '', 'cDatabase',  tpString, '');
   rDBname:=ReadFromRegistry(CurrentUser, '', 'rDatabase',  tpString, '');

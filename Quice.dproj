@@ -143,7 +143,7 @@
         <DCC_Define>LeakChecking;C;$(DCC_Define)</DCC_Define>
         <VerInfo_Locale>1033</VerInfo_Locale>
         <DCC_DebugInfoInExe>true</DCC_DebugInfoInExe>
-        <VerInfo_Keys>CompanyName=;FileVersion=2.335.1.5;InternalName=;LegalCopyright=;LegalTrademarks=;OriginalFilename=;ProductVersion=2.335;Comments=compiled by chaosua;ProgramID=com.embarcadero.$(MSBuildProjectName);FileDescription=Quice - Mangos DB Editor;ProductName=$(MSBuildProjectName)</VerInfo_Keys>
+        <VerInfo_Keys>CompanyName=;FileVersion=2.335.1.6;InternalName=;LegalCopyright=;LegalTrademarks=;OriginalFilename=;ProductVersion=2.335;Comments=compiled by chaosua;ProgramID=com.embarcadero.$(MSBuildProjectName);FileDescription=Quice - Mangos DB Editor;ProductName=$(MSBuildProjectName)</VerInfo_Keys>
         <DCC_DebugInformation>2</DCC_DebugInformation>
         <DCC_MapFile>3</DCC_MapFile>
         <BT_BuildType>Debug</BT_BuildType>
@@ -154,7 +154,7 @@
         <AppEnableRuntimeThemes>true</AppEnableRuntimeThemes>
         <VerInfo_AutoIncVersion>true</VerInfo_AutoIncVersion>
         <VerInfo_MinorVer>335</VerInfo_MinorVer>
-        <VerInfo_Build>5</VerInfo_Build>
+        <VerInfo_Build>6</VerInfo_Build>
         <VerInfo_Debug>true</VerInfo_Debug>
     </PropertyGroup>
     <PropertyGroup Condition="'$(Cfg_2_Win64)'!=''">
@@ -167,6 +167,7 @@
         <VerInfo_Keys>CompanyName=;FileDescription=Quice - Mangos DB Editor;FileVersion=2.335.1.0;InternalName=Quice;LegalCopyright=© indomit, 2009 (Quice), Ishigure, 2010, Faq, 2012;LegalTrademarks=;OriginalFilename=Quice.exe;ProductName=Quice;ProductVersion=2.335;Comments=compiled by chaosua</VerInfo_Keys>
         <AppEnableRuntimeThemes>true</AppEnableRuntimeThemes>
         <VerInfo_AutoIncVersion>true</VerInfo_AutoIncVersion>
+        <VerInfo_Debug>true</VerInfo_Debug>
     </PropertyGroup>
     <ItemGroup>
         <DelphiCompile Include="$(MainSource)">

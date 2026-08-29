@@ -3010,12 +3010,17 @@ procedure TMainForm.UpdateCaption;
 var
   Server: string;
   Port: Integer;
+  Major, Minor, Release, Build: Word;
 begin
 if (MainForm.MyTrinityConnection.Connected=true) then
 begin
   Server := TFDPhysMySQLConnectionDefParams(MyTrinityConnection.ResultConnectionDef.Params).Server;
   Port := TFDPhysMySQLConnectionDefParams(MyTrinityConnection.ResultConnectionDef.Params).Port;
-  Caption := Format('Quice %s - Connection: %s:%d / %s', [VERSION_EXE, Server, Port, GetDBVersion]);
+
+  if GetFileVersion(Application.ExeName, Major, Minor, Release, Build) then
+    Caption := Format('Quice %d.%d.%d.%d - Connection: %s:%d / %s',[Major, Minor, Release, Build, Server, Port, GetDBVersion])
+  else
+    Caption := Format('Quice %s - Connection: %s:%d / %s', [VERSION_EXE, Server, Port, GetDBVersion]);
 
   Application.Title := Caption;
 end;
